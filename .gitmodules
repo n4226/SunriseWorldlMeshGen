@@ -1,0 +1,4 @@
+[submodule "Sunrise"]
+	path = Sunrise
+	url = https://github.com/n4226/Sunrise
+	branch = dev
