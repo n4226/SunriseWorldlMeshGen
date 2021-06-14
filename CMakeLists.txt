@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.10)
 project(SunriseWorldMeshGen)
 
 # add the executable
-add_executable(SunriseWorldMeshGen Main.cpp)
+add_executable(SunriseWorldMeshGen src/main.cpp)
 
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
