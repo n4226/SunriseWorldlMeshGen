@@ -1,0 +1,3 @@
+C:/code/visual_studio/SunriseWordlMeshGen/build/CMakeFiles/SunriseWorldMeshGen.dir
+C:/code/visual_studio/SunriseWordlMeshGen/build/CMakeFiles/ALL_BUILD.dir
+C:/code/visual_studio/SunriseWordlMeshGen/build/CMakeFiles/ZERO_CHECK.dir
