@@ -25,12 +25,13 @@ group "Dependencies"
 
 group ""
 
-include "Sunrise"
 
 -- below is the project
 
 
 project "SunriseWorldMeshGen"
+	
+	mainProjDir = "SunriseWorldMeshGen"
 
 	kind "ConsoleApp"
 	language "C++"
@@ -38,7 +39,9 @@ project "SunriseWorldMeshGen"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+	sunriseLocation = "%{wks.location}/extern/Sunrise"
 
+	
 
 	files {
 		"src/**.h",
@@ -56,25 +59,25 @@ project "SunriseWorldMeshGen"
 	includedirs {
 		"C:/VulkanSDK/1.2.154.1/Include",
 
-		"%{wks.location}/Sunrise/src",
-		"%{wks.location}/Sunrise/vendor",
-		"%{wks.location}/Sunrise/vendor/spdlog/include",
+		"%{sunriseLocation}/src",
+		"%{sunriseLocation}/vendor",
+		"%{sunriseLocation}/vendor/spdlog/include",
 
-		"%{wks.location}/Sunrise/vendor/glm-master",
-		"%{wks.location}/Sunrise/vendor/marl-main/marl-main/include",
-		"%{wks.location}/Sunrise/vendor/stb",
-		"%{wks.location}/Sunrise/vendor/mango-master/mango-master/include",
-		"%{wks.location}/Sunrise/vendor/libigl/include",
-		"%{wks.location}/Sunrise/vendor/HTTPRequest/include",
-		"%{wks.location}/Sunrise/vendor/httplib/include",
-		"%{wks.location}/Sunrise/vendor/rapidjson/include",
-		"%{wks.location}/Sunrise/vendor/libguarded/src",
-		"%{wks.location}/Sunrise/vendor/nlohmann/include",
+		"%{sunriseLocation}/vendor/glm-master",
+		"%{sunriseLocation}/vendor/marl-main/marl-main/include",
+		"%{sunriseLocation}/vendor/stb",
+		"%{sunriseLocation}/vendor/mango-master/mango-master/include",
+		"%{sunriseLocation}/vendor/libigl/include",
+		"%{sunriseLocation}/vendor/HTTPRequest/include",
+		"%{sunriseLocation}/vendor/httplib/include",
+		"%{sunriseLocation}/vendor/rapidjson/include",
+		"%{sunriseLocation}/vendor/libguarded/src",
+		"%{sunriseLocation}/vendor/nlohmann/include",
 
-		"%{wks.location}/Sunrise/vendor/bin/glfw/windows/glfw-3.3.2.bin.WIN64/glfw-3.3.2.bin.WIN64/lib-vc2019",
+		"%{sunriseLocation}/vendor/bin/glfw/windows/glfw-3.3.2.bin.WIN64/glfw-3.3.2.bin.WIN64/lib-vc2019",
 		
-		"%{wks.location}/Sunrise/vendor/date/include",
-		"%{wks.location}/Sunrise/vendor/entt/single_include",
+		"%{sunriseLocation}/vendor/date/include",
+		"%{sunriseLocation}/vendor/entt/single_include",
 	}	
 
 	libdirs {
@@ -87,8 +90,8 @@ project "SunriseWorldMeshGen"
 	}
 
 	postbuildcommands {
-		("{COPY} ../bin/" .. outputdir .. "/Sunrise/Sunrise.dLL ../bin/" .. outputdir .. "/%{prj.name}/"),
-		("{COPY} ../bin/" .. outputdir .. "/Sunrise/Sunrise.pdb ../bin/" .. outputdir .. "/%{prj.name}/"),
+		("{COPY} %{wks.location}/bin/" .. outputdir .. "/Sunrise/Sunrise.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
+		("{COPY} %{wks.location}/bin/" .. outputdir .. "/Sunrise/Sunrise.pdb %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
 		--("call ../Sunrise/src/Sunrise/Sunrise/graphcis/shaders/compileShaders.bat"),
 		--("XCOPY /S /Y ../Sunrise/src/Sunrise/Sunrise/graphcis/shaders/ ../bin/" .. outputdir .. "/%{prj.name}/shaders"),
 	}
@@ -102,7 +105,7 @@ project "SunriseWorldMeshGen"
 		defines {
 			"SR_PLATFORM_WINDOWS"
 		}
-		debugdir ("../bin/" .. outputdir .. "/%{prj.name}/")
+		debugdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}/")
 
 
 	filter "configurations:Debug"
@@ -137,3 +140,5 @@ project "SunriseWorldMeshGen"
 	   -- One or more additional dependencies for this build command (optional)
 	   --buildinputs { 'path/to/file1.ext', 'path/to/file2.ext' }
 
+
+include "extern/Sunrise"

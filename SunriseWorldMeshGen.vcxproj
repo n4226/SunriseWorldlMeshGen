@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9D997896-09FB-55A4-9268-9C56FEC88C63}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SunriseWorldMeshGen</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>bin\Debug-windows-x86_64\SunriseWorldMeshGen\</OutDir>
+    <IntDir>bin-int\Debug-windows-x86_64\SunriseWorldMeshGen\</IntDir>
+    <TargetName>SunriseWorldMeshGen</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\Release-windows-x86_64\SunriseWorldMeshGen\</OutDir>
+    <IntDir>bin-int\Release-windows-x86_64\SunriseWorldMeshGen\</IntDir>
+    <TargetName>SunriseWorldMeshGen</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>bin\Dist-windows-x86_64\SunriseWorldMeshGen\</OutDir>
+    <IntDir>bin-int\Dist-windows-x86_64\SunriseWorldMeshGen\</IntDir>
+    <TargetName>SunriseWorldMeshGen</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul)
+IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)
+IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)
+IF EXIST $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="src\baseApp\SunriseWorldGenApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp" />
+    <ClCompile Include="src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="extern\Sunrise\Sunrise.vcxproj">
+      <Project>{0EBAD311-7A99-52AD-83B1-DD83EF0FB90E}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
