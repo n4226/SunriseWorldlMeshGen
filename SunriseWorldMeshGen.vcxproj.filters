@@ -4,16 +4,57 @@
     <Filter Include="baseApp">
       <UniqueIdentifier>{E1CB2866-4DAB-A701-56C3-32D8C2210E63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="generation">
+      <UniqueIdentifier>{B11313BF-9DCB-540C-06D3-2D68F2A9EFFC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="underlingSystems">
+      <UniqueIdentifier>{6543E7DB-513C-062E-7A6E-EBB266C6E539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="underlingSystems\osmFetching">
+      <UniqueIdentifier>{4B738966-372E-7912-E0E5-F15CCC7FC3A2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\baseApp\MeshGenConfig.h">
+      <Filter>baseApp</Filter>
+    </ClInclude>
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h">
       <Filter>baseApp</Filter>
     </ClInclude>
+    <ClInclude Include="src\generation\creator.h">
+      <Filter>generation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mgpch.h" />
+    <ClInclude Include="src\underlingSystems\ShapeFileSystem.h">
+      <Filter>underlingSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\underlingSystems\osmFetching\OsmFetcher.h">
+      <Filter>underlingSystems\osmFetching</Filter>
+    </ClInclude>
+    <ClInclude Include="src\underlingSystems\osmFetching\osm.h">
+      <Filter>underlingSystems\osmFetching</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\baseApp\MeshGenConfig.cpp">
+      <Filter>baseApp</Filter>
+    </ClCompile>
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp">
       <Filter>baseApp</Filter>
     </ClCompile>
+    <ClCompile Include="src\generation\creator.cpp">
+      <Filter>generation</Filter>
+    </ClCompile>
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mgpch.cpp" />
+    <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp">
+      <Filter>underlingSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\underlingSystems\osmFetching\OsmFetcher.cpp">
+      <Filter>underlingSystems\osmFetching</Filter>
+    </ClCompile>
+    <ClCompile Include="src\underlingSystems\osmFetching\osm.cpp">
+      <Filter>underlingSystems\osmFetching</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

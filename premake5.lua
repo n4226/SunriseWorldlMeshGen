@@ -41,7 +41,8 @@ project "SunriseWorldMeshGen"
 
 	sunriseLocation = "%{wks.location}/extern/Sunrise"
 
-	
+	pchheader "mgpch.h"
+	pchsource "src/mgpch.cpp"
 
 	files {
 		"src/**.h",
@@ -59,6 +60,7 @@ project "SunriseWorldMeshGen"
 	includedirs {
 		"C:/VulkanSDK/1.2.154.1/Include",
 
+		"%{wks.location}/src",
 		"%{sunriseLocation}/src",
 		"%{sunriseLocation}/vendor",
 		"%{sunriseLocation}/vendor/spdlog/include",

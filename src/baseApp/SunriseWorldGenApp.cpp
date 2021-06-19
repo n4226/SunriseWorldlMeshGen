@@ -1,5 +1,8 @@
+#include "mgpch.h"
 #include "SunriseWorldGenApp.h"
 #include "Sunrise/Sunrise/core/EntryPoint.h"
+
+#include "MeshGenConfig.h"
 
 using namespace sunrise;
 
@@ -47,7 +50,7 @@ void SunriseWorldGenApp::run()
 {
 	Application::run();
 
-	SR_INFO("Running");
+	/*SR_INFO("Running");
 
 	Sleep(300);
 	printf("Hello World!\n");
@@ -58,10 +61,21 @@ void SunriseWorldGenApp::run()
 	printf("Don't ask what happened to the first one\n");
 
 	Sleep(1000);
-
+	
 	printf("\nEnter your name to receive your free cake!\n");
 
+	std::cin.get();*/
+
+	printf("\n\nWelcome to mesh gen\n");
+
+
+	printf("Will generate mesh to configured folder, press return to accept\n");
+
 	std::cin.get();
+
+	SR_INFO("Starting mesh gen");
+
+	MeshGenConfig::getorReset();
 
 }
 

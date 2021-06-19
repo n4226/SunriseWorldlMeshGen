@@ -76,10 +76,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -100,10 +101,11 @@ IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q 
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -127,10 +129,11 @@ IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -153,11 +156,25 @@ IF EXIST $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\baseApp\MeshGenConfig.h" />
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h" />
+    <ClInclude Include="src\generation\creator.h" />
+    <ClInclude Include="src\mgpch.h" />
+    <ClInclude Include="src\underlingSystems\ShapeFileSystem.h" />
+    <ClInclude Include="src\underlingSystems\osmFetching\OsmFetcher.h" />
+    <ClInclude Include="src\underlingSystems\osmFetching\osm.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\baseApp\MeshGenConfig.cpp" />
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp" />
+    <ClCompile Include="src\generation\creator.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\mgpch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp" />
+    <ClCompile Include="src\underlingSystems\osmFetching\OsmFetcher.cpp" />
+    <ClCompile Include="src\underlingSystems\osmFetching\osm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="extern\Sunrise\Sunrise.vcxproj">

@@ -1,3 +1,4 @@
+#include "mgpch.h"
 #include "stdio.h"
 
 #include "Sunrise.h"
