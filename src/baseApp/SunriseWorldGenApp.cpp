@@ -4,6 +4,8 @@
 
 #include "MeshGenConfig.h"
 
+#include "configure tasks/ConfigureTasksScript.h"
+
 using namespace sunrise;
 
 
@@ -77,6 +79,8 @@ void SunriseWorldGenApp::run()
 
 	MeshGenConfig::getorReset();
 
+
+	ConfigureTasksScript::runScript();
 }
 
 void SunriseWorldGenApp::shutdown()

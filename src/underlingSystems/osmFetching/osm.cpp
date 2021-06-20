@@ -100,7 +100,7 @@ namespace osm {
 				e.tags = std::map<std::string, std::string>();
 				
 				for (auto& t : tags) {
-					e.tags.insert(std::pair<std::string, std::string>(t.name.GetString(), t.value.GetString()));
+					e.tags.emplace(t.name.GetString(), t.value.GetString());
 				}
 			}
 

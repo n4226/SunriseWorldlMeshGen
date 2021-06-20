@@ -96,7 +96,8 @@
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul)
-IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
+IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul)
+IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -124,7 +125,8 @@ IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q 
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)
-IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
+IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)
+IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
@@ -152,23 +154,35 @@ IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)
-IF EXIST $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
+IF EXIST $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)
+IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h" />
     <ClInclude Include="src\baseApp\MeshGenConfig.h" />
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h" />
+    <ClInclude Include="src\generation\GenerationStatistics.h" />
+    <ClInclude Include="src\generation\GenerationSystem.h" />
     <ClInclude Include="src\generation\creator.h" />
+    <ClInclude Include="src\generation\systems\RoadCreator.h" />
+    <ClInclude Include="src\generation\systems\buildingCreator.h" />
+    <ClInclude Include="src\generation\systems\groundCreator.h" />
     <ClInclude Include="src\mgpch.h" />
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h" />
     <ClInclude Include="src\underlingSystems\osmFetching\OsmFetcher.h" />
-    <ClInclude Include="src\underlingSystems\osmFetching\_httplib.h" />
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp" />
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp" />
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp" />
+    <ClCompile Include="src\generation\GenerationStatistics.cpp" />
+    <ClCompile Include="src\generation\GenerationSystem.cpp" />
     <ClCompile Include="src\generation\creator.cpp" />
+    <ClCompile Include="src\generation\systems\RoadCreator.cpp" />
+    <ClCompile Include="src\generation\systems\buildingCreator.cpp" />
+    <ClCompile Include="src\generation\systems\groundCreator.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\mgpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

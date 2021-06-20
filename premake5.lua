@@ -102,6 +102,10 @@ project "SunriseWorldMeshGen"
 		("{COPY} %{wks.location}/bin/" .. outputdir .. "/Sunrise/Sunrise.pdb %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
 		--("call ../Sunrise/src/Sunrise/Sunrise/graphcis/shaders/compileShaders.bat"),
 		--("XCOPY /S /Y ../Sunrise/src/Sunrise/Sunrise/graphcis/shaders/ ../bin/" .. outputdir .. "/%{prj.name}/shaders"),
+		
+		-- shapelib dll copy
+		("{COPY} %{wks.location}/extern/shapelib/build/dll/Debug/shp.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
+
 	}
 
 	filter "system:windows"

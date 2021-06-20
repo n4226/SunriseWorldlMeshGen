@@ -12,6 +12,7 @@ public:
 		std::string osmCashDir;
 		std::string coastlineDir;
 		std::string osmServerURL;
+		bool onlyUseOsmCash;
 	};
 
 	static ConfigValues getorReset();

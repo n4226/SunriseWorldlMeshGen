@@ -81,7 +81,7 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash)
     osm::osm parsedOsm = osm::makeOSM(response->body);
 
 
-    if (server != "http://localhost") {
+    if (strcmp(server, "http://localhost") != 0) {
         printf("sleeping with json data\n");
         Sleep(8000);
     }
