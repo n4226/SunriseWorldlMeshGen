@@ -2,3 +2,6 @@
 	path = extern/Sunrise
 	url = https://github.com/n4226/Sunrise
 	branch = dev
+[submodule "extern/shapelib"]
+	path = extern/shapelib
+	url = https://github.com/OSGeo/shapelib

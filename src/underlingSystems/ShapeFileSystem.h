@@ -1,10 +1,10 @@
 #pragma once
 #include "mgpch.h"
 
-#include <shapelib-master/shapefil.h>
+#include <shapefil.h>
 #include <array>
 #include <vector>
-#include "math/meshAlgs/Triangulation.h"
+#include "Sunrise/Sunrise/math/mesh/Triangulation.h"
 
 class ShapeFileSystem
 {
@@ -16,7 +16,7 @@ public:
 	void getCoastlineInChunk(Box chunk);
 
 
-	std::vector<meshAlgs::TriangulatedMesh*> polygons;
+	std::vector<mesh::TriangulatedMesh*> polygons;
 	std::vector<Box> polygonBounds;
 
 private:

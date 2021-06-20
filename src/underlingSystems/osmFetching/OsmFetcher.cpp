@@ -12,15 +12,10 @@
 
 #include "../../baseApp/MeshGenConfig.h"
 
-#include "dependencies/httplib.h"
+#include "httplib.h"
 
-#define SERVER_LOCAL 1
 
-#if SERVER_LOCAL
-const char* server = "http://localhost";
-#else
- //const char* server = "http://overpass-api.de";
-#endif
+
 OsmFetcher::OsmFetcher()
 {
 }
@@ -54,6 +49,8 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash)
 #endif
     printf("fetching osm from server\n");
     //get from server 
+
+    auto server = MeshGenConfig::getorReset().osmServerURL.c_str();
 
     httplib::Client cli(server);//();
 

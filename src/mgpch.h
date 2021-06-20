@@ -7,6 +7,11 @@ using namespace sunrise;
 using namespace sunrise::math;
 
 
+// local
+
+#include "baseApp/MeshGenConfig.h"
+
+
 ///////// system
 
 

@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -91,8 +91,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul)
@@ -105,7 +105,7 @@ IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q 
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -119,8 +119,8 @@ IF EXIST $(SolutionDir)\bin\Debug-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q 
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)
@@ -133,7 +133,7 @@ IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib\include;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -147,8 +147,8 @@ IF EXIST $(SolutionDir)\bin\Release-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>vulkan-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)
@@ -162,6 +162,7 @@ IF EXIST $(SolutionDir)\bin\Dist-windows-x86_64\Sunrise\Sunrise.pdb\ (xcopy /Q /
     <ClInclude Include="src\mgpch.h" />
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h" />
     <ClInclude Include="src\underlingSystems\osmFetching\OsmFetcher.h" />
+    <ClInclude Include="src\underlingSystems\osmFetching\_httplib.h" />
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h" />
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,9 @@
     <ClInclude Include="src\underlingSystems\osmFetching\OsmFetcher.h">
       <Filter>underlingSystems\osmFetching</Filter>
     </ClInclude>
+    <ClInclude Include="src\underlingSystems\osmFetching\_httplib.h">
+      <Filter>underlingSystems\osmFetching</Filter>
+    </ClInclude>
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h">
       <Filter>underlingSystems\osmFetching</Filter>
     </ClInclude>

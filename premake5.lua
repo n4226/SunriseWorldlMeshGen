@@ -61,34 +61,40 @@ project "SunriseWorldMeshGen"
 		"C:/VulkanSDK/1.2.154.1/Include",
 
 		"%{wks.location}/src",
+		"%{wks.location}/extern/shapelib/",
 		"%{sunriseLocation}/src",
 		"%{sunriseLocation}/vendor",
 		"%{sunriseLocation}/vendor/spdlog/include",
-
+		
 		"%{sunriseLocation}/vendor/glm-master",
 		"%{sunriseLocation}/vendor/marl-main/marl-main/include",
 		"%{sunriseLocation}/vendor/stb",
 		"%{sunriseLocation}/vendor/mango-master/mango-master/include",
 		"%{sunriseLocation}/vendor/libigl/include",
 		"%{sunriseLocation}/vendor/HTTPRequest/include",
-		"%{sunriseLocation}/vendor/httplib/include",
+		"%{sunriseLocation}/vendor/httplib/",
 		"%{sunriseLocation}/vendor/rapidjson/include",
 		"%{sunriseLocation}/vendor/libguarded/src",
 		"%{sunriseLocation}/vendor/nlohmann/include",
-
+		"%{sunriseLocation}/vendor/earcut-hpp/include/mapbox",
+		
 		"%{sunriseLocation}/vendor/bin/glfw/windows/glfw-3.3.2.bin.WIN64/glfw-3.3.2.bin.WIN64/lib-vc2019",
 		
 		"%{sunriseLocation}/vendor/date/include",
 		"%{sunriseLocation}/vendor/entt/single_include",
 	}	
-
+	
 	libdirs {
 		"C:/VulkanSDK/1.2.154.1/Lib",
+		"%{sunriseLocation}/vendor/marl-main/marl-main/Debug",
+		"%{wks.location}/extern/shapelib/build/dll/Debug",
 	}
 
 	links {
 		"Sunrise",
 		"vulkan-1",
+		"shp",
+		"marl",
 	}
 
 	postbuildcommands {

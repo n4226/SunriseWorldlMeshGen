@@ -13,6 +13,8 @@ MeshGenConfig::ConfigValues MeshGenConfig::getorReset()
 		auto vals = defaults();
 
 		write(vals);
+
+		return vals;
 	}
 
 }
@@ -43,7 +45,7 @@ void MeshGenConfig::write(const ConfigValues& values)
 	vals.push_back(values.coastlineDir);
 	vals.push_back(values.osmServerURL);
 
-	auto valstr = std::reduce(vals.begin(), vals.end(), "");
+	auto valstr = std::reduce(vals.begin(), vals.end());
 
 	FileManager::saveStringToFile(valstr,path());
 }
@@ -56,6 +58,7 @@ MeshGenConfig::ConfigValues MeshGenConfig::defaults()
 	vals.coastlineDir = FileManager::baseEngineResourceDir() + "osmCoastlines/justNewYorkArea-land-polygons-split-4326/";
 	vals.osmServerURL = "http://localhost";
 
+	return vals;
 }
 
 MeshGenConfig::MeshGenConfig()
