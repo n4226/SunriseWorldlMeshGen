@@ -19,6 +19,14 @@ public:
 	~ChunkGenerationStatistics() = default;
 
 	void logVerts(size_t number, VertUse use);
+	void logWholeMesh(Mesh* mesh);
+
+	// time profiling
+
+	void startTimer() { timerStart = std::chrono::high_resolution_clock::now(); }
+	void markOsmJSONReceived() { jsonReceived = std::chrono::high_resolution_clock::now(); }
+	void markOSMParsedFromJSON() { osmParsed = std::chrono::high_resolution_clock::now(); }
+	void endTimer() { timerEnd = std::chrono::high_resolution_clock::now(); }
 
 	std::string printLog();
 
@@ -27,7 +35,16 @@ protected:
 	math::Box chunk;
 	size_t lod;
 
+	Mesh* wholeMesh = 0;
+
 	std::unordered_map<VertUse, size_t> verts = {};
 	size_t totalVerts = 0;
+
+	// timers
+	std::chrono::high_resolution_clock::time_point timerStart;
+	std::chrono::high_resolution_clock::time_point jsonReceived;
+	std::chrono::high_resolution_clock::time_point osmParsed;
+	std::chrono::high_resolution_clock::time_point timerEnd;
+
 };
 

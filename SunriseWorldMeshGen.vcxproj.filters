@@ -53,6 +53,8 @@
       <Filter>underlingSystems\osmFetching</Filter>
     </ClInclude>
     <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h" />
+    <ClInclude Include="src\generation\managment\GenerationLodInformer.h" />
+    <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp">
@@ -91,5 +93,7 @@
       <Filter>underlingSystems\osmFetching</Filter>
     </ClCompile>
     <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp" />
+    <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp" />
+    <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp" />
   </ItemGroup>
 </Project>

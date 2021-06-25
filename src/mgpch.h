@@ -12,6 +12,10 @@ using namespace sunrise::math;
 #include "baseApp/MeshGenConfig.h"
 
 
+// deifnes
+
+#define USE_MARL 0
+
 ///////// system
 
 

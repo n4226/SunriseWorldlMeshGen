@@ -1,12 +1,16 @@
 #include "mgpch.h"
 #include "buildingCreator.h"
+#include "../../underlingSystems/osmFetching/OsmAttributeFetcher.h"
 
+#include "../managment/GenerationLodInformer.h"
 
-void buildingCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod)
+void buildingCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod, ChunkGenerationStatistics& stats)
 {
 	mesh.indicies.push_back({});
 	mesh.attributes->subMeshMats.push_back(2);
 	
+	auto startVerts = mesh.verts.size();
+
 	//TODO: somehow prevent each creator from ahving to loop through all the elements in the osm data after eachother by combining them into one 
 	// TODO remove duplicate pointes if they fall on a streight 2d line after being clipped to the chunk -> this could be for objecy such as buildings or more commanly to grounds of different surfaces eg ocean and land
 	//
@@ -36,28 +40,21 @@ void buildingCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, in
 
 
 		if (element.type == osm::type::way && element.tags.count("building") > 0) {
-			addBuilding(mesh, osm, element, frame,lod);
+			if (GenerationLodInformer::drawBuilding(frame,lod,element))
+				addBuilding(mesh, osm, element, frame,lod,stats);
 		}
 
 	}
 
-
+	stats.logVerts(mesh.verts.size() - startVerts, ChunkGenerationStatistics::VertUse::building);
 }
 
-void buildingCreator::addBuilding(Mesh& mesh, osm::osm& osm, osm::element& building, const Box& frame, int lod)
+void buildingCreator::addBuilding(Mesh& mesh, osm::osm& osm, osm::element& building, const Box& frame, int lod, ChunkGenerationStatistics& stats)
 {
 
 	constexpr double radius = math::dEarthRad;
 	const glm::dvec3 center_geo = math::LlatoGeo(glm::dvec3(frame.getCenter(), 0), {}, radius);
-	double height;
-	
-	if (building.tags.count("height")) {
-		try {
-			height = std::stod(building.tags.at("height"));
-		}
-		catch (...) { height = 4; }
-	}
-	else height = 4;
+	double height = OsmAttributeFetcher::buildingHeight(building);
 
 	auto startVertOfset = mesh.verts.size();
 
@@ -164,6 +161,8 @@ void buildingCreator::addBuilding(Mesh& mesh, osm::osm& osm, osm::element& build
 		mesh.verts.push_back(glm::vec3(pos2));
 		mesh.verts.push_back(glm::vec3(pos3));
 		mesh.verts.push_back(glm::vec3(pos4));
+
+		//stats.logVerts(4, ChunkGenerationStatistics::VertUse::building);
 
 		mesh.normals.push_back(glm::vec3(normal));
 		mesh.normals.push_back(glm::vec3(normal));

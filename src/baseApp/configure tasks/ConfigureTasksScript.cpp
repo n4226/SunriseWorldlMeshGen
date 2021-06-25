@@ -7,15 +7,15 @@
 void ConfigureTasksScript::runScript()
 {
 	// marl created and configured by engine
-	/*auto confic = marl::Scheduler::Config();
+	//auto confic = marl::Scheduler::Config();
 
-	confic.setWorkerThreadCount(std::thread::hardware_concurrency());
+	//confic.setWorkerThreadCount(std::thread::hardware_concurrency());
 
-	auto scheduler = new marl::Scheduler(confic);
+	//auto scheduler = new marl::Scheduler(confic);
 
-	scheduler->bind();
+	//scheduler->bind();
 
-	defer(scheduler->unbind());*/
+	//defer(scheduler->unbind());
 
 	shapeFileSystem = new ShapeFileSystem();
 
@@ -37,6 +37,7 @@ void ConfigureTasksScript::runScript()
 	auto chunks = {
 		//GenerationSystem::genreateChunksAround(desired, 12, glm::ivec2(12, 12)),
 		GenerationSystem::genreateChunksAround(desired, 11, glm::ivec2(6, 6)),
+		//GenerationSystem::genreateChunksAround(desired, 11, glm::ivec2(1, 1)),
 
 
 		//GenerationSystem::genreateChunksAround(desired, 12, glm::ivec2(27, 27)),
@@ -54,7 +55,7 @@ void ConfigureTasksScript::runScript()
 	GenerationSystem genSys(std::move(flatChunks));
 
 
-	genSys.generate(0, true);
+	genSys.generate(0);
 
 	// first parm is chunk index and second is lod level
 	//genSys.debugChunk(0,1);

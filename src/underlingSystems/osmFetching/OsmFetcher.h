@@ -10,6 +10,7 @@
 #include "marl/ticket.h"
 #include "marl/defer.h"
 
+#include "../../generation/GenerationStatistics.h"
 
 class OsmFetcher
 {
@@ -18,7 +19,7 @@ public:
 	OsmFetcher();
 
 
-	osm::osm fetchChunk(Box frame, bool onlyUseOSMCash);
+	osm::osm fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationStatistics& stats);
 
 	marl::Ticket::Queue waitforServerQueue;
 private:

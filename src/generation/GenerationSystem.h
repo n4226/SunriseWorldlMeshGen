@@ -5,13 +5,16 @@
 #include "creator.h"
 #include "../underlingSystems/osmFetching/OsmFetcher.h"
 
+#include "GenerationStatistics.h"
+
+
 class GenerationSystem
 {
 public:
 	GenerationSystem(std::vector<Box>&& chunks);
 	
 
-	void generate(int lod, bool onlyUseOSMCash = false);
+	void generate(int lod);
 
 	void debugChunk(size_t index, int lod);
 

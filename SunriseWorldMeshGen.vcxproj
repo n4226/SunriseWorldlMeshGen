@@ -159,6 +159,8 @@ IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h" />
+    <ClInclude Include="src\generation\managment\GenerationLodInformer.h" />
     <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h" />
     <ClInclude Include="src\baseApp\MeshGenConfig.h" />
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h" />
@@ -174,6 +176,8 @@ IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp" />
+    <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp" />
     <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp" />
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp" />
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp" />

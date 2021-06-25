@@ -34,23 +34,30 @@ GenerationSystem::GenerationSystem(std::vector<Box>&& chunks)
 {
 }
 
-void GenerationSystem::generate(int lod, bool onlyUseOSMCash)
+void GenerationSystem::generate(int lod)
 {
+    auto onlyUseOSMCash = MeshGenConfig::getorReset().onlyUseOsmCash;
     auto startTime = std::chrono::high_resolution_clock::now();
     //for (Box& chunk : chunks) {
 
     // Create a WaitGroup with an initial count of numTasks.
+#if USE_MARL
     marl::WaitGroup finishedChunk(chunks.size());
-
     //auto ticket = osmFetcher.waitforServerQueue.take();
 
     for (size_t i = 0; i < chunks.size(); i++)
     {
-        auto chunk = chunks[i];
+        auto& chunk = chunks[i];
         marl::schedule([this, onlyUseOSMCash, lod, chunk,finishedChunk] {
 
+#else
 
-            //std::for_each(std::execution::par, chunks.begin(), chunks.end(), [this,onlyUseOSMCash,lod](Box& chunk) {
+        std::for_each(std::execution::par, chunks.begin(), chunks.end(), [this,onlyUseOSMCash,lod](Box& chunk) {
+#endif
+
+            auto stats = ChunkGenerationStatistics(chunk, lod);
+
+            stats.startTimer();
 
             auto file = outputDir + chunk.toString() + ".bmesh";
             auto attrFile = attrOutputDir + chunk.toString() + ".bmattr";
@@ -67,14 +74,16 @@ void GenerationSystem::generate(int lod, bool onlyUseOSMCash)
                 mesh.attributes = &binaryAttributes;
 
                 printf("going to get Osm for a chunk\n");
-                osm::osm osmData = osmFetcher.fetchChunk(chunk, onlyUseOSMCash);
+                osm::osm osmData = osmFetcher.fetchChunk(chunk, onlyUseOSMCash,stats);
 
 
                 printf("Got Osm for a chunk\n");
 
                 for (icreator* creator : creators)
-                    creator->createInto(mesh, osmData, chunk, lod);
+                    creator->createInto(mesh, osmData, chunk, lod,stats);
 
+                //TODO WARNING LIFE CYCLE OF THIS MESH LIMETED TO THIS SCOPE
+                stats.logWholeMesh(&mesh);
 
                 BinaryMeshSeirilizer binaryMesh(mesh);
 
@@ -82,9 +91,12 @@ void GenerationSystem::generate(int lod, bool onlyUseOSMCash)
                 // write to file
                 printf("writing to mesh file\n");
                 {
+                    FileManager::createIntermediateDirs(file);
+                    FileManager::createIntermediateDirs(attrFile);
 
                     std::ofstream out;
                     out.open(file, std::fstream::out | std::fstream::binary);
+
 
                     out.write(reinterpret_cast<char*>(binaryMesh.mesh), binaryMesh.meshLength);
                     out.close();
@@ -93,28 +105,50 @@ void GenerationSystem::generate(int lod, bool onlyUseOSMCash)
 
                     printf("wrote to mesh file\n");
                 }
+                stats.endTimer();
+
+                SR_INFO("printing chunk statistics:");
+
+                //printf(stats.printLog().c_str());
+
+                FileManager::saveStringToFile(stats.printLog(), outputDir + chunk.toString() + ".stats");
             }
+#if USE_MARL
             catch (...) {
                 finishedChunk.done();
                 return;
             }
 
             finishedChunk.done();
-
         });
-
     }
 
     finishedChunk.wait();
+#else
+            catch (...) {
+                // moving onto next chunk nothing needed here
+                return;
+            }
+
+            // moving onto next chunk nothing needed here
+    });
+#endif
+
 
     auto endTime = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration<double>(endTime - startTime);
-    printf("finished all chunks in %f seconds \n",time);
+    printf("finished all chunks in %llf seconds \n",time);
+
 }
 
 void GenerationSystem::debugChunk(size_t index, int lod)
 {
     const auto& chunk = chunks[index];
+
+    auto stats = ChunkGenerationStatistics(chunk, lod);
+
+    stats.startTimer();
+
 
     BinaryMeshAttrributes binaryAttributes{};
     Mesh mesh;
@@ -122,13 +156,17 @@ void GenerationSystem::debugChunk(size_t index, int lod)
     mesh.attributes = &binaryAttributes;
 
     printf("going to get Osm for a chunk\n");
-    osm::osm osmData = osmFetcher.fetchChunk(chunk, false);
+    osm::osm osmData = osmFetcher.fetchChunk(chunk, false,stats);
 
 
     printf("Got Osm for a chunk\n");
 
     for (icreator* creator : creators)
-        creator->createInto(mesh, osmData, chunk,lod);
+        creator->createInto(mesh, osmData, chunk,lod,stats);
+    
+    
+    stats.endTimer();
+
     //mesh.indicies.erase(mesh.indicies.begin());
     mesh::displayMesh(mesh);
     

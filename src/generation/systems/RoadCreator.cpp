@@ -3,7 +3,7 @@
 
 
 
-void RoadCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod)
+void RoadCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod, ChunkGenerationStatistics& stats)
 {
 	// only lods < 1 have roads as 3d structures
 	if (lod > 0) return;

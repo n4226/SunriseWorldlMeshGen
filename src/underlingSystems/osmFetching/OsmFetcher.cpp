@@ -20,9 +20,9 @@ OsmFetcher::OsmFetcher()
 {
 }
 
-osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash)
+osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationStatistics& stats)
 {
-#if !SERVER_LOCAL
+#if !SERVER_LOCAL && USE_MARL
     auto ticket = waitforServerQueue.take();
 #endif
 
@@ -32,6 +32,7 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash)
     printf("attempting to open osm cash file\n");
     std::ifstream f(file);
     if (f.good()) {
+        stats.markOsmJSONReceived();
         printf("using osm cash to load osm\n");
         std::string str((std::istreambuf_iterator<char>(f)),
             std::istreambuf_iterator<char>());
@@ -39,11 +40,13 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash)
             remove(file.c_str());
             throw std::runtime_error("osm data not json");
         }
-        return osm::    makeOSM(str);
+        auto osmData = osm::    makeOSM(str);
+        stats.markOSMParsedFromJSON();
+        return osmData;
     }
     else if (onlyUseOSMCash)
         throw std::runtime_error("not in osm cash");
-#if !SERVER_LOCAL
+#if !SERVER_LOCAL && USE_MARL
     ticket.wait();
     defer(ticket.done());
 #endif
@@ -75,11 +78,13 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash)
         out.close();
     }
 
+    stats.markOsmJSONReceived();
     // pars to osm
     printf("parsing osm from json\n");
 
     osm::osm parsedOsm = osm::makeOSM(response->body);
 
+    stats.markOSMParsedFromJSON();
 
     if (strcmp(server, "http://localhost") != 0) {
         printf("sleeping with json data\n");
