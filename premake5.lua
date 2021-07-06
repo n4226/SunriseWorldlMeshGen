@@ -28,10 +28,10 @@ group ""
 
 -- below is the project
 
+mainProjDir = "SunriseWorldMeshGen"
 
 project "SunriseWorldMeshGen"
 	
-	mainProjDir = "SunriseWorldMeshGen"
 
 	kind "ConsoleApp"
 	language "C++"
@@ -82,6 +82,7 @@ project "SunriseWorldMeshGen"
 		
 		"%{sunriseLocation}/vendor/date/include",
 		"%{sunriseLocation}/vendor/entt/single_include",
+		"%{sunriseLocation}/vendor/asio-1.18.1/include",
 	}	
 	
 	libdirs {

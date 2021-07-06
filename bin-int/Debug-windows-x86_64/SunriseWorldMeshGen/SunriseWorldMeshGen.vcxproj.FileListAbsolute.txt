@@ -1,3 +1,7 @@
 C:\code\visual_studio\SunriseWorldlMeshGen\bin\Debug-windows-x86_64\SunriseWorldMeshGen\glfw3.dll
 C:\code\visual_studio\SunriseWorldlMeshGen\bin\Debug-windows-x86_64\SunriseWorldMeshGen\mpir.dll
 C:\code\visual_studio\SunriseWorldlMeshGen\bin-int\Debug-windows-x86_64\SunriseWorldMeshGen\SunriseWorldMeshGen.vcxproj.CopyComplete
+E:\dev\visual_studio\SunriseWorldlMeshGen\bin\Debug-windows-x86_64\SunriseWorldMeshGen\glfw3.dll
+E:\dev\visual_studio\SunriseWorldlMeshGen\bin\Debug-windows-x86_64\SunriseWorldMeshGen\mpir.dll
+E:\dev\visual_studio\SunriseWorldlMeshGen\bin-int\Debug-windows-x86_64\SunriseWorldMeshGen\SunriseWorldMeshGen.vcxproj.CopyComplete
+E:\dev\visual_studio\SunriseWorldlMeshGen\bin\Debug-windows-x86_64\SunriseWorldMeshGen\mpfr.dll

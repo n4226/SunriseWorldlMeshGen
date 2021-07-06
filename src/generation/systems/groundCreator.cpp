@@ -49,71 +49,71 @@ void groundCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int 
 
     // airports
 
-    {
-        bool airport = false;
-        std::vector<std::vector<glm::dvec2>> airportPolygone;
-        for (osm::element& element : osm.elements) {
-            if (element.type == osm::type::way && element.tags.count("aeroway") > 0 && element.tags.at("aeroway") == "aerodrome") {
+    //{
+    //    bool airport = false;
+    //    std::vector<std::vector<glm::dvec2>> airportPolygone;
+    //    for (osm::element& element : osm.elements) {
+    //        if (element.type == osm::type::way && element.tags.count("aeroway") > 0 && element.tags.at("aeroway") == "aerodrome") {
 
-                auto nodes = osm.nodesIn(element);
+    //            auto nodes = osm.nodesIn(element);
 
-                std::vector<glm::dvec2> basePath(nodes.size());
+    //            std::vector<glm::dvec2> basePath(nodes.size());
 
-                std::transform(nodes.begin(), nodes.end(), basePath.begin(), [&](osm::element* element) {
-                    if (element->type != osm::type::node) {
-                        auto msg = std::string("tried to get lat lon of non node at: ") + __FILE__ + std::string(" ") + std::string(std::to_string(__LINE__));
-                        printf(msg.c_str());
-                        throw std::runtime_error(msg.c_str());
-                    }
-                    auto posLatLon = glm::dvec2(*element->lat, *element->lon);
+    //            std::transform(nodes.begin(), nodes.end(), basePath.begin(), [&](osm::element* element) {
+    //                if (element->type != osm::type::node) {
+    //                    auto msg = std::string("tried to get lat lon of non node at: ") + __FILE__ + std::string(" ") + std::string(std::to_string(__LINE__));
+    //                    printf(msg.c_str());
+    //                    throw std::runtime_error(msg.c_str());
+    //                }
+    //                auto posLatLon = glm::dvec2(*element->lat, *element->lon);
 
-                    posLatLon.x = glm::max(posLatLon.x, frame.start.x);
-                    posLatLon.y = glm::max(posLatLon.y, frame.start.y);
-                    posLatLon.x = glm::min(posLatLon.x, frame.getEnd().x);
-                    posLatLon.y = glm::min(posLatLon.y, frame.getEnd().y);
+    //                posLatLon.x = glm::max(posLatLon.x, frame.start.x);
+    //                posLatLon.y = glm::max(posLatLon.y, frame.start.y);
+    //                posLatLon.x = glm::min(posLatLon.x, frame.getEnd().x);
+    //                posLatLon.y = glm::min(posLatLon.y, frame.getEnd().y);
 
-                    return posLatLon;
-                    });
-                airport = true;
-                airportPolygone.insert(airportPolygone.begin(), basePath);
-            }
-            else if (element.type == osm::type::way && isAny(element, { 
-                {"landuse","grass"},
-                {"natural", "*"},
-                //{ "amenity", "parking"},
-                })) {
-                auto nodes = osm.nodesIn(element);
+    //                return posLatLon;
+    //                });
+    //            airport = true;
+    //            airportPolygone.insert(airportPolygone.begin(), basePath);
+    //        }
+    //        else if (element.type == osm::type::way && isAny(element, { 
+    //            {"landuse","grass"},
+    //            {"natural", "*"},
+    //            //{ "amenity", "parking"},
+    //            })) {
+    //            auto nodes = osm.nodesIn(element);
 
-                std::vector<glm::dvec2> basePath(nodes.size());
+    //            std::vector<glm::dvec2> basePath(nodes.size());
 
-                std::transform(nodes.begin(), nodes.end(), basePath.begin(), [&](osm::element* element) {
-                    if (element->type != osm::type::node) {
-                        auto msg = std::string("tried to get lat lon of non node at: ") + __FILE__ + std::string(" ") + std::string(std::to_string(__LINE__));
-                        printf(msg.c_str());
-                        throw std::runtime_error(msg.c_str());
-                    }
-                    auto posLatLon = glm::dvec2(*element->lat, *element->lon);
+    //            std::transform(nodes.begin(), nodes.end(), basePath.begin(), [&](osm::element* element) {
+    //                if (element->type != osm::type::node) {
+    //                    auto msg = std::string("tried to get lat lon of non node at: ") + __FILE__ + std::string(" ") + std::string(std::to_string(__LINE__));
+    //                    printf(msg.c_str());
+    //                    throw std::runtime_error(msg.c_str());
+    //                }
+    //                auto posLatLon = glm::dvec2(*element->lat, *element->lon);
 
-                    posLatLon.x = glm::max(posLatLon.x, frame.start.x);
-                    posLatLon.y = glm::max(posLatLon.y, frame.start.y);
-                    posLatLon.x = glm::min(posLatLon.x, frame.getEnd().x);
-                    posLatLon.y = glm::min(posLatLon.y, frame.getEnd().y);
+    //                posLatLon.x = glm::max(posLatLon.x, frame.start.x);
+    //                posLatLon.y = glm::max(posLatLon.y, frame.start.y);
+    //                posLatLon.x = glm::min(posLatLon.x, frame.getEnd().x);
+    //                posLatLon.y = glm::min(posLatLon.y, frame.getEnd().y);
 
-                    return posLatLon;
-                    });
+    //                return posLatLon;
+    //                });
 
-                airportPolygone.push_back(basePath);
-            }
+    //            airportPolygone.push_back(basePath);
+    //        }
 
-        }
+    //    }
 
-        if (airportPolygone.size() > 0 && airport) {
-            mesh.indicies.push_back({});
-            mesh.attributes->subMeshMats.push_back(1);
-            drawMultPolygonInChunk(airportPolygone, mesh, frame,stats);
-        }
-    
-    }
+    //    if (airportPolygone.size() > 0 && airport) {
+    //        mesh.indicies.push_back({});
+    //        mesh.attributes->subMeshMats.push_back(1);
+    //        drawMultPolygonInChunk(airportPolygone, mesh, frame,stats);
+    //    }
+    //
+    //}
 
 
 
@@ -121,25 +121,36 @@ void groundCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int 
 
     auto framePoints = frame.polygon();
 
-    //std::reverse(framePoints.begin(), framePoints.end());
+    std::reverse(framePoints.begin(), framePoints.end());
 
     // remove when wanting lands and oceans to be different
     // so that the main frame is the only thing drawn
-    oceanMass.clear();
+    //oceanMass.clear();
 
-    oceanMass.insert(oceanMass.begin(), framePoints);
-    //oceanMass.insert(oceanMass.begin(), frame.polygon());
+    if (oceanMass.size() == 0) {
+        SR_ASSERT(oceanMass.size() < 199999);
+    }
 
-    //oceanMass.erase(std::prev(oceanMass.end()));
+        //oceanMass.insert(oceanMass.begin(), framePoints);
+        oceanMass.insert(oceanMass.begin(), frame.polygon());
 
-    mesh.indicies.push_back({});
-    mesh.attributes->subMeshMats.push_back(0);
+        //oceanMass.erase(std::prev(oceanMass.end()));
 
-    // not drawing ocean right now so drawing land over the whole frame
-    drawMultPolygonInChunk(oceanMass,mesh,frame,stats);
+        mesh.indicies.push_back({});
+        mesh.attributes->subMeshMats.push_back(0);
+
+        drawMultPolygonInChunk(oceanMass, mesh, frame, stats);
 
 }
 
+/// <summary>
+/// returns all land masses
+/// </summary>
+/// <param name="mesh"></param>
+/// <param name="frame"></param>
+/// <param name="draw"></param>
+/// <param name="stats"></param>
+/// <returns></returns>
 std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(Mesh& mesh, const Box& frame,bool draw, ChunkGenerationStatistics& stats)
 {
     if (draw) {
@@ -159,8 +170,9 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
         auto boundPath = bounds.polygon();//meshAlgs::bounds(poly.verts);
         auto& poly = *shapeFileSystem->polygons[i];
 
-        if (!frame.containsAny(poly.verts)) {
+        if (!frame.overlaps(bounds)) { //(!frame.containsAny(poly.verts) && !bounds.containsAny(frame.polygon())) {
             continue;
+        // for me tomorrow - make box interseciton fucntion and if passes move to actuall polygon interseciton fuction
         }
 
         std::vector<glm::dvec2> polyPoints = { poly.verts.begin(),std::prev(poly.verts.end()) };
@@ -175,18 +187,19 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
 
 
         //auto cutPolyVerts = meshAlgs::intersectionOf(polyPoints, boundPath);
-        std::vector<std::vector<glm::dvec2>> polyVerts = { polyPoints };
+
+        auto frameP = frame.polygon();
+
+        std::reverse(frameP.begin(), frameP.end());
+
+
+        std::vector<std::vector<glm::dvec2>> polyVerts = mesh::intersectionOf(frameP, polyPoints);
+
+        if (polyVerts.size() == 0) continue;
 
         //TODO: need to use boolean ops eventually becuae right now there are many many many extra verticies
-        for (size_t i = 0; i < polyVerts[0].size(); i++)
-        {
-            auto& posLatLon = polyVerts[0][i];
+       
 
-            posLatLon.x = glm::max(posLatLon.x, frame.start.x);
-            posLatLon.y = glm::max(posLatLon.y, frame.start.y);
-            posLatLon.x = glm::min(posLatLon.x, frame.getEnd().x);
-            posLatLon.y = glm::min(posLatLon.y, frame.getEnd().y);
-        }
 
         landPolygonsTruncated->push_back(polyVerts[0]);
 
@@ -204,6 +217,13 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
 }
 
 
+/// <summary>
+/// will draw in the last submesh so push this back before hand for new material
+/// </summary>
+/// <param name="polygon"></param>
+/// <param name="mesh"></param>
+/// <param name="frame"></param>
+/// <param name="stats"></param>
 void groundCreator::drawMultPolygonInChunk(std::vector<std::vector<glm::dvec2>>& polygon, Mesh& mesh, const Box& frame, ChunkGenerationStatistics& stats)
 {
     auto roofMesh = mesh::triangulate(polygon).first;

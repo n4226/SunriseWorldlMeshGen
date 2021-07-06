@@ -26,14 +26,18 @@ namespace osm {
 		}
 		Document j;
 
-		j.Parse(str.c_str());
+		auto cStr = str.c_str();
+		j.Parse(cStr);
+
+		if (j.IsNull()) {
+			throw std::runtime_error("json null");
+		}
 
 		//auto j = json::parse(str);
 
 		osm osm;
 
 		// parse headers
-
 		osm.version = j["version"].GetDouble();
 		osm.generator = j["generator"].GetString();
 		osm.osm3S.timestampOsmBase = j["osm3s"]["timestamp_osm_base"].GetString();

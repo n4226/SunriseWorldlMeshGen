@@ -1,7 +1,9 @@
 #include "mgpch.h"
 #include "RoadCreator.h"
 
+#include "../../underlingSystems/osmFetching/OsmAttributeFetcher.h"
 
+#define LANEWIDTH 1
 
 void RoadCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod, ChunkGenerationStatistics& stats)
 {
@@ -9,7 +11,7 @@ void RoadCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lo
 	if (lod > 0) return;
 
 	mesh.indicies.push_back({});
-	mesh.attributes->subMeshMats.push_back(1);
+	mesh.attributes->subMeshMats.push_back(3);
 
 	//TODO: somehow prevent each creator from ahving to loop through all the elements in the osm data after eachother by combining them into one 
 	// TODO remove duplicate pointes if they fall on a streight 2d line after being clipped to the chunk -> this could be for objecy such as buildings or more commanly to grounds of different surfaces eg ocean and land
@@ -37,29 +39,14 @@ void RoadCreator::addRoad(Mesh& mesh, osm::osm& osm, osm::element& road, const B
 
 
 	//TODO: make this acurate
-	double width;
-	double lanes;
+	double lanes = OsmAttributeFetcher::tryGetValue<double>(road,"lanes",2);
+	double width = OsmAttributeFetcher::tryGetValue<double>(road,"width",lanes*LANEWIDTH);
 
-	if (road.tags.count("lanes")) {
-		try {
-			lanes = std::stod(road.tags.at("lanes"));
-		}
-		catch (...) { lanes = 2; }
-	}
-	else lanes = 2;
-
-	if (road.tags.count("width")) {
-		try {
-			width = std::stod(road.tags.at("width"));
-		}
-		catch (...) { width = lanes * 1; }
-	}
-	else width = lanes * 1;
 
 	// first node IS duplicated - AT INDEX 0 AND INDEX SIZE - 1
-	std::vector<glm::dvec2> basePath(nodes.size());
+	std::vector<glm::dvec2> _basePath(nodes.size());
 
-	std::transform(nodes.begin(), nodes.end(), basePath.begin(), [&, road, basePath,this](osm::element* element) {
+	std::transform(nodes.begin(), nodes.end(), _basePath.begin(), [&, road, _basePath,this](osm::element* element) {
 		if (element->type != osm::type::node) { 
 			auto msg = std::string("tried to get lat lon of non node at: ") + __FILE__ + std::string(" ") + std::string(std::to_string(__LINE__));
 			printf(msg.c_str());
@@ -67,13 +54,21 @@ void RoadCreator::addRoad(Mesh& mesh, osm::osm& osm, osm::element& road, const B
 		}
 		auto posLatLon = glm::dvec2(*element->lat, *element->lon);
 
-		posLatLon.x = glm::max(posLatLon.x, frame.start.x);
-		posLatLon.y = glm::max(posLatLon.y, frame.start.y);
-		posLatLon.x = glm::min(posLatLon.x, frame.getEnd().x);
-		posLatLon.y = glm::min(posLatLon.y, frame.getEnd().y);
+		//posLatLon.x = glm::max(posLatLon.x, frame.start.x);
+		//posLatLon.y = glm::max(posLatLon.y, frame.start.y);
+		//posLatLon.x = glm::min(posLatLon.x, frame.getEnd().x);
+		//posLatLon.y = glm::min(posLatLon.y, frame.getEnd().y);
 
 		return posLatLon;
 	});
+
+	//auto chunkPoly = frame.polygon();
+	//std::reverse(chunkPoly.begin(), chunkPoly.end());
+	//std::vector<std::vector<glm::dvec2>> clippedPath = mesh::intersectionOf(_basePath,chunkPoly); 
+
+	//SR_ASSERT(clippedPath.size() > 0);
+
+	std::vector<glm::dvec2> basePath = _basePath;//clippedPath[0];
 
 	int vertIndex = 0;
 
@@ -115,8 +110,11 @@ void RoadCreator::addRoad(Mesh& mesh, osm::osm& osm, osm::element& road, const B
 
 		// scalled uvs
 
-		mesh.uvs.push_back(glm::vec2(0, 0));
-		mesh.uvs.push_back(glm::vec2(width, 0));
+		auto uvProgress = glm::distance(p1, math::LlatoGeo(glm::dvec3(basePath[0], 0), glm::dvec3(0), radius) - center_geo);
+		glm::vec2 scale(2);
+
+		mesh.uvs.push_back(glm::vec2(0, uvProgress) * scale);
+		mesh.uvs.push_back(glm::vec2(width, uvProgress) * scale);
 
 
 		if (i < basePath.size() - 1) {

@@ -26,23 +26,29 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
     auto ticket = waitforServerQueue.take();
 #endif
 
-    auto file = MeshGenConfig::getorReset().osmCashDir + frame.toString() + ".osm";
+    auto file = MeshGenConfig::get().osmCashDir + frame.toString() + ".osm";
 
     // check if in local cash if so return that
     printf("attempting to open osm cash file\n");
     std::ifstream f(file);
     if (f.good()) {
-        stats.markOsmJSONReceived();
-        printf("using osm cash to load osm\n");
-        std::string str((std::istreambuf_iterator<char>(f)),
-            std::istreambuf_iterator<char>());
-        if (str.substr(0, 5) == "<?xml") {
-            remove(file.c_str());
-            throw std::runtime_error("osm data not json");
+        try {
+            stats.markOsmJSONReceived();
+            printf("using osm cash to load osm\n");
+            std::string str((std::istreambuf_iterator<char>(f)),
+                std::istreambuf_iterator<char>());
+            if (str.substr(0, 5) == "<?xml") {
+                remove(file.c_str());
+                throw std::runtime_error("osm data not json");
+            }
+            auto osmData = osm::makeOSM(str);
+            stats.markOSMParsedFromJSON();
+            return osmData;
         }
-        auto osmData = osm::    makeOSM(str);
-        stats.markOSMParsedFromJSON();
-        return osmData;
+        catch (const std::exception& e) {
+            if (onlyUseOSMCash)
+                throw e;
+        }
     }
     else if (onlyUseOSMCash)
         throw std::runtime_error("not in osm cash");
@@ -53,9 +59,14 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
     printf("fetching osm from server\n");
     //get from server 
 
-    auto server = MeshGenConfig::getorReset().osmServerURL.c_str();
+    auto server = MeshGenConfig::get().osmServerURL;
 
-    httplib::Client cli(server);//();
+    httplib::Client cli(server.c_str());//();
+
+    cli.set_write_timeout(40, 0);
+    cli.set_read_timeout(40, 0);
+    cli.set_connection_timeout(40, 0);
+    cli.set_keep_alive(true);
 
     auto str = getQuery(frame);
 
@@ -66,7 +77,7 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
     //update cash - raw osm
 
     if (response == nullptr || response.error() == httplib::Error::Read)
-        throw std::runtime_error("error");
+        throw std::runtime_error("read error");
     if (response->body.empty())
         throw std::runtime_error("osmEmpty");
 
@@ -86,12 +97,13 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
 
     stats.markOSMParsedFromJSON();
 
-    if (strcmp(server, "http://localhost") != 0) {
+    if (strcmp(server.c_str(), "http://127.0.0.1") != 0) {
         printf("sleeping with json data\n");
         Sleep(8000);
     }
     else {
         printf("not sleeping\n");
+        Sleep(10);
     }
 
     return parsedOsm;

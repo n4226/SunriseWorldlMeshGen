@@ -5,9 +5,9 @@
 // constants:
 constexpr double buildingCullHeightCutof = 10;
 
-constexpr double buildingProbLOD1 = 0.80;
-constexpr double buildingProbLOD2 = 0.60;
-constexpr double buildingProbLOD3 = 0.50;
+constexpr double buildingProbLOD1 = 0.60;
+constexpr double buildingProbLOD2 = 0.40;
+constexpr double buildingProbLOD3 = 0.20;
 
 
 
