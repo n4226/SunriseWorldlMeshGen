@@ -35,8 +35,8 @@
 # project spacific
 
 
-bin/
-bin-intermediate/
+bin/*
+bin-intermediate/*
 
 *.shp
 *.shx
