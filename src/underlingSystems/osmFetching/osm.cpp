@@ -176,6 +176,11 @@ namespace osm {
 		results.resize(e.nodes.size());
 
 		std::transform(e.nodes.begin(), e.nodes.end(), results.begin(), [&](int64_t id) {
+			SR_ASSERT(node_elementMap.find(id) != node_elementMap.end());
+#if SR_ENABLE_PRECONDITION_CHECKS
+			if (node_elementMap.find(id) != node_elementMap.end())
+				throw std::runtime_error("node not found");
+#endif
 			auto result = node_elementMap.find(id)->second;
 			return result;
 		});

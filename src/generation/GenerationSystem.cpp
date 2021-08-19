@@ -21,6 +21,8 @@
 #include <chrono>
 
 
+#include"igl/writeOBJ.h"
+
 GenerationSystem::GenerationSystem(std::vector<Box>&& chunks)
     : osmFetcher(),
     chunks(chunks), 
@@ -179,11 +181,27 @@ void GenerationSystem::debugChunk(size_t index, int lod)
     for (icreator* creator : creators)
         creator->createInto(mesh, osmData, chunk,lod,stats);
     
-    
+    stats.logWholeMesh(&mesh);
     stats.endTimer();
 
+    std::string path = "E:\\Sunrise-World-Data\\test_binary_ops";
+
+    for (size_t i = 0; i < mesh.indicies.size(); i++)
+    {
+
+        Eigen::MatrixXd V;
+        Eigen::MatrixXi I;
+
+        makeLibiglMesh(mesh, i, V, I);
+
+
+        igl::writeOBJ(path + "/cube(" + std::to_string(i) + ").obj", V, I);
+    }
+
+
+    FileManager::saveStringToFile(stats.printLog(), path + "/" + chunk.toString() + ".stats");
     //mesh.indicies.erase(mesh.indicies.begin());
-    mesh::displayMesh(mesh);
+    //mesh::displayMesh(mesh);
     
 
     //BinaryMeshSeirilizer binaryMesh(mesh);

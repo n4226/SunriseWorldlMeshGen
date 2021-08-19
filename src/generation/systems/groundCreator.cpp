@@ -4,6 +4,7 @@
 
 #include "../../underlingSystems/ShapeFileSystem.h"
 
+
 constexpr double radius = math::dEarthRad;
 
 bool isAny(osm::element& element, std::vector<std::array<std::string, 2>>&& wantedKeyValues) {
@@ -38,7 +39,7 @@ void groundCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int 
 
     // last param is weather to draw the land polygon
     //TODO: for now assuming only one but this is not correct
-    auto lands = createLandPolygonChunkMesh(mesh, frame, false,stats);
+    auto lands = createLandPolygonChunkMesh(mesh, frame, true, stats);
 
     // if there was no land than make a full flat chunk to eventually become oscean
     //if (lands->size() == 0)
@@ -117,30 +118,68 @@ void groundCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int 
 
 
 
-    auto oceanMass = *lands;
 
     auto framePoints = frame.polygon();
 
     std::reverse(framePoints.begin(), framePoints.end());
 
+    if (lands->size() == 0) {
+        // falback
+    }
+
+    //mesh::Polygon2D landMass = std::accumulate(lands->begin(), lands->end(), mesh::Polygon2D(), [](mesh::Polygon2D a,mesh::Polygon2D b) {
+    //    return mesh::unionOf(a, b)[0];
+    //});
+
+
+    // combines overlapping land masses
+    mesh::HPolygon2D filteredLandMasses = *lands;
+
+    //for (size_t i = 0; i < lands->size(); i++)
+    //{
+    //    bool added = false;
+    //    for (size_t j = 0; j < filteredLandMasses.size(); j++)
+    //    {
+    //        if (mesh::overlap(filteredLandMasses[j], (*lands)[i])) {
+    //            filteredLandMasses[j] = mesh::unionOf(filteredLandMasses[j], (*lands)[i])[0];
+    //            added = true;
+    //            break;
+    //        }
+    //    }
+
+    //    if (!added)
+    //        filteredLandMasses.push_back((*lands)[i]);
+    //}
+
+    std::vector<mesh::Polygon2D> oceanMass = {framePoints};
+    
+
+    for (size_t i = 0; i < filteredLandMasses.size(); i++)
+    {
+        oceanMass = { mesh::bunionSMDifference(oceanMass[0], filteredLandMasses[i])};
+    }
+    
+
     // remove when wanting lands and oceans to be different
     // so that the main frame is the only thing drawn
     //oceanMass.clear();
 
-    if (oceanMass.size() == 0) {
-        SR_ASSERT(oceanMass.size() < 199999);
-    }
+    //if (oceanMass.size() == 0) {
+        //SR_ASSERT(oceanMass.size() < 199999);
+
 
         //oceanMass.insert(oceanMass.begin(), framePoints);
-        oceanMass.insert(oceanMass.begin(), frame.polygon());
+        //oceanMass.insert(oceanMass.begin(), frame.polygon());
 
         //oceanMass.erase(std::prev(oceanMass.end()));
 
+        //oceanMass.resize(1);
+
         mesh.indicies.push_back({});
         mesh.attributes->subMeshMats.push_back(0);
-
-        drawMultPolygonInChunk(oceanMass, mesh, frame, stats);
-
+        //std::vector<std::vector<glm::dvec2>> p = { (*lands)[i] };
+        drawMultPolygonInChunk(oceanMass, mesh, frame, &stats);
+    //}
 }
 
 /// <summary>
@@ -197,10 +236,9 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
 
         if (polyVerts.size() == 0) continue;
 
-        //TODO: need to use boolean ops eventually becuae right now there are many many many extra verticies
-       
 
 
+        //landPolygonsTruncated->push_back(polyPoints);
         landPolygonsTruncated->push_back(polyVerts[0]);
 
         //auto roofMesh = meshAlgs::triangulate(*cutPolyVerts).first;
@@ -208,7 +246,7 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
 
        // draw this truncated to bounds polygone if draw is true
        if (draw)
-        drawMultPolygonInChunk(polyVerts,mesh,frame,stats);
+        drawMultPolygonInChunk(polyVerts,mesh,frame,&stats);
        
     }
 
@@ -224,12 +262,19 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
 /// <param name="mesh"></param>
 /// <param name="frame"></param>
 /// <param name="stats"></param>
-void groundCreator::drawMultPolygonInChunk(std::vector<std::vector<glm::dvec2>>& polygon, Mesh& mesh, const Box& frame, ChunkGenerationStatistics& stats)
+void groundCreator::drawMultPolygonInChunk(std::vector<std::vector<glm::dvec2>>& polygon, Mesh& mesh, const Box& frame, ChunkGenerationStatistics* stats, bool geoCenter)
 {
+    SR_ASSERT(polygon.size() > 0);
     auto roofMesh = mesh::triangulate(polygon).first;
     //auto roofMesh = mesh::triangulateEarcut(polygon);
 
-    const glm::dvec3 center_geo = math::LlatoGeo(glm::dvec3(frame.getCenter(), 0), {}, radius);
+    glm::dvec3 center_geo;
+    if (geoCenter)
+        center_geo = math::LlatoGeo(glm::dvec3(frame.getCenter(), 0), {}, radius);
+    else {
+        center_geo = glm::dvec3(frame.getCenter(),0);
+    }
+
     auto startVertOfset = mesh.verts.size();
 
 
@@ -238,9 +283,15 @@ void groundCreator::drawMultPolygonInChunk(std::vector<std::vector<glm::dvec2>>&
         auto posLatLon = roofMesh->verts[i];
 
         auto posLLA = glm::dvec3(posLatLon.x, posLatLon.y, 0);
-        auto pos1 = math::LlatoGeo(posLLA, glm::dvec3(0), radius) - center_geo;
+        glm::dvec3 pos1;
+        if (geoCenter)
+            pos1 = math::LlatoGeo(posLLA, glm::dvec3(0), radius) - center_geo;
+        else
+            pos1 = posLLA - center_geo;
+            
         mesh.verts.push_back(pos1);
-        stats.logVerts(1, ChunkGenerationStatistics::VertUse::land);
+        if (stats)
+            stats->logVerts(1, ChunkGenerationStatistics::VertUse::land);
 
         auto geo_unCentered = math::LlatoGeo(posLLA, {}, radius);
 

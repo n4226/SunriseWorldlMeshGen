@@ -3,7 +3,8 @@
 
 #include "../../underlingSystems/ShapeFileSystem.h"
 #include "../../generation/GenerationSystem.h"
-
+#include "../../generation/systems/groundCreator.h"
+#include"igl/writeOBJ.h"
 #include  "Sunrise.h"
 
 void testAllocator() {
@@ -83,10 +84,46 @@ void testBox() {
 
 }
 
+void testMeshBinaryOps() {
+	std::string path = "E:\\Sunrise-World-Data\\test_binary_ops";
+
+	groundCreator creator{};
+	Mesh mesh;
+
+	mesh.indicies.push_back({});
+
+	glm::dvec2 newNYTestPoint(40.75699, -73.92144);
+
+	Box chunk = 
+		//GenerationSystem::actualChunk(newNYTestPoint, 12);
+		Box(glm::dvec2(-1, -1), glm::dvec2(2, 2));
+
+	std::vector<std::vector<glm::dvec2>> polygon = {   
+		chunk.polygon(),
+		Box({-0.5, 0 }, {1,1}).polygon(),
+	};
+	polygon = mesh::differenceBetween(chunk.polygon(), Box({ -0.5, 0 }, { 1,1 }).polygon());
+	//polygon = mesh::intersectionOf(Box({ -0.5, 0.5 }, { 1,1 }).polygon(), chunk.polygon());
+
+
+	//std::swap(polygon[0], polygon[1]);
+
+	creator.drawMultPolygonInChunk(polygon, mesh, chunk, nullptr,false);
+
+	
+	Eigen::MatrixXd V;
+	Eigen::MatrixXi I;
+
+	makeLibiglMesh(mesh, 0, V, I);
+
+	igl::writeOBJ(path + "/cube.obj", V, I);
+
+}
 
 void ConfigureTasksScript::runScript()
 {
-
+	/*testMeshBinaryOps();
+	return;*/
 	//testAllocator();
 	/*testBox();
 	return;*/
@@ -120,14 +157,18 @@ void ConfigureTasksScript::runScript()
 
 
 	glm::dvec2 newNYTestPoint(40.75699, -73.92144);
+	glm::dvec2 newNYTestPointOverWater(40.7634, -73.947);
 
 
 	std::vector<std::vector<math::Box>> chunks = {
-		GenerationSystem::genreateChunksAround(newNYTestPoint, 13, glm::ivec2(6, 6)),
+		//GenerationSystem::genreateChunksAround(newNYTestPointOverWater, 13, glm::ivec2(3, 3)),
 		//GenerationSystem::genreateChunksAround(newNYTestPoint, 12, glm::ivec2(3, 3)),
-		//GenerationSystem::genreateChunksAround(newNYTestPoint, 11, glm::ivec2(2, 2)),
-		//GenerationSystem::genreateChunksAround(desired, 10, glm::ivec2(6, 6)),
+		GenerationSystem::genreateChunksAround(newNYTestPoint, 11, glm::ivec2(2, 2)),
 
+		/*GenerationSystem::genreateChunksAround(desired, 10, glm::ivec2(3, 3)),
+		GenerationSystem::genreateChunksAround(desired, 11, glm::ivec2(6, 6)),
+		GenerationSystem::genreateChunksAround(desired, 12, glm::ivec2(9, 9)),
+		GenerationSystem::genreateChunksAround(desired, 13, glm::ivec2(12, 12)),*/
 
 		//GenerationSystem::genreateChunksAround(desired, 12, glm::ivec2(27, 27)),
 		//GenerationSystem::genreateChunksAround(desired, 11, glm::ivec2(9, 9))
@@ -147,10 +188,10 @@ void ConfigureTasksScript::runScript()
 
 
 	// lod nolonger taken in but calculated per chunk
-	genSys.generate(-1);
+	//genSys.generate(-1);
 
 	// first parm is chunk index and second is lod level
-	//genSys.debugChunk(0,1);
+	genSys.debugChunk(0,1);
 
 
 
