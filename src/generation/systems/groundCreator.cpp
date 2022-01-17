@@ -153,12 +153,12 @@ void groundCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int 
 
     std::vector<mesh::Polygon2D> oceanMass = {framePoints};
     
-
-    for (size_t i = 0; i < filteredLandMasses.size(); i++)
-    {
-        oceanMass = { mesh::bunionSMDifference(oceanMass[0], filteredLandMasses[i])};
-    }
-    
+    //NOTE: just comented ouy
+    //for (size_t i = 0; i < filteredLandMasses.size(); i++)
+    //{
+    //    oceanMass = { mesh::bunionSMDifference(oceanMass[0], filteredLandMasses[i])};
+    //}
+    //
 
     // remove when wanting lands and oceans to be different
     // so that the main frame is the only thing drawn
@@ -231,7 +231,7 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
 
         std::reverse(frameP.begin(), frameP.end());
 
-
+        /* NOTE: just ocmmented out
         std::vector<std::vector<glm::dvec2>> polyVerts = mesh::intersectionOf(frameP, polyPoints);
 
         if (polyVerts.size() == 0) continue;
@@ -247,7 +247,7 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
        // draw this truncated to bounds polygone if draw is true
        if (draw)
         drawMultPolygonInChunk(polyVerts,mesh,frame,&stats);
-       
+       */
     }
 
     // return all the truncated polygons

@@ -85,6 +85,7 @@ void testBox() {
 }
 
 void testMeshBinaryOps() {
+	/*
 	std::string path = "E:\\Sunrise-World-Data\\test_binary_ops";
 
 	groundCreator creator{};
@@ -113,11 +114,11 @@ void testMeshBinaryOps() {
 	
 	Eigen::MatrixXd V;
 	Eigen::MatrixXi I;
-
+	mesh::
 	makeLibiglMesh(mesh, 0, V, I);
 
 	igl::writeOBJ(path + "/cube.obj", V, I);
-
+	*/
 }
 
 void ConfigureTasksScript::runScript()
@@ -187,12 +188,13 @@ void ConfigureTasksScript::runScript()
 	GenerationSystem genSys(std::move(flatChunks));
 
 
+
 	//uncomment to begin
 	// lod nolonger taken in but calculated per chunk
 	//genSys.generate(-1);
 
 	// first parm is chunk index and second is lod level
-	genSys.debugChunk(0,1);
+	//genSys.debugChunk(0,1);
 
 
 

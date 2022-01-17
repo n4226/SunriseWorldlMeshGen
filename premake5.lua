@@ -34,7 +34,7 @@ project "SunriseWorldMeshGen"
 	
 
 	-- not sure if these two lines should be commented out
-	mainProjDir = "SunriseWorldMeshGen"
+	--mainProjDir = "SunriseWorldMeshGen"
 	sunriseLocation = "%{wks.location}/extern/Sunrise"
 
 	kind "ConsoleApp"
