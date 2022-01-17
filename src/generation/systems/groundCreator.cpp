@@ -206,6 +206,7 @@ std::vector<std::vector<glm::dvec2>>* groundCreator::createLandPolygonChunkMesh(
 
 void groundCreator::drawMultPolygonInChunk(std::vector<std::vector<glm::dvec2>>& polygon, Mesh& mesh, const Box& frame, ChunkGenerationStatistics& stats)
 {
+
     auto roofMesh = mesh::triangulate(polygon).first;
     //auto roofMesh = mesh::triangulateEarcut(polygon);
 

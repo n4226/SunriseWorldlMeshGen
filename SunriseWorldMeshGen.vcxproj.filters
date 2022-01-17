@@ -4,8 +4,14 @@
     <Filter Include="baseApp">
       <UniqueIdentifier>{E1CB2866-4DAB-A701-56C3-32D8C2210E63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="baseApp\configure tasks">
+      <UniqueIdentifier>{389726B4-A4CE-6E4B-ADD8-D26E198F9544}</UniqueIdentifier>
+    </Filter>
     <Filter Include="generation">
       <UniqueIdentifier>{B11313BF-9DCB-540C-06D3-2D68F2A9EFFC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="generation\managment">
+      <UniqueIdentifier>{186E8EE2-04FD-17AC-AD1B-2CA799892852}</UniqueIdentifier>
     </Filter>
     <Filter Include="generation\systems">
       <UniqueIdentifier>{D822A2FF-C406-6355-2D67-5DA8196A4DD7}</UniqueIdentifier>
@@ -24,6 +30,9 @@
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h">
       <Filter>baseApp</Filter>
     </ClInclude>
+    <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h">
+      <Filter>baseApp\configure tasks</Filter>
+    </ClInclude>
     <ClInclude Include="src\generation\GenerationStatistics.h">
       <Filter>generation</Filter>
     </ClInclude>
@@ -32,6 +41,9 @@
     </ClInclude>
     <ClInclude Include="src\generation\creator.h">
       <Filter>generation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\generation\managment\GenerationLodInformer.h">
+      <Filter>generation\managment</Filter>
     </ClInclude>
     <ClInclude Include="src\generation\systems\RoadCreator.h">
       <Filter>generation\systems</Filter>
@@ -46,15 +58,15 @@
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h">
       <Filter>underlingSystems</Filter>
     </ClInclude>
+    <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h">
+      <Filter>underlingSystems\osmFetching</Filter>
+    </ClInclude>
     <ClInclude Include="src\underlingSystems\osmFetching\OsmFetcher.h">
       <Filter>underlingSystems\osmFetching</Filter>
     </ClInclude>
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h">
       <Filter>underlingSystems\osmFetching</Filter>
     </ClInclude>
-    <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h" />
-    <ClInclude Include="src\generation\managment\GenerationLodInformer.h" />
-    <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp">
@@ -62,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp">
       <Filter>baseApp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp">
+      <Filter>baseApp\configure tasks</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\GenerationStatistics.cpp">
       <Filter>generation</Filter>
@@ -71,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="src\generation\creator.cpp">
       <Filter>generation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp">
+      <Filter>generation\managment</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\systems\RoadCreator.cpp">
       <Filter>generation\systems</Filter>
@@ -86,14 +104,14 @@
     <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp">
       <Filter>underlingSystems</Filter>
     </ClCompile>
+    <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp">
+      <Filter>underlingSystems\osmFetching</Filter>
+    </ClCompile>
     <ClCompile Include="src\underlingSystems\osmFetching\OsmFetcher.cpp">
       <Filter>underlingSystems\osmFetching</Filter>
     </ClCompile>
     <ClCompile Include="src\underlingSystems\osmFetching\osm.cpp">
       <Filter>underlingSystems\osmFetching</Filter>
     </ClCompile>
-    <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp" />
-    <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp" />
-    <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp" />
   </ItemGroup>
 </Project>

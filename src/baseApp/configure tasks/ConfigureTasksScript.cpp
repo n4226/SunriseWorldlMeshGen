@@ -55,7 +55,11 @@ void ConfigureTasksScript::runScript()
 	GenerationSystem genSys(std::move(flatChunks));
 
 
-	genSys.generate(0);
+	//uncomment to begin
+	//genSys.generate(0);
+
+
+
 
 	// first parm is chunk index and second is lod level
 	//genSys.debugChunk(0,1);

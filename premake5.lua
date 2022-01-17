@@ -32,6 +32,7 @@ group ""
 project "SunriseWorldMeshGen"
 	
 	mainProjDir = "SunriseWorldMeshGen"
+	sunriseLocation = "%{wks.location}/extern/Sunrise"
 
 	kind "ConsoleApp"
 	language "C++"
@@ -39,7 +40,6 @@ project "SunriseWorldMeshGen"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
-	sunriseLocation = "%{wks.location}/extern/Sunrise"
 
 	pchheader "mgpch.h"
 	pchsource "src/mgpch.cpp"
@@ -62,7 +62,7 @@ project "SunriseWorldMeshGen"
 
 		"%{wks.location}/src",
 		"%{wks.location}/extern/shapelib/",
-		"%{sunriseLocation}/src",
+		"%{sunriseLocation}/src", "%{sunriseLocation}/src/Sunrise",
 		"%{sunriseLocation}/vendor",
 		"%{sunriseLocation}/vendor/spdlog/include",
 		
@@ -77,6 +77,7 @@ project "SunriseWorldMeshGen"
 		"%{sunriseLocation}/vendor/libguarded/src",
 		"%{sunriseLocation}/vendor/nlohmann/include",
 		"%{sunriseLocation}/vendor/earcut-hpp/include/mapbox",
+		"%{sunriseLocation}/vendor/asio-1.18.1/include",
 		
 		"%{sunriseLocation}/vendor/bin/glfw/windows/glfw-3.3.2.bin.WIN64/glfw-3.3.2.bin.WIN64/lib-vc2019",
 		

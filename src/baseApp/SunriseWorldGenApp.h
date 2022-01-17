@@ -16,7 +16,16 @@ public:
 
 protected:
 
-	bool wantsWindows() override { return false; };
+	ApplicationConfig configure() override {
+		ApplicationConfig config{};
+
+		config.marlThreadCountOffset = 1;
+		config.enableAsioContext = false;
+		config.vulkan = false;
+		config.wantsWindows = false;
+
+		return config;
+	}
 
 };
 

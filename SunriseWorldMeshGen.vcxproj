@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -106,7 +106,7 @@ IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -135,7 +135,7 @@ IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -159,31 +159,30 @@ IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h" />
-    <ClInclude Include="src\generation\managment\GenerationLodInformer.h" />
-    <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h" />
     <ClInclude Include="src\baseApp\MeshGenConfig.h" />
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h" />
+    <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h" />
     <ClInclude Include="src\generation\GenerationStatistics.h" />
     <ClInclude Include="src\generation\GenerationSystem.h" />
     <ClInclude Include="src\generation\creator.h" />
+    <ClInclude Include="src\generation\managment\GenerationLodInformer.h" />
     <ClInclude Include="src\generation\systems\RoadCreator.h" />
     <ClInclude Include="src\generation\systems\buildingCreator.h" />
     <ClInclude Include="src\generation\systems\groundCreator.h" />
     <ClInclude Include="src\mgpch.h" />
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h" />
+    <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h" />
     <ClInclude Include="src\underlingSystems\osmFetching\OsmFetcher.h" />
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp" />
-    <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp" />
-    <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp" />
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp" />
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp" />
+    <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp" />
     <ClCompile Include="src\generation\GenerationStatistics.cpp" />
     <ClCompile Include="src\generation\GenerationSystem.cpp" />
     <ClCompile Include="src\generation\creator.cpp" />
+    <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp" />
     <ClCompile Include="src\generation\systems\RoadCreator.cpp" />
     <ClCompile Include="src\generation\systems\buildingCreator.cpp" />
     <ClCompile Include="src\generation\systems\groundCreator.cpp" />
@@ -192,6 +191,7 @@ IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp" />
+    <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp" />
     <ClCompile Include="src\underlingSystems\osmFetching\OsmFetcher.cpp" />
     <ClCompile Include="src\underlingSystems\osmFetching\osm.cpp" />
   </ItemGroup>
