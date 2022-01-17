@@ -11,12 +11,18 @@ inline bool stringToBool(std::string s)
 	return s.compare("true") == 0 ? true : false;
 }
 
+MeshGenConfig::ConfigValues MeshGenConfig::get()
+{
+	static ConfigValues v = getorReset();
+
+	return v;
+}
+
 MeshGenConfig::ConfigValues MeshGenConfig::getorReset()
 {
 	
-	
 	if (FileManager::exists(path())) {
-		return get();
+		return load();
 	}
 	else {
 		auto vals = defaults();
@@ -28,7 +34,7 @@ MeshGenConfig::ConfigValues MeshGenConfig::getorReset()
 
 }
 
-MeshGenConfig::ConfigValues MeshGenConfig::get()
+MeshGenConfig::ConfigValues MeshGenConfig::load()
 {
 
 	auto valuestr = FileManager::loadStringfromFile(path());
@@ -43,6 +49,7 @@ MeshGenConfig::ConfigValues MeshGenConfig::get()
 	settings.coastlineDir = values[1];
 	settings.osmServerURL = values[2];
 	settings.onlyUseOsmCash = stringToBool(values[3]);
+	settings.skipExisting = stringToBool(values[4]);
 
 	return settings;
 }
@@ -55,6 +62,7 @@ void MeshGenConfig::write(const ConfigValues& values)
 	vals.push_back(values.coastlineDir);
 	vals.push_back(values.osmServerURL);
 	vals.push_back(boolToString(values.onlyUseOsmCash));
+	vals.push_back(boolToString(values.skipExisting));
 
 	std::string valstr;
 
@@ -74,6 +82,7 @@ MeshGenConfig::ConfigValues MeshGenConfig::defaults()
 	vals.coastlineDir = FileManager::baseEngineResourceDir() + "osmCoastlines/justNewYorkArea-land-polygons-split-4326/";
 	vals.osmServerURL = "http://localhost";
 	vals.onlyUseOsmCash = false;
+	vals.skipExisting = true;
 
 	return vals;
 }

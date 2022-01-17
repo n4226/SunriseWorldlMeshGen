@@ -1,1 +1,0 @@
-C:\code\visual_studio\SunriseWorldlMeshGen\bin-int\Debug-windows-x86_64\Sunrise\Sunrise.vcxproj.CopyComplete

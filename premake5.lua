@@ -28,9 +28,12 @@ group ""
 
 -- below is the project
 
+mainProjDir = "SunriseWorldMeshGen"
 
 project "SunriseWorldMeshGen"
 	
+
+	-- not sure if these two lines should be commented out
 	mainProjDir = "SunriseWorldMeshGen"
 	sunriseLocation = "%{wks.location}/extern/Sunrise"
 
@@ -83,6 +86,7 @@ project "SunriseWorldMeshGen"
 		
 		"%{sunriseLocation}/vendor/date/include",
 		"%{sunriseLocation}/vendor/entt/single_include",
+		"%{sunriseLocation}/vendor/asio-1.18.1/include",
 	}	
 	
 	libdirs {

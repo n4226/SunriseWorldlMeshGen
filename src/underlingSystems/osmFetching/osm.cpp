@@ -26,14 +26,18 @@ namespace osm {
 		}
 		Document j;
 
-		j.Parse(str.c_str());
+		auto cStr = str.c_str();
+		j.Parse(cStr);
+
+		if (j.IsNull()) {
+			throw std::runtime_error("json null");
+		}
 
 		//auto j = json::parse(str);
 
 		osm osm;
 
 		// parse headers
-
 		osm.version = j["version"].GetDouble();
 		osm.generator = j["generator"].GetString();
 		osm.osm3S.timestampOsmBase = j["osm3s"]["timestamp_osm_base"].GetString();
@@ -172,6 +176,11 @@ namespace osm {
 		results.resize(e.nodes.size());
 
 		std::transform(e.nodes.begin(), e.nodes.end(), results.begin(), [&](int64_t id) {
+			SR_ASSERT(node_elementMap.find(id) != node_elementMap.end());
+#if SR_ENABLE_PRECONDITION_CHECKS
+			if (node_elementMap.find(id) != node_elementMap.end())
+				throw std::runtime_error("node not found");
+#endif
 			auto result = node_elementMap.find(id)->second;
 			return result;
 		});

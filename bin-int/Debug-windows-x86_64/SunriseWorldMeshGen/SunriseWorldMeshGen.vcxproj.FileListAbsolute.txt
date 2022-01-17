@@ -1,2 +1,0 @@
-C:\code\visual_studio\SunriseWorldlMeshGen\bin\Debug-windows-x86_64\SunriseWorldMeshGen\glfw3.dll
-C:\code\visual_studio\SunriseWorldlMeshGen\bin-int\Debug-windows-x86_64\SunriseWorldMeshGen\SunriseWorldMeshGen.vcxproj.CopyComplete

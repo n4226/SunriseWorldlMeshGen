@@ -29,7 +29,7 @@ namespace Sunrise {
 
 ShapeFileSystem::ShapeFileSystem()
 {
-	auto path = MeshGenConfig::getorReset().coastlineDir + "land_polygons.shp";
+	auto path = MeshGenConfig::get().coastlineDir + "land_polygons.shp";
 
 	shapeFile = SHPOpen(path.c_str(),"rb");
 

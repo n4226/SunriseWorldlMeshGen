@@ -19,6 +19,9 @@
     <Filter Include="underlingSystems">
       <UniqueIdentifier>{6543E7DB-513C-062E-7A6E-EBB266C6E539}</UniqueIdentifier>
     </Filter>
+    <Filter Include="underlingSystems\elevation">
+      <UniqueIdentifier>{9BF390E1-8703-3DB2-F0BC-A1D0DCEB2B4B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="underlingSystems\osmFetching">
       <UniqueIdentifier>{4B738966-372E-7912-E0E5-F15CCC7FC3A2}</UniqueIdentifier>
     </Filter>
@@ -58,6 +61,12 @@
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h">
       <Filter>underlingSystems</Filter>
     </ClInclude>
+<<<<<<< HEAD
+=======
+    <ClInclude Include="src\underlingSystems\elevation\ElevationFetcher.h">
+      <Filter>underlingSystems\elevation</Filter>
+    </ClInclude>
+>>>>>>> a33e9cd91257292f28b847171f3a66ac393ca8b0
     <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h">
       <Filter>underlingSystems\osmFetching</Filter>
     </ClInclude>
@@ -104,6 +113,12 @@
     <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp">
       <Filter>underlingSystems</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="src\underlingSystems\elevation\ElevationFetcher.cpp">
+      <Filter>underlingSystems\elevation</Filter>
+    </ClCompile>
+>>>>>>> a33e9cd91257292f28b847171f3a66ac393ca8b0
     <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp">
       <Filter>underlingSystems\osmFetching</Filter>
     </ClCompile>

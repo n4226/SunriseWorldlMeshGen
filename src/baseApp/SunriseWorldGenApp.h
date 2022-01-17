@@ -27,6 +27,19 @@ protected:
 		return config;
 	}
 
+
+	ApplicationConfig configure() { 
+		ApplicationConfig config{};
+
+		config.enableMarl = true;
+		config.vulkan = false;
+		config.wantsWindows = false;
+		config.enableAsioContextThread = false;
+		config.enableAsioContext = false;
+		config.useFileSys = false;
+
+		return config;
+	}
 };
 
 

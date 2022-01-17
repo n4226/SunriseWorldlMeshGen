@@ -77,7 +77,7 @@ void SunriseWorldGenApp::run()
 
 	SR_INFO("Starting mesh gen");
 
-	MeshGenConfig::getorReset();
+	MeshGenConfig::get();
 
 
 	ConfigureTasksScript::runScript();

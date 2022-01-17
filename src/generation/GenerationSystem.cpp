@@ -21,22 +21,28 @@
 #include <chrono>
 
 
+#include"igl/writeOBJ.h"
+
 GenerationSystem::GenerationSystem(std::vector<Box>&& chunks)
     : osmFetcher(),
     chunks(chunks), 
     creators({
     new groundCreator(),
-    new buildingCreator(),
-    new RoadCreator(),
+    //new buildingCreator(),
+    //new RoadCreator(),
     }),
     outputDir(FileManager::engineTerrainChunkDir()),
     attrOutputDir(FileManager::engineTerrainChunkAttributesDir())
 {
 }
 
-void GenerationSystem::generate(int lod)
+
+// lod no longer taken in but calulated
+void GenerationSystem::generate(int __lod)
 {
-    auto onlyUseOSMCash = MeshGenConfig::getorReset().onlyUseOsmCash;
+    SR_INFO("attempting to generate {} chunks", chunks.size());
+
+    auto onlyUseOSMCash = MeshGenConfig::get().onlyUseOsmCash;
     auto startTime = std::chrono::high_resolution_clock::now();
     //for (Box& chunk : chunks) {
 
@@ -52,8 +58,11 @@ void GenerationSystem::generate(int lod)
 
 #else
 
-        std::for_each(std::execution::par, chunks.begin(), chunks.end(), [this,onlyUseOSMCash,lod](Box& chunk) {
+        std::for_each(std::execution::par, chunks.begin(), chunks.end(), [this,onlyUseOSMCash](Box& chunk) {
 #endif
+
+            constexpr double baseSize = 90.0 / 4096;
+            auto lod = static_cast<size_t>((chunk.size.x / baseSize) - 1);
 
             auto stats = ChunkGenerationStatistics(chunk, lod);
 
@@ -63,7 +72,7 @@ void GenerationSystem::generate(int lod)
             auto attrFile = attrOutputDir + chunk.toString() + ".bmattr";
             try {
 
-                if (std::filesystem::exists(file)) {
+                if (std::filesystem::exists(file) && MeshGenConfig::get().skipExisting) {
                     printf("skipping an already saved chunk chunk\n");
                     throw std::runtime_error("already made");
                 }
@@ -81,6 +90,13 @@ void GenerationSystem::generate(int lod)
 
                 for (icreator* creator : creators)
                     creator->createInto(mesh, osmData, chunk, lod,stats);
+
+                // posibly temporary:
+                /*for (size_t i = 0; i < mesh.indicies.size(); i++)
+                {
+                    if (mesh.indicies[i].size() == 0)
+
+                }*/
 
                 //TODO WARNING LIFE CYCLE OF THIS MESH LIMETED TO THIS SCOPE
                 stats.logWholeMesh(&mesh);
@@ -125,8 +141,9 @@ void GenerationSystem::generate(int lod)
 
     finishedChunk.wait();
 #else
-            catch (...) {
+            catch (const std::exception& e) {
                 // moving onto next chunk nothing needed here
+                SR_CRITICAL("UNHANDLED CHUNK creation exeption: {}", e.what());
                 return;
             }
 
@@ -164,11 +181,27 @@ void GenerationSystem::debugChunk(size_t index, int lod)
     for (icreator* creator : creators)
         creator->createInto(mesh, osmData, chunk,lod,stats);
     
-    
+    stats.logWholeMesh(&mesh);
     stats.endTimer();
 
+    std::string path = "E:\\Sunrise-World-Data\\test_binary_ops";
+
+    for (size_t i = 0; i < mesh.indicies.size(); i++)
+    {
+
+        Eigen::MatrixXd V;
+        Eigen::MatrixXi I;
+
+        makeLibiglMesh(mesh, i, V, I);
+
+
+        igl::writeOBJ(path + "/cube(" + std::to_string(i) + ").obj", V, I);
+    }
+
+
+    FileManager::saveStringToFile(stats.printLog(), path + "/" + chunk.toString() + ".stats");
     //mesh.indicies.erase(mesh.indicies.begin());
-    mesh::displayMesh(mesh);
+    //mesh::displayMesh(mesh);
     
 
     //BinaryMeshSeirilizer binaryMesh(mesh);

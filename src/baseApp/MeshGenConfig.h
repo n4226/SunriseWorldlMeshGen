@@ -13,14 +13,16 @@ public:
 		std::string coastlineDir;
 		std::string osmServerURL;
 		bool onlyUseOsmCash;
+		bool skipExisting;
 	};
 
-	static ConfigValues getorReset();
+	static ConfigValues get();
 
 
 protected:
+	static ConfigValues getorReset();
+	static ConfigValues load();
 
-	static ConfigValues get();
 	static void write(const ConfigValues& values);
 	static ConfigValues defaults();
 
