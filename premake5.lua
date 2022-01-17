@@ -39,6 +39,9 @@ project "SunriseWorldMeshGen"
 
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++17"
+	staticruntime "off"
+
 
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
@@ -103,10 +106,8 @@ project "SunriseWorldMeshGen"
 	}
 
 	postbuildcommands {
-		("{COPY} %{wks.location}/bin/" .. outputdir .. "/Sunrise/Sunrise.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
-		("{COPY} %{wks.location}/bin/" .. outputdir .. "/Sunrise/Sunrise.pdb %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
-		--("call ../Sunrise/src/Sunrise/Sunrise/graphcis/shaders/compileShaders.bat"),
-		--("XCOPY /S /Y ../Sunrise/src/Sunrise/Sunrise/graphcis/shaders/ ../bin/" .. outputdir .. "/%{prj.name}/shaders"),
+		--("{COPY} %{wks.location}/bin/" .. outputdir .. "/Sunrise/Sunrise.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
+		--("{COPY} %{wks.location}/bin/" .. outputdir .. "/Sunrise/Sunrise.pdb %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
 		
 		-- shapelib dll copy
 		("{COPY} %{wks.location}/extern/shapelib/build/dll/Debug/shp.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
@@ -114,9 +115,6 @@ project "SunriseWorldMeshGen"
 	}
 
 	filter "system:windows"
-		
-		cppdialect "C++17"
-		staticruntime "off"
 		systemversion "latest"
 
 		defines {

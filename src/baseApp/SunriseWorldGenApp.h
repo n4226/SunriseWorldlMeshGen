@@ -21,11 +21,11 @@ protected:
 
 		config.enableMarl = true;
 		config.marlThreadCountOffset = 1;
-		config.vulkan = false;
+		config.vulkan = true;
 		config.wantsWindows = false;
 		config.enableAsioContextThread = false;
 		config.enableAsioContext = false;
-		config.useFileSys = false;
+		config.useFileSys = true;
 
 		return config;
 	}
