@@ -13,7 +13,11 @@
 #include <iostream>
 #include <fstream>
 #include <thread>
+
+#ifdef SR_PLATFORM_WINDOWS
 #include <Windows.h>
+#endif
+
 #include <filesystem>
 #include <algorithm>
 #include <execution>
@@ -58,7 +62,7 @@ void GenerationSystem::generate(int __lod)
 
 #else
 
-        std::for_each(std::execution::par, chunks.begin(), chunks.end(), [this,onlyUseOSMCash](Box& chunk) {
+        std::for_each(MG_EXECUION_POLOCY chunks.begin(), chunks.end(), [this,onlyUseOSMCash](Box& chunk) {
 #endif
 
             constexpr double baseSize = 90.0 / 4096;

@@ -1,0 +1,628 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0A136330A7F463E27F72A970 /* RoadCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD643A78A0249AEAFD5978B8 /* RoadCreator.cpp */; };
+		11EF8EB5119271E74BE724F5 /* osm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1BA80FDD730D82CF251B9E1D /* osm.cpp */; };
+		2B959E479FEFE3391DD36C87 /* MeshGenConfig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E9788AF50C1656184B24EEF /* MeshGenConfig.cpp */; };
+		3D2866BD4F52436F83432CFD /* creator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFE390C5B9A54D37F3A44F05 /* creator.cpp */; };
+		4CA6677E668FC9B02215DDBE /* GenerationLodInformer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E5E10E6348722D8F5ED7F26 /* GenerationLodInformer.cpp */; };
+		5A0577FDA2A4B62FC5D06E3D /* ShapeFileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6816D459778DB37037C5B85 /* ShapeFileSystem.cpp */; };
+		61B416574F1BA909EC159C97 /* OsmFetcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 099F095F1629BBD1910E879F /* OsmFetcher.cpp */; };
+		627D4960920F18526D1C57A0 /* mgpch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF03F8862DE663AF20445C8 /* mgpch.cpp */; };
+		64835917187F7249FA31AF57 /* ElevationFetcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FC9691F1A235211565BB75F /* ElevationFetcher.cpp */; };
+		72C29ADEC9D84350F620D91E /* ConfigureTasksScript.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCA3304617EE807806206686 /* ConfigureTasksScript.cpp */; };
+		99B3D7224CA9E0D49DCC3D62 /* groundCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE313E4AA23087BC271B9C8A /* groundCreator.cpp */; };
+		B68AC1CC0D182C3EE591400C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E21F5234E590246666FCC874 /* main.cpp */; };
+		B8E5C5A5978861174C6A63E5 /* SunriseWorldGenApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C27EC82DC221AB5FFC765E6D /* SunriseWorldGenApp.cpp */; };
+		BE1C2EA81AA3331AA345ECE8 /* libSunrise.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C321C6F0D306F322BF7A7D30 /* libSunrise.a */; };
+		C31E653F5D425A710D683B7F /* GenerationSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DBF9C32750540819CE379167 /* GenerationSystem.cpp */; };
+		E4B305CBCA4A0CFD8D8F1C0B /* GenerationStatistics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CFB868F329B97FE5F1007733 /* GenerationStatistics.cpp */; };
+		F57A433FCCCD6E71463AD97F /* OsmAttributeFetcher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA0EB0C7A1736BB92C2B3F07 /* OsmAttributeFetcher.cpp */; };
+		FC408440E9A816F286A20A80 /* buildingCreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 21B19E882E3C50FAA9211CC8 /* buildingCreator.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0D21F52B63AF5F9D3C28736B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BCCB28FEE8D13014BC1F0CF /* extern/Sunrise/Sunrise.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 95951D7896481A6A0A29EBB8;
+			remoteInfo = libSunrise.a;
+		};
+		5F5C67C4B5E9D2368E62E604 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BCCB28FEE8D13014BC1F0CF /* extern/Sunrise/Sunrise.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3CF3265EDFE14D106F072C9E;
+			remoteInfo = libSunrise.a;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		045452D19A7D64C35BE3C111 /* OsmAttributeFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OsmAttributeFetcher.h; path = src/underlingSystems/osmFetching/OsmAttributeFetcher.h; sourceTree = "<group>"; };
+		07CE1882CE5C0FF43C5E36C2 /* RoadCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoadCreator.h; path = src/generation/systems/RoadCreator.h; sourceTree = "<group>"; };
+		099F095F1629BBD1910E879F /* OsmFetcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OsmFetcher.cpp; path = src/underlingSystems/osmFetching/OsmFetcher.cpp; sourceTree = "<group>"; };
+		1BA80FDD730D82CF251B9E1D /* osm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = osm.cpp; path = src/underlingSystems/osmFetching/osm.cpp; sourceTree = "<group>"; };
+		21B19E882E3C50FAA9211CC8 /* buildingCreator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = buildingCreator.cpp; path = src/generation/systems/buildingCreator.cpp; sourceTree = "<group>"; };
+		2BCCB28FEE8D13014BC1F0CF /* libSunrise.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "Sunrise.xcodeproj"; path = extern/Sunrise/Sunrise.xcodeproj; sourceTree = SOURCE_ROOT; };
+		3D961930D7F0022214286770 /* GenerationLodInformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GenerationLodInformer.h; path = src/generation/managment/GenerationLodInformer.h; sourceTree = "<group>"; };
+		3DC048D1DFA9E4C3D6D0F711 /* GenerationSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GenerationSystem.h; path = src/generation/GenerationSystem.h; sourceTree = "<group>"; };
+		3E9788AF50C1656184B24EEF /* MeshGenConfig.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MeshGenConfig.cpp; path = src/baseApp/MeshGenConfig.cpp; sourceTree = "<group>"; };
+		53353BA7E5C305994E9BA9E7 /* osm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = osm.h; path = src/underlingSystems/osmFetching/osm.h; sourceTree = "<group>"; };
+		57C4794FCC1EBE414A02478F /* ShapeFileSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeFileSystem.h; path = src/underlingSystems/ShapeFileSystem.h; sourceTree = "<group>"; };
+		5A714FB2FEC3ED6410FC35F2 /* mgpch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = mgpch.h; path = src/mgpch.h; sourceTree = "<group>"; };
+		7FC9691F1A235211565BB75F /* ElevationFetcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ElevationFetcher.cpp; path = src/underlingSystems/elevation/ElevationFetcher.cpp; sourceTree = "<group>"; };
+		870716D449C77746A6FC5514 /* groundCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = groundCreator.h; path = src/generation/systems/groundCreator.h; sourceTree = "<group>"; };
+		989C1109AA5350FB1FC13F49 /* ElevationFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ElevationFetcher.h; path = src/underlingSystems/elevation/ElevationFetcher.h; sourceTree = "<group>"; };
+		9A18A4C98E17EE3B13030309 /* OsmFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OsmFetcher.h; path = src/underlingSystems/osmFetching/OsmFetcher.h; sourceTree = "<group>"; };
+		9B8C7BA1C3C73453AB62C1E1 /* SunriseWorldMeshGen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = SunriseWorldMeshGen; path = SunriseWorldMeshGen; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E5E10E6348722D8F5ED7F26 /* GenerationLodInformer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GenerationLodInformer.cpp; path = src/generation/managment/GenerationLodInformer.cpp; sourceTree = "<group>"; };
+		A6816D459778DB37037C5B85 /* ShapeFileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeFileSystem.cpp; path = src/underlingSystems/ShapeFileSystem.cpp; sourceTree = "<group>"; };
+		A9FA018F053B5501D8959FCF /* creator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = creator.h; path = src/generation/creator.h; sourceTree = "<group>"; };
+		AA9E11129E9D5A8423886F52 /* buildingCreator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = buildingCreator.h; path = src/generation/systems/buildingCreator.h; sourceTree = "<group>"; };
+		AE313E4AA23087BC271B9C8A /* groundCreator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = groundCreator.cpp; path = src/generation/systems/groundCreator.cpp; sourceTree = "<group>"; };
+		B17079997F93CD4B06A21FD9 /* MeshGenConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MeshGenConfig.h; path = src/baseApp/MeshGenConfig.h; sourceTree = "<group>"; };
+		BCA3304617EE807806206686 /* ConfigureTasksScript.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ConfigureTasksScript.cpp; path = "src/baseApp/configure tasks/ConfigureTasksScript.cpp"; sourceTree = "<group>"; };
+		BF4F3CF79E6C57297A75B337 /* SunriseWorldGenApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SunriseWorldGenApp.h; path = src/baseApp/SunriseWorldGenApp.h; sourceTree = "<group>"; };
+		BFE390C5B9A54D37F3A44F05 /* creator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = creator.cpp; path = src/generation/creator.cpp; sourceTree = "<group>"; };
+		BFF03F8862DE663AF20445C8 /* mgpch.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = mgpch.cpp; path = src/mgpch.cpp; sourceTree = "<group>"; };
+		C27EC82DC221AB5FFC765E6D /* SunriseWorldGenApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SunriseWorldGenApp.cpp; path = src/baseApp/SunriseWorldGenApp.cpp; sourceTree = "<group>"; };
+		CFB868F329B97FE5F1007733 /* GenerationStatistics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GenerationStatistics.cpp; path = src/generation/GenerationStatistics.cpp; sourceTree = "<group>"; };
+		DA0EB0C7A1736BB92C2B3F07 /* OsmAttributeFetcher.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OsmAttributeFetcher.cpp; path = src/underlingSystems/osmFetching/OsmAttributeFetcher.cpp; sourceTree = "<group>"; };
+		DBF9C32750540819CE379167 /* GenerationSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = GenerationSystem.cpp; path = src/generation/GenerationSystem.cpp; sourceTree = "<group>"; };
+		DD643A78A0249AEAFD5978B8 /* RoadCreator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = RoadCreator.cpp; path = src/generation/systems/RoadCreator.cpp; sourceTree = "<group>"; };
+		E21F5234E590246666FCC874 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		E7EF81D0CD86890290CB9810 /* ConfigureTasksScript.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConfigureTasksScript.h; path = "src/baseApp/configure tasks/ConfigureTasksScript.h"; sourceTree = "<group>"; };
+		F29FFC9DE3976A8F4F9AEADD /* GenerationStatistics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GenerationStatistics.h; path = src/generation/GenerationStatistics.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00B7C89126DDF8438DE4EED1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE1C2EA81AA3331AA345ECE8 /* libSunrise.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E397813D2C08656F70A7377D /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXGroup section */
+		2E7E10B389BF64255D19AEF3 /* managment */ = {
+			isa = PBXGroup;
+			children = (
+				9E5E10E6348722D8F5ED7F26 /* GenerationLodInformer.cpp */,
+				3D961930D7F0022214286770 /* GenerationLodInformer.h */,
+			);
+			name = managment;
+			sourceTree = "<group>";
+		};
+		51B5CC489F18C27A1537C288 /* underlingSystems */ = {
+			isa = PBXGroup;
+			children = (
+				A6816D459778DB37037C5B85 /* ShapeFileSystem.cpp */,
+				57C4794FCC1EBE414A02478F /* ShapeFileSystem.h */,
+				B9CA7A852AED1B77E0B3C8C5 /* elevation */,
+				660DB365F89B7D57617421A5 /* osmFetching */,
+			);
+			name = underlingSystems;
+			sourceTree = "<group>";
+		};
+		660DB365F89B7D57617421A5 /* osmFetching */ = {
+			isa = PBXGroup;
+			children = (
+				DA0EB0C7A1736BB92C2B3F07 /* OsmAttributeFetcher.cpp */,
+				045452D19A7D64C35BE3C111 /* OsmAttributeFetcher.h */,
+				099F095F1629BBD1910E879F /* OsmFetcher.cpp */,
+				9A18A4C98E17EE3B13030309 /* OsmFetcher.h */,
+				1BA80FDD730D82CF251B9E1D /* osm.cpp */,
+				53353BA7E5C305994E9BA9E7 /* osm.h */,
+			);
+			name = osmFetching;
+			sourceTree = "<group>";
+		};
+		70102373C69D8DE59F16A1B3 /* systems */ = {
+			isa = PBXGroup;
+			children = (
+				DD643A78A0249AEAFD5978B8 /* RoadCreator.cpp */,
+				07CE1882CE5C0FF43C5E36C2 /* RoadCreator.h */,
+				21B19E882E3C50FAA9211CC8 /* buildingCreator.cpp */,
+				AA9E11129E9D5A8423886F52 /* buildingCreator.h */,
+				AE313E4AA23087BC271B9C8A /* groundCreator.cpp */,
+				870716D449C77746A6FC5514 /* groundCreator.h */,
+			);
+			name = systems;
+			sourceTree = "<group>";
+		};
+		88809C002CD339B23F0B8240 /* baseApp */ = {
+			isa = PBXGroup;
+			children = (
+				3E9788AF50C1656184B24EEF /* MeshGenConfig.cpp */,
+				B17079997F93CD4B06A21FD9 /* MeshGenConfig.h */,
+				C27EC82DC221AB5FFC765E6D /* SunriseWorldGenApp.cpp */,
+				BF4F3CF79E6C57297A75B337 /* SunriseWorldGenApp.h */,
+				97D395E365F6E995ED053C23 /* configure tasks */,
+			);
+			name = baseApp;
+			sourceTree = "<group>";
+		};
+		976E4360AE80DE929E9CD9A0 /* generation */ = {
+			isa = PBXGroup;
+			children = (
+				CFB868F329B97FE5F1007733 /* GenerationStatistics.cpp */,
+				F29FFC9DE3976A8F4F9AEADD /* GenerationStatistics.h */,
+				DBF9C32750540819CE379167 /* GenerationSystem.cpp */,
+				3DC048D1DFA9E4C3D6D0F711 /* GenerationSystem.h */,
+				BFE390C5B9A54D37F3A44F05 /* creator.cpp */,
+				A9FA018F053B5501D8959FCF /* creator.h */,
+				2E7E10B389BF64255D19AEF3 /* managment */,
+				70102373C69D8DE59F16A1B3 /* systems */,
+			);
+			name = generation;
+			sourceTree = "<group>";
+		};
+		97D395E365F6E995ED053C23 /* configure tasks */ = {
+			isa = PBXGroup;
+			children = (
+				BCA3304617EE807806206686 /* ConfigureTasksScript.cpp */,
+				E7EF81D0CD86890290CB9810 /* ConfigureTasksScript.h */,
+			);
+			name = "configure tasks";
+			sourceTree = "<group>";
+		};
+		9D968EAA920D05DCE0E0A4EA /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				2BCCB28FEE8D13014BC1F0CF /* Sunrise.xcodeproj */,
+			);
+			name = Projects;
+			sourceTree = "<group>";
+		};
+		A6C936B49B3FADE6EA134CF4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9B8C7BA1C3C73453AB62C1E1 /* SunriseWorldMeshGen */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B2CCF118E173450A3AB49F58 /* SunriseWorldMeshGen */ = {
+			isa = PBXGroup;
+			children = (
+				88809C002CD339B23F0B8240 /* baseApp */,
+				976E4360AE80DE929E9CD9A0 /* generation */,
+				E21F5234E590246666FCC874 /* main.cpp */,
+				BFF03F8862DE663AF20445C8 /* mgpch.cpp */,
+				5A714FB2FEC3ED6410FC35F2 /* mgpch.h */,
+				51B5CC489F18C27A1537C288 /* underlingSystems */,
+				A6C936B49B3FADE6EA134CF4 /* Products */,
+				9D968EAA920D05DCE0E0A4EA /* Projects */,
+			);
+			name = SunriseWorldMeshGen;
+			sourceTree = "<group>";
+		};
+		B9CA7A852AED1B77E0B3C8C5 /* elevation */ = {
+			isa = PBXGroup;
+			children = (
+				7FC9691F1A235211565BB75F /* ElevationFetcher.cpp */,
+				989C1109AA5350FB1FC13F49 /* ElevationFetcher.h */,
+			);
+			name = elevation;
+			sourceTree = "<group>";
+		};
+		CF62090B17D2ED3D5C71BF4B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C321C6F0D306F322BF7A7D30 /* libSunrise.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		82F2E367D9804DD9B1F961A7 /* SunriseWorldMeshGen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EEF310F0151940A27C203730 /* Build configuration list for PBXNativeTarget "SunriseWorldMeshGen" */;
+			buildPhases = (
+				709F493196C578E3FDCC6F71 /* Resources */,
+				DA4C62880072923A677988C8 /* Sources */,
+				00B7C89126DDF8438DE4EED1 /* Frameworks */,
+				E397813D2C08656F70A7377D /* Embed Libraries */,
+				9607AE3710C85E8F00CD1376 /* Postbuild */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD1A4614058B2A464A29FC54 /* PBXTargetDependency */,
+			);
+			name = SunriseWorldMeshGen;
+			productInstallPath = "$(HOME)/bin";
+			productName = SunriseWorldMeshGen;
+			productReference = 9B8C7BA1C3C73453AB62C1E1 /* SunriseWorldMeshGen */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "SunriseWorldMeshGen" */;
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 1;
+			mainGroup = B2CCF118E173450A3AB49F58 /* SunriseWorldMeshGen */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CF62090B17D2ED3D5C71BF4B /* Products */;
+					ProjectRef = 2BCCB28FEE8D13014BC1F0CF /* Sunrise.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				82F2E367D9804DD9B1F961A7 /* SunriseWorldMeshGen */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C321C6F0D306F322BF7A7D30 /* libSunrise.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSunrise.a;
+			remoteRef = 0D21F52B63AF5F9D3C28736B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		709F493196C578E3FDCC6F71 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9607AE3710C85E8F00CD1376 /* Postbuild */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Postbuild;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nif [ \"${CONFIGURATION}\" = \"Debug\" ]; then\ncp -rf extern/shapelib/build/dll/Debug/shp.dll bin/Debug-macosx-x86_64/SunriseWorldMeshGen\nfi\nif [ \"${CONFIGURATION}\" = \"Release\" ]; then\ncp -rf extern/shapelib/build/dll/Debug/shp.dll bin/Release-macosx-x86_64/SunriseWorldMeshGen\nfi\nif [ \"${CONFIGURATION}\" = \"Dist\" ]; then\ncp -rf extern/shapelib/build/dll/Debug/shp.dll bin/Dist-macosx-x86_64/SunriseWorldMeshGen\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DA4C62880072923A677988C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B959E479FEFE3391DD36C87 /* MeshGenConfig.cpp in Sources */,
+				B8E5C5A5978861174C6A63E5 /* SunriseWorldGenApp.cpp in Sources */,
+				72C29ADEC9D84350F620D91E /* ConfigureTasksScript.cpp in Sources */,
+				E4B305CBCA4A0CFD8D8F1C0B /* GenerationStatistics.cpp in Sources */,
+				C31E653F5D425A710D683B7F /* GenerationSystem.cpp in Sources */,
+				3D2866BD4F52436F83432CFD /* creator.cpp in Sources */,
+				4CA6677E668FC9B02215DDBE /* GenerationLodInformer.cpp in Sources */,
+				0A136330A7F463E27F72A970 /* RoadCreator.cpp in Sources */,
+				FC408440E9A816F286A20A80 /* buildingCreator.cpp in Sources */,
+				99B3D7224CA9E0D49DCC3D62 /* groundCreator.cpp in Sources */,
+				B68AC1CC0D182C3EE591400C /* main.cpp in Sources */,
+				627D4960920F18526D1C57A0 /* mgpch.cpp in Sources */,
+				5A0577FDA2A4B62FC5D06E3D /* ShapeFileSystem.cpp in Sources */,
+				64835917187F7249FA31AF57 /* ElevationFetcher.cpp in Sources */,
+				F57A433FCCCD6E71463AD97F /* OsmAttributeFetcher.cpp in Sources */,
+				61B416574F1BA909EC159C97 /* OsmFetcher.cpp in Sources */,
+				11EF8EB5119271E74BE724F5 /* osm.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BD1A4614058B2A464A29FC54 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = libSunrise.a;
+			targetProxy = 5F5C67C4B5E9D2368E62E604 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		39841AF4247040E66C560934 /* Dist */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = (
+					YES,
+				);
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++2a";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = src/mgpch.h;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SR_PLATFORM_MACOS,
+					SR_DIST,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"C:/VulkanSDK/1.2.154.1/Lib",
+					"extern/Sunrise/vendor/marl-main/marl-main/Debug",
+					extern/shapelib/build/dll/Debug,
+					/usr/local/lib,
+					"extern/Sunrise/vendor/bin/glfw/macos/glfw-3.3.6.bin.MACOS/lib-universal",
+				);
+				OBJROOT = "bin-int/Dist-macosx-x86_64/SunriseWorldMeshGen";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lvulkan-1",
+					"-lshp",
+					"-lmarl",
+				);
+				SYMROOT = "bin/Dist-macosx-x86_64/SunriseWorldMeshGen";
+				USER_HEADER_SEARCH_PATHS = (
+					"C:/VulkanSDK/1.2.154.1/Include",
+					src,
+					extern/shapelib,
+					extern/Sunrise/src,
+					extern/Sunrise/src/Sunrise,
+					extern/Sunrise/vendor,
+					extern/Sunrise/vendor/spdlog/include,
+					"extern/Sunrise/vendor/glm-master",
+					"extern/Sunrise/vendor/marl-main/marl-main/include",
+					extern/Sunrise/vendor/stb,
+					"extern/Sunrise/vendor/mango-master/mango-master/include",
+					extern/Sunrise/vendor/libigl/include,
+					extern/Sunrise/vendor/HTTPRequest/include,
+					extern/Sunrise/vendor/httplib,
+					extern/Sunrise/vendor/rapidjson/include,
+					extern/Sunrise/vendor/libguarded/src,
+					extern/Sunrise/vendor/nlohmann/include,
+					"extern/Sunrise/vendor/earcut-hpp/include/mapbox",
+					"extern/Sunrise/vendor/bin/glfw/windows/glfw-3.3.2.bin.WIN64/glfw-3.3.2.bin.WIN64/lib-vc2019",
+					extern/Sunrise/vendor/date/include,
+					extern/Sunrise/vendor/entt/single_include,
+					"extern/Sunrise/vendor/asio-1.18.1/include",
+					extern/Sunrise/vendor/eigen,
+					/usr/local/include,
+					"extern/Sunrise/vendor/bin/glfw/macos/glfw-3.3.6.bin.MACOS/include",
+				);
+			};
+			name = Dist;
+		};
+		75A8BCA19DE37553857F02E1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = (
+					YES,
+				);
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++2a";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = src/mgpch.h;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SR_PLATFORM_MACOS,
+					SR_RELEASE,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"C:/VulkanSDK/1.2.154.1/Lib",
+					"extern/Sunrise/vendor/marl-main/marl-main/Debug",
+					extern/shapelib/build/dll/Debug,
+					/usr/local/lib,
+					"extern/Sunrise/vendor/bin/glfw/macos/glfw-3.3.6.bin.MACOS/lib-universal",
+				);
+				OBJROOT = "bin-int/Release-macosx-x86_64/SunriseWorldMeshGen";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lvulkan-1",
+					"-lshp",
+					"-lmarl",
+				);
+				SYMROOT = "bin/Release-macosx-x86_64/SunriseWorldMeshGen";
+				USER_HEADER_SEARCH_PATHS = (
+					"C:/VulkanSDK/1.2.154.1/Include",
+					src,
+					extern/shapelib,
+					extern/Sunrise/src,
+					extern/Sunrise/src/Sunrise,
+					extern/Sunrise/vendor,
+					extern/Sunrise/vendor/spdlog/include,
+					"extern/Sunrise/vendor/glm-master",
+					"extern/Sunrise/vendor/marl-main/marl-main/include",
+					extern/Sunrise/vendor/stb,
+					"extern/Sunrise/vendor/mango-master/mango-master/include",
+					extern/Sunrise/vendor/libigl/include,
+					extern/Sunrise/vendor/HTTPRequest/include,
+					extern/Sunrise/vendor/httplib,
+					extern/Sunrise/vendor/rapidjson/include,
+					extern/Sunrise/vendor/libguarded/src,
+					extern/Sunrise/vendor/nlohmann/include,
+					"extern/Sunrise/vendor/earcut-hpp/include/mapbox",
+					"extern/Sunrise/vendor/bin/glfw/windows/glfw-3.3.2.bin.WIN64/glfw-3.3.2.bin.WIN64/lib-vc2019",
+					extern/Sunrise/vendor/date/include,
+					extern/Sunrise/vendor/entt/single_include,
+					"extern/Sunrise/vendor/asio-1.18.1/include",
+					extern/Sunrise/vendor/eigen,
+					/usr/local/include,
+					"extern/Sunrise/vendor/bin/glfw/macos/glfw-3.3.6.bin.MACOS/include",
+				);
+			};
+			name = Release;
+		};
+		8F1D104388DECCB5C2DDCE83 /* Dist */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = (
+					YES,
+				);
+				CONFIGURATION_BUILD_DIR = "bin/Dist-macosx-x86_64/SunriseWorldMeshGen";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = SunriseWorldMeshGen;
+			};
+			name = Dist;
+		};
+		94E80DB6C6E1586840C093F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = (
+					YES,
+				);
+				CONFIGURATION_BUILD_DIR = "bin/Debug-macosx-x86_64/SunriseWorldMeshGen";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = SunriseWorldMeshGen;
+			};
+			name = Debug;
+		};
+		A3071CA7EB7800D93016D2E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = (
+					YES,
+				);
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++2a";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = src/mgpch.h;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					SR_PLATFORM_MACOS,
+					SR_DEBUG,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"C:/VulkanSDK/1.2.154.1/Lib",
+					"extern/Sunrise/vendor/marl-main/marl-main/Debug",
+					extern/shapelib/build/dll/Debug,
+					/usr/local/lib,
+					"extern/Sunrise/vendor/bin/glfw/macos/glfw-3.3.6.bin.MACOS/lib-universal",
+				);
+				OBJROOT = "bin-int/Debug-macosx-x86_64/SunriseWorldMeshGen";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lvulkan-1",
+					"-lshp",
+					"-lmarl",
+				);
+				SYMROOT = "bin/Debug-macosx-x86_64/SunriseWorldMeshGen";
+				USER_HEADER_SEARCH_PATHS = (
+					"C:/VulkanSDK/1.2.154.1/Include",
+					src,
+					extern/shapelib,
+					extern/Sunrise/src,
+					extern/Sunrise/src/Sunrise,
+					extern/Sunrise/vendor,
+					extern/Sunrise/vendor/spdlog/include,
+					"extern/Sunrise/vendor/glm-master",
+					"extern/Sunrise/vendor/marl-main/marl-main/include",
+					extern/Sunrise/vendor/stb,
+					"extern/Sunrise/vendor/mango-master/mango-master/include",
+					extern/Sunrise/vendor/libigl/include,
+					extern/Sunrise/vendor/HTTPRequest/include,
+					extern/Sunrise/vendor/httplib,
+					extern/Sunrise/vendor/rapidjson/include,
+					extern/Sunrise/vendor/libguarded/src,
+					extern/Sunrise/vendor/nlohmann/include,
+					"extern/Sunrise/vendor/earcut-hpp/include/mapbox",
+					"extern/Sunrise/vendor/bin/glfw/windows/glfw-3.3.2.bin.WIN64/glfw-3.3.2.bin.WIN64/lib-vc2019",
+					extern/Sunrise/vendor/date/include,
+					extern/Sunrise/vendor/entt/single_include,
+					"extern/Sunrise/vendor/asio-1.18.1/include",
+					extern/Sunrise/vendor/eigen,
+					/usr/local/include,
+					"extern/Sunrise/vendor/bin/glfw/macos/glfw-3.3.6.bin.MACOS/include",
+				);
+			};
+			name = Debug;
+		};
+		B5E56E304B5C2D62B9F88470 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = (
+					YES,
+				);
+				CONFIGURATION_BUILD_DIR = "bin/Release-macosx-x86_64/SunriseWorldMeshGen";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_DYNAMIC_NO_PIC = NO;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = SunriseWorldMeshGen;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "SunriseWorldMeshGen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3071CA7EB7800D93016D2E7 /* Debug */,
+				75A8BCA19DE37553857F02E1 /* Release */,
+				39841AF4247040E66C560934 /* Dist */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EEF310F0151940A27C203730 /* Build configuration list for PBXNativeTarget "SunriseWorldMeshGen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94E80DB6C6E1586840C093F6 /* Debug */,
+				B5E56E304B5C2D62B9F88470 /* Release */,
+				8F1D104388DECCB5C2DDCE83 /* Dist */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+};
+rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

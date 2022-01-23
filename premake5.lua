@@ -39,7 +39,7 @@ project "SunriseWorldMeshGen"
 
 	kind "ConsoleApp"
 	language "C++"
-	cppdialect "C++17"
+	cppdialect "C++20"
 	staticruntime "off"
 
 
@@ -90,6 +90,7 @@ project "SunriseWorldMeshGen"
 		"%{sunriseLocation}/vendor/date/include",
 		"%{sunriseLocation}/vendor/entt/single_include",
 		"%{sunriseLocation}/vendor/asio-1.18.1/include",
+		"%{sunriseLocation}/vendor/eigen"
 	}	
 	
 	libdirs {
@@ -121,6 +122,25 @@ project "SunriseWorldMeshGen"
 			"SR_PLATFORM_WINDOWS"
 		}
 		debugdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}/")
+
+	filter "system:macosx"
+
+		defines {
+			"SR_PLATFORM_MACOS"
+		}
+		xcodebuildsettings { ["ALWAYS_SEARCH_USER_PATHS"] = "YES" }
+
+		pchheader "src/mgpch.h" 
+
+		includedirs {
+			"/usr/local/include",
+			"%{sunriseLocation}/vendor/bin/glfw/macos/glfw-3.3.6.bin.MACOS/include",
+		}
+
+		libdirs {
+			"/usr/local/lib",
+			"%{sunriseLocation}/vendor/bin/glfw/macos/glfw-3.3.6.bin.MACOS/lib-universal",
+		}
 
 
 	filter "configurations:Debug"

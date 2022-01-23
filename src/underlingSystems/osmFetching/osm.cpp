@@ -4,7 +4,7 @@
 //#include "nlohmann/json.hpp"
 
 #include <execution>
-#include <ranges>
+//#include <ranges>
 #include <algorithm>
 
 
@@ -12,7 +12,6 @@
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
-
 
 
 namespace osm {
@@ -44,11 +43,10 @@ namespace osm {
 		osm.osm3S.copyright = j["osm3s"]["copyright"].GetString();
 
 		// parse elements
-		
 
 		auto jElements = j["elements"].GetArray();
 		osm.elements.resize(jElements.Size());
-		std::transform(std::execution::seq, jElements.begin(), jElements.end(), osm.elements.begin(), [](Value& je) {
+		std::transform(MG_EXECUION_POLOCY jElements.begin(), jElements.end(), osm.elements.begin(), [](Value& je) {
 			element e;
 
 			e.id = je["id"].GetInt64();

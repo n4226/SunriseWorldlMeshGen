@@ -14,13 +14,26 @@ using namespace sunrise::math;
 
 // deifnes
 
+#ifndef SR_PLATFORM_MACOS
 #define USE_MARL 0
+#else
+#define USE_MARL 1
+#endif
+
+
+
+#ifndef SR_PLATFORM_MACOS
+#define MG_EXECUION_POLOCY std::execution::seq,
+#else
+#define MG_EXECUION_POLOCY
+#endif
+
 
 ///////// system
 
 
 #include <execution>
-#include <ranges>
+//#include <ranges> - only available in c++ 20+
 #include <algorithm>
 
 #include <iostream>
