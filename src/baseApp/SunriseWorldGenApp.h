@@ -20,11 +20,11 @@ protected:
 		ApplicationConfig config{};
 
 		config.enableMarl = true;
-		config.marlThreadCountOffset = 1;
+		config.marlThreadCountOffset = 2;
 		config.vulkan = true;
-		config.wantsWindows = false;
-		config.enableAsioContextThread = false;
-		config.enableAsioContext = false;
+		config.wantsWindows = true;
+		config.enableAsioContextThread = true;
+		config.enableAsioContext = true;
 		config.useFileSys = true;
 
 		return config;

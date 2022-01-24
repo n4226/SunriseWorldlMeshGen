@@ -1,126 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="baseApp">
-      <UniqueIdentifier>{E1CB2866-4DAB-A701-56C3-32D8C2210E63}</UniqueIdentifier>
+    <Filter Include="extern">
+      <UniqueIdentifier>{7BE134FC-6783-5FD2-503E-73263C7FE622}</UniqueIdentifier>
     </Filter>
-    <Filter Include="baseApp\configure tasks">
-      <UniqueIdentifier>{389726B4-A4CE-6E4B-ADD8-D26E198F9544}</UniqueIdentifier>
+    <Filter Include="extern\Sunrise">
+      <UniqueIdentifier>{735E7AB5-5F2C-6EBB-48C0-DEE1342D4A20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="generation">
-      <UniqueIdentifier>{B11313BF-9DCB-540C-06D3-2D68F2A9EFFC}</UniqueIdentifier>
+    <Filter Include="extern\Sunrise\src">
+      <UniqueIdentifier>{0A1EB68F-F601-77E5-5F62-71384B656167}</UniqueIdentifier>
     </Filter>
-    <Filter Include="generation\managment">
-      <UniqueIdentifier>{186E8EE2-04FD-17AC-AD1B-2CA799892852}</UniqueIdentifier>
+    <Filter Include="extern\Sunrise\src\Sunrise">
+      <UniqueIdentifier>{02BAFA75-EEC9-A646-5783-0B6543B295DF}</UniqueIdentifier>
     </Filter>
-    <Filter Include="generation\systems">
-      <UniqueIdentifier>{D822A2FF-C406-6355-2D67-5DA8196A4DD7}</UniqueIdentifier>
+    <Filter Include="extern\Sunrise\src\Sunrise\Sunrise">
+      <UniqueIdentifier>{FACD3791-E609-3BFB-4F1C-53F23B77E315}</UniqueIdentifier>
     </Filter>
-    <Filter Include="underlingSystems">
-      <UniqueIdentifier>{6543E7DB-513C-062E-7A6E-EBB266C6E539}</UniqueIdentifier>
+    <Filter Include="extern\Sunrise\src\Sunrise\Sunrise\graphics">
+      <UniqueIdentifier>{9A8BCEEA-06F1-6171-8FC9-034AFB2D57E0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="underlingSystems\elevation">
-      <UniqueIdentifier>{9BF390E1-8703-3DB2-F0BC-A1D0DCEB2B4B}</UniqueIdentifier>
+    <Filter Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders">
+      <UniqueIdentifier>{9342316B-FF53-D911-88A5-6B51F4B5624B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="underlingSystems\osmFetching">
-      <UniqueIdentifier>{4B738966-372E-7912-E0E5-F15CCC7FC3A2}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\baseApp">
+      <UniqueIdentifier>{F8CB626F-6481-DB64-ED75-D53B592AD268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\baseApp\configure tasks">
+      <UniqueIdentifier>{4FE5F322-BBF2-2109-44D9-1DF4B0E5EDBF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\baseApp\ui">
+      <UniqueIdentifier>{65C0FB3B-518E-EF41-3A22-6068268FCBA6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\generation">
+      <UniqueIdentifier>{68B019F6-547E-0DFC-3D12-7E22297FE960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\generation\managment">
+      <UniqueIdentifier>{8F9BCDEC-7BC0-1C6D-A40B-02FD908F1B8B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\generation\systems">
+      <UniqueIdentifier>{8F8679F6-7B80-A248-64ED-3859508608B5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\underlingSystems">
+      <UniqueIdentifier>{5C4D5443-48DC-DD0C-F1FA-F107DD68EEB2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\underlingSystems\elevation">
+      <UniqueIdentifier>{521E1024-3E44-DA8A-278A-5F56134FFF56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\underlingSystems\osmFetching">
+      <UniqueIdentifier>{C2277E45-AE78-6987-D7DC-5749C38CFCF0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\baseApp\MeshGenConfig.h">
-      <Filter>baseApp</Filter>
+      <Filter>src\baseApp</Filter>
     </ClInclude>
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h">
-      <Filter>baseApp</Filter>
+      <Filter>src\baseApp</Filter>
     </ClInclude>
     <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h">
-      <Filter>baseApp\configure tasks</Filter>
+      <Filter>src\baseApp\configure tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\baseApp\ui\MainMeshGenUIScene.h">
+      <Filter>src\baseApp\ui</Filter>
     </ClInclude>
     <ClInclude Include="src\generation\GenerationStatistics.h">
-      <Filter>generation</Filter>
+      <Filter>src\generation</Filter>
     </ClInclude>
     <ClInclude Include="src\generation\GenerationSystem.h">
-      <Filter>generation</Filter>
+      <Filter>src\generation</Filter>
     </ClInclude>
     <ClInclude Include="src\generation\creator.h">
-      <Filter>generation</Filter>
+      <Filter>src\generation</Filter>
     </ClInclude>
     <ClInclude Include="src\generation\managment\GenerationLodInformer.h">
-      <Filter>generation\managment</Filter>
+      <Filter>src\generation\managment</Filter>
     </ClInclude>
     <ClInclude Include="src\generation\systems\RoadCreator.h">
-      <Filter>generation\systems</Filter>
+      <Filter>src\generation\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\generation\systems\buildingCreator.h">
-      <Filter>generation\systems</Filter>
+      <Filter>src\generation\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\generation\systems\groundCreator.h">
-      <Filter>generation\systems</Filter>
+      <Filter>src\generation\systems</Filter>
     </ClInclude>
-    <ClInclude Include="src\mgpch.h" />
+    <ClInclude Include="src\mgpch.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h">
-      <Filter>underlingSystems</Filter>
+      <Filter>src\underlingSystems</Filter>
     </ClInclude>
     <ClInclude Include="src\underlingSystems\elevation\ElevationFetcher.h">
-      <Filter>underlingSystems\elevation</Filter>
+      <Filter>src\underlingSystems\elevation</Filter>
     </ClInclude>
     <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h">
-      <Filter>underlingSystems\osmFetching</Filter>
+      <Filter>src\underlingSystems\osmFetching</Filter>
     </ClInclude>
     <ClInclude Include="src\underlingSystems\osmFetching\OsmFetcher.h">
-      <Filter>underlingSystems\osmFetching</Filter>
+      <Filter>src\underlingSystems\osmFetching</Filter>
     </ClInclude>
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h">
-      <Filter>underlingSystems\osmFetching</Filter>
+      <Filter>src\underlingSystems\osmFetching</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp">
-      <Filter>baseApp</Filter>
+      <Filter>src\baseApp</Filter>
     </ClCompile>
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp">
-      <Filter>baseApp</Filter>
+      <Filter>src\baseApp</Filter>
     </ClCompile>
     <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp">
-      <Filter>baseApp\configure tasks</Filter>
+      <Filter>src\baseApp\configure tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\baseApp\ui\MainMeshGenUIScene.cpp">
+      <Filter>src\baseApp\ui</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\GenerationStatistics.cpp">
-      <Filter>generation</Filter>
+      <Filter>src\generation</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\GenerationSystem.cpp">
-      <Filter>generation</Filter>
+      <Filter>src\generation</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\creator.cpp">
-      <Filter>generation</Filter>
+      <Filter>src\generation</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp">
-      <Filter>generation\managment</Filter>
+      <Filter>src\generation\managment</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\systems\RoadCreator.cpp">
-      <Filter>generation\systems</Filter>
+      <Filter>src\generation\systems</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\systems\buildingCreator.cpp">
-      <Filter>generation\systems</Filter>
+      <Filter>src\generation\systems</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\systems\groundCreator.cpp">
-      <Filter>generation\systems</Filter>
+      <Filter>src\generation\systems</Filter>
     </ClCompile>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\mgpch.cpp" />
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mgpch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp">
-      <Filter>underlingSystems</Filter>
+      <Filter>src\underlingSystems</Filter>
     </ClCompile>
     <ClCompile Include="src\underlingSystems\elevation\ElevationFetcher.cpp">
-      <Filter>underlingSystems\elevation</Filter>
+      <Filter>src\underlingSystems\elevation</Filter>
     </ClCompile>
     <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp">
-      <Filter>underlingSystems\osmFetching</Filter>
+      <Filter>src\underlingSystems\osmFetching</Filter>
     </ClCompile>
     <ClCompile Include="src\underlingSystems\osmFetching\OsmFetcher.cpp">
-      <Filter>underlingSystems\osmFetching</Filter>
+      <Filter>src\underlingSystems\osmFetching</Filter>
     </ClCompile>
     <ClCompile Include="src\underlingSystems\osmFetching\osm.cpp">
-      <Filter>underlingSystems\osmFetching</Filter>
+      <Filter>src\underlingSystems\osmFetching</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\GBuffer.frag">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\GBuffer.vert">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\gpuGenCommands.comp">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\terrain.frag">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\terrain.vert">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\triangle.frag">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\triangle.vert">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>

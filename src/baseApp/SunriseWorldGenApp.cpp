@@ -6,6 +6,8 @@
 
 #include "configure tasks/ConfigureTasksScript.h"
 
+#include "ui/MainMeshGenUIScene.h"
+
 using namespace sunrise;
 
 
@@ -29,7 +31,8 @@ public:
 
 
 SunriseWorldGenApp::SunriseWorldGenApp()
-	: Application(nullptr)
+	//: Application(nullptr)
+	: Application(new MainMeshGenUIScene(this))
 	//: Application(new WorldScene(this))
 {
 }
@@ -40,7 +43,7 @@ SunriseWorldGenApp::~SunriseWorldGenApp()
 
 const char* SunriseWorldGenApp::getName()
 {
-	return "World Gen";
+	return "Sunrise World Generation Utility";
 }
 
 void SunriseWorldGenApp::startup()

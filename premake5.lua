@@ -58,9 +58,9 @@ project "SunriseWorldMeshGen"
 		"src/**.frag",
 		"src/**.comp",
 		
-		"%{wks.location}/Sunrise/src/**.vert",
-		"%{wks.location}/Sunrise/src/**.frag",
-		"%{wks.location}/Sunrise/src/**.comp"
+		"%{sunriseLocation}/src/**.vert",
+		"%{sunriseLocation}/src/**.frag",
+		"%{sunriseLocation}/src/**.comp"
 	}
 
 	includedirs {
@@ -160,13 +160,17 @@ project "SunriseWorldMeshGen"
 
 	-- GLSL Shader Compile Pipeline
 
-	filter 'files:**.vert or files:**.frag or files:**.comp'
+	filter {'files:**.vert or files:**.frag or files:**.comp', 'system:windows' }
+		glslCompilerLoc = "C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe"
 	   -- A message to display while this build step is running (optional)
-	   buildmessage 'Compiling %{file.relpath} TO SPIR-V'
+	   buildmessage 'Compiling %{file.relpath} TO SPIR-V - windows'
+		
+	   buildinputs {("%{sunriseLocation}src/Sunrise/graphics/shaders/headers/**.h")}
 
 	   -- One or more commands to run (required)
 	   buildcommands {
-		  ("C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %{file.relpath} -o ../bin/" .. outputdir .. "/%{prj.name}/shaders/%{file.name}.spv")
+		  -- (glslCompilerLoc .. (" -V %{file.relpath} -o %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/shaders/%{file.name}.spv -g"))
+		  ("C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %{file.relpath} -o %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/shaders/%{file.name}.spv -g")
 	   }
 
 	   -- One or more outputs resulting from the build (required)
