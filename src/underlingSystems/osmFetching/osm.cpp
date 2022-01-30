@@ -166,7 +166,7 @@ namespace osm {
 		}
 	}
 
-	std::vector<element*> osm::nodesIn(element e)
+	std::vector<element*> osm::nodesIn(element e) const
 	{
 		if (e.nodes.size() == 0) return {};
 
@@ -174,9 +174,9 @@ namespace osm {
 		results.resize(e.nodes.size());
 
 		std::transform(e.nodes.begin(), e.nodes.end(), results.begin(), [&](int64_t id) {
-			SR_ASSERT(node_elementMap.find(id) != node_elementMap.end());
+			//SR_ASSERT(node_elementMap.find(id) != node_elementMap.end());
 #if SR_ENABLE_PRECONDITION_CHECKS
-			if (node_elementMap.find(id) != node_elementMap.end())
+			if (node_elementMap.find(id) == node_elementMap.end())
 				throw std::runtime_error("node not found");
 #endif
 			auto result = node_elementMap.find(id)->second;
@@ -185,4 +185,32 @@ namespace osm {
 		return results;
 	}
 
+
+	bool isAny(element& element, std::vector<std::array<std::string, 2>>&& wantedKeyValues) {
+
+		for (size_t i = 0; i < wantedKeyValues.size(); i++)
+		{
+			auto key = wantedKeyValues[i][0];
+			auto value = wantedKeyValues[i][1];
+
+			if (element.tags.count(key) > 0) {
+				if (value != "*") {
+					for (auto& kv : element.tags) {
+						if (kv.first == key && kv.second == value) {
+							return true;
+						}
+					}
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 }
+
+

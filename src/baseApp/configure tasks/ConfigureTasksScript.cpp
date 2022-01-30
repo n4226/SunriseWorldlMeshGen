@@ -149,7 +149,7 @@ void ConfigureTasksScript::runScript()
 	glm::dvec2 kewrCenter(37.5128831, -122.3585615);
 
 	glm::dvec2 ksfoApproach(37.6128831, -122.3585615);
-
+	
 	//GenerationSystem genSys(GenerationSystem::genreateChunksAround(desired, 12, glm::ivec2(3, 3)));
 	//GenerationSystem genSys(GenerationSystem::genreateChunksAround(desired, 11, glm::ivec2(3, 3)));
 

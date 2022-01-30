@@ -4,52 +4,68 @@
 
 #include "../managment/GenerationLodInformer.h"
 
-void buildingCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod, ChunkGenerationStatistics& stats)
+//void buildingCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod, ChunkGenerationStatistics& stats)
+//{
+//	mesh.indicies.push_back({});
+//	mesh.attributes->subMeshMats.push_back(2);
+//	
+//	auto startVerts = mesh.verts.size();
+//
+//	//TODO: somehow prevent each creator from ahving to loop through all the elements in the osm data after eachother by combining them into one 
+//	// TODO remove duplicate pointes if they fall on a streight 2d line after being clipped to the chunk -> this could be for objecy such as buildings or more commanly to grounds of different surfaces eg ocean and land
+//	//
+//	for (osm::element& element : osm.elements) {
+//		if (element.type == osm::type::way && element.tags.count("building") > 0) {
+//			auto nodes = osm.nodesIn(element);
+//
+//			// first node IS duplicated - AT INDEX 0 AND INDEX SIZE - 1
+//			std::vector<glm::dvec2> basePath(nodes.size());
+//
+//			std::transform(nodes.begin(), nodes.end(), basePath.begin(), [&](osm::element* element) {
+//				return glm::dvec2(*element->lat, *element->lon);
+//			});
+//			auto bounds = new Box();
+//			*bounds = mesh::bounds(basePath);
+//			buldingAABBS.emplace(&element, bounds);
+//		}
+//	}
+//
+//
+//
+//	//TODO: somehow prevent each creator from ahving to loop through all the elements in the osm data after eachother by combining them into one loop
+//	for (osm::element& element : osm.elements) {
+//		
+//		// TODO remove duplicate pointes if they fall on a streight 2d line after being clipped to the chunk -> this could be for objecy such as buildings or more commanly to grounds of different surfaces eg ocean and land
+//
+//
+//
+//		if (element.type == osm::type::way && element.tags.count("building") > 0) {
+//			if (GenerationLodInformer::drawBuilding(frame,lod,element))
+//				addBuilding(mesh, osm, element, frame,lod,stats);
+//		}
+//
+//	}
+//
+//	stats.logVerts(mesh.verts.size() - startVerts, ChunkGenerationStatistics::VertUse::building);
+//}
+
+void buildingCreator::initInChunk(bool forMesh, Mesh& mesh)
 {
-	mesh.indicies.push_back({});
-	mesh.attributes->subMeshMats.push_back(2);
-	
-	auto startVerts = mesh.verts.size();
-
-	//TODO: somehow prevent each creator from ahving to loop through all the elements in the osm data after eachother by combining them into one 
-	// TODO remove duplicate pointes if they fall on a streight 2d line after being clipped to the chunk -> this could be for objecy such as buildings or more commanly to grounds of different surfaces eg ocean and land
-	//
-	for (osm::element& element : osm.elements) {
-		if (element.type == osm::type::way && element.tags.count("building") > 0) {
-			auto nodes = osm.nodesIn(element);
-
-			// first node IS duplicated - AT INDEX 0 AND INDEX SIZE - 1
-			std::vector<glm::dvec2> basePath(nodes.size());
-
-			std::transform(nodes.begin(), nodes.end(), basePath.begin(), [&](osm::element* element) {
-				return glm::dvec2(*element->lat, *element->lon);
-			});
-			auto bounds = new Box();
-			*bounds = mesh::bounds(basePath);
-			buldingAABBS.emplace(&element, bounds);
-		}
+	if (forMesh) {
+		mesh.indicies.push_back({});
+		mesh.attributes->subMeshMats.push_back(2);
 	}
-
-
-
-	//TODO: somehow prevent each creator from ahving to loop through all the elements in the osm data after eachother by combining them into one loop
-	for (osm::element& element : osm.elements) {
-		
-		// TODO remove duplicate pointes if they fall on a streight 2d line after being clipped to the chunk -> this could be for objecy such as buildings or more commanly to grounds of different surfaces eg ocean and land
-
-
-
-		if (element.type == osm::type::way && element.tags.count("building") > 0) {
-			if (GenerationLodInformer::drawBuilding(frame,lod,element))
-				addBuilding(mesh, osm, element, frame,lod,stats);
-		}
-
-	}
-
-	stats.logVerts(mesh.verts.size() - startVerts, ChunkGenerationStatistics::VertUse::building);
 }
 
-void buildingCreator::addBuilding(Mesh& mesh, osm::osm& osm, osm::element& building, const Box& frame, int lod, ChunkGenerationStatistics& stats)
+void buildingCreator::meshFromElement(Mesh& mesh, const osm::element& element)
+{
+	if (element.type == osm::type::way && element.tags.count("building") > 0) {
+		if (GenerationLodInformer::drawBuilding(chunk.chunk,chunk.lod,element))
+			addBuilding(mesh, chunk.osm, element, chunk.chunk,chunk.lod,chunk.stats);
+	}
+}
+
+void buildingCreator::addBuilding(Mesh& mesh,const osm::osm& osm,const osm::element& building, const Box& frame, int lod, ChunkGenerationStatistics& stats)
 {
 
 	constexpr double radius = math::dEarthRad;
@@ -100,19 +116,24 @@ void buildingCreator::addBuilding(Mesh& mesh, osm::osm& osm, osm::element& build
 
 
 
-	// roof
+	// roof 
+	
+
+
+
 	// creates a po.ygon with one set of points, the base points dropping the last point since it is just the first point
 	std::vector<std::vector<glm::dvec2>> roofPoly = { std::vector<glm::dvec2>(basePath.begin(),std::prev(basePath.end())) };
 
 	auto [roofMesh, isCLockWise] = mesh::triangulate(roofPoly);
 
+	
 	//TODO --- deal with duplicate verticies her this is important
 
 	startVertOfset = mesh.verts.size();
 
-	for (size_t i = 0; i < roofMesh->verts.size(); i++)
+	for (size_t i = 0; i < roofMesh.verts.size(); i++)
 	{
-		auto posLatLon = roofMesh->verts[i];
+		auto posLatLon = roofMesh.verts[i];
 		auto posLLA = glm::dvec3(posLatLon.x, posLatLon.y, height);
 		auto pos1 = math::LlatoGeo(posLLA, glm::dvec3(0), radius) - center_geo;
 		mesh.verts.push_back(pos1);
@@ -130,11 +151,10 @@ void buildingCreator::addBuilding(Mesh& mesh, osm::osm& osm, osm::element& build
 		mesh.uvs.push_back(uv);
 	}
 
-	for (size_t i = 0; i < roofMesh->indicies[0].size(); i++)
+	for (size_t i = 0; i < roofMesh.indicies[0].size(); i++)
 	{
-		mesh.indicies[mesh.indicies.size() - 1].push_back(roofMesh->indicies[0][i] + startVertOfset);
+		mesh.indicies[mesh.indicies.size() - 1].push_back(roofMesh.indicies[0][i] + startVertOfset);
 	}
-
 
 
 	// walls 

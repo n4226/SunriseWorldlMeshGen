@@ -11,10 +11,9 @@
 class GenerationSystem
 {
 public:
-	GenerationSystem(std::vector<Box>&& chunks);
-	
+	GenerationSystem(const std::vector<Box>& chunks);
 
-	void generate(int lod);
+	void generate();
 
 	void debugChunk(size_t index, int lod);
 
@@ -22,10 +21,14 @@ public:
 	static Box actualChunk(glm::dvec2 desired,int divided = 12);
 private:
 
+	void generateChunk(Box chunk,size_t lod, Mesh& mesh, ChunkGenerationStatistics& stats,const osm::osm& osmData);
+
+	static std::vector<icreator*> createCreators(icreator::ChunkData chunkData);
+
 	OsmFetcher osmFetcher;
 
 	std::vector<Box> chunks;
-	std::vector<icreator*> creators;
+	//std::vector<icreator*> creators;
 
 	const std::string outputDir;
 	const std::string attrOutputDir;

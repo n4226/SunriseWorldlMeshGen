@@ -27,6 +27,8 @@ protected:
 		config.enableAsioContext = true;
 		config.useFileSys = true;
 
+		config.wantsHighThreadPriority = false;
+
 		return config;
 	}
 };

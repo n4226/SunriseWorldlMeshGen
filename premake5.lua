@@ -104,6 +104,8 @@ project "SunriseWorldMeshGen"
 		"vulkan-1",
 		"shp",
 		"marl",
+		"geos", -- geos and geos_c vs projects must be manually changed to create static libs instead of dynamic ones
+		"geos_c"
 	}
 
 	postbuildcommands {
@@ -148,15 +150,27 @@ project "SunriseWorldMeshGen"
 		runtime "Debug"
 		symbols "on"
 
+		libdirs {
+			"%{sunriseLocation}/vendor/geos/bin/Debug"
+		}
+
 	filter "configurations:Release"
 		defines "SR_RELEASE"
 		runtime "Release"
 		optimize "on"
 
+		libdirs {
+			"%{sunriseLocation}/vendor/geos/bin/Release"
+		}
+
 	filter "configurations:Dist"
 		defines "SR_DIST"
 		runtime "Release"
 		optimize "on"
+		
+		libdirs {
+			"%{sunriseLocation}/vendor/geos/bin/Release"
+		}
 
 	-- GLSL Shader Compile Pipeline
 

@@ -33,23 +33,27 @@ namespace osm {
         std::string copyright;
     };
 
+    struct osm;
+    osm makeOSM(std::string& str);
+
     struct osm {
         double version;
         std::string generator;
         osm3S osm3S;
         std::vector<element> elements;
 
+
+        std::vector<element*> nodesIn(element e) const;
+
+    private:
+        friend osm makeOSM(std::string& str);;
         void createCacheStructure();
-
-        std::vector<element*> nodesIn(element e);
-
         std::unordered_map<uint64_t, element*> node_elementMap;
         std::unordered_map<uint64_t, element*> way_elementMap;
         std::unordered_map<uint64_t, element*> relation_elementMap;
     };
 
-    osm makeOSM(std::string& str);
-
+    bool isAny(element& element, std::vector<std::array<std::string, 2>>&& wantedKeyValues);
 }
 
 

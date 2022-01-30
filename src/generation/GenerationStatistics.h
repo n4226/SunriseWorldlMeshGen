@@ -11,6 +11,7 @@ public:
 		water,
 		building,
 	};
+
 	static constexpr std::array<VertUse, 3> allUses() {
 		return { VertUse::land, VertUse::water, VertUse::building };
 	}

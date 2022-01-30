@@ -5,28 +5,46 @@
 
 #define LANEWIDTH 1
 
-void RoadCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod, ChunkGenerationStatistics& stats)
-{
-	// only lods < 1 have roads as 3d structures
-	if (lod > 0) return;
+//void RoadCreator::createInto(Mesh& mesh, osm::osm& osm, const Box& frame, int lod, ChunkGenerationStatistics& stats)
+//{
+//	// only lods < 1 have roads as 3d structures
+//	if (lod > 0) return;
+//
+//	mesh.indicies.push_back({});
+//	mesh.attributes->subMeshMats.push_back(3);
+//
+//	//TODO: somehow prevent each creator from ahving to loop through all the elements in the osm data after eachother by combining them into one 
+//	// TODO remove duplicate pointes if they fall on a streight 2d line after being clipped to the chunk -> this could be for objecy such as buildings or more commanly to grounds of different surfaces eg ocean and land
+//	//
+//	for (osm::element& element : osm.elements) {
+//		if (element.type == osm::type::way && element.tags.count("highway") > 0) {
+//			
+//			addRoad(mesh, osm, element, frame, lod);
+//
+//		}
+//	}
+//
+//}
 
+void RoadCreator::initInChunk(bool forMesh, Mesh& mesh)
+{
+	//only lods < 1 have roads as 3d structures
+	if (chunk.lod > 0) return;
 	mesh.indicies.push_back({});
 	mesh.attributes->subMeshMats.push_back(3);
-
-	//TODO: somehow prevent each creator from ahving to loop through all the elements in the osm data after eachother by combining them into one 
-	// TODO remove duplicate pointes if they fall on a streight 2d line after being clipped to the chunk -> this could be for objecy such as buildings or more commanly to grounds of different surfaces eg ocean and land
-	//
-	for (osm::element& element : osm.elements) {
-		if (element.type == osm::type::way && element.tags.count("highway") > 0) {
-			
-			addRoad(mesh, osm, element, frame, lod);
-
-		}
-	}
-
 }
 
-void RoadCreator::addRoad(Mesh& mesh, osm::osm& osm, osm::element& road, const Box& frame, int lod)
+void RoadCreator::meshFromElement(Mesh& mesh, const osm::element& elm)
+{
+	if (chunk.lod > 0) return;
+	if (elm.type == osm::type::way && elm.tags.count("highway") > 0) {
+					
+		addRoad(mesh, chunk.osm, elm, chunk.chunk, chunk.lod);
+		
+	}
+}
+
+void RoadCreator::addRoad(Mesh& mesh,const osm::osm& osm,const osm::element& road, const Box& frame, int lod)
 {
 
 	constexpr double radius = math::dEarthRad;
@@ -75,17 +93,17 @@ void RoadCreator::addRoad(Mesh& mesh, osm::osm& osm, osm::element& road, const B
 	//TODO: detect if closed path and adjust mesh acordingly
 	for (size_t i = 0; i < basePath.size(); i++)
 	{
-
-		auto p1 = math::LlatoGeo(glm::dvec3(basePath[i + 0], 0), glm::dvec3(0), radius) - center_geo;
+		double elevationOffset = 1;
+		auto p1 = math::LlatoGeo(glm::dvec3(basePath[i + 0], elevationOffset), glm::dvec3(0), radius) - center_geo;
 		//auto p2 = math::LlatoGeo(glm::dvec3(basePath[i + 1], 0), glm::dvec3(0), radius) - center_geo;
 
 		auto forward = glm::dvec3(0);
 
 		if (i < basePath.size() - 1) {
-			forward += math::LlatoGeo(glm::dvec3(basePath[i + 1], 0), glm::dvec3(0), radius) - math::LlatoGeo(glm::dvec3(basePath[i + 0], 0), glm::dvec3(0), radius);
+			forward += math::LlatoGeo(glm::dvec3(basePath[i + 1], elevationOffset), glm::dvec3(0), radius) - math::LlatoGeo(glm::dvec3(basePath[i + 0], elevationOffset), glm::dvec3(0), radius);
 		}
 		if (i > 0) {
-			forward += math::LlatoGeo(glm::dvec3(basePath[i + 0], 0), glm::dvec3(0), radius) - math::LlatoGeo(glm::dvec3(basePath[i - 1], 0), glm::dvec3(0), radius);
+			forward += math::LlatoGeo(glm::dvec3(basePath[i + 0], elevationOffset), glm::dvec3(0), radius) - math::LlatoGeo(glm::dvec3(basePath[i - 1], elevationOffset), glm::dvec3(0), radius);
 		}
 
 		forward = glm::normalize(forward);
@@ -110,7 +128,7 @@ void RoadCreator::addRoad(Mesh& mesh, osm::osm& osm, osm::element& road, const B
 
 		// scalled uvs
 
-		auto uvProgress = glm::distance(p1, math::LlatoGeo(glm::dvec3(basePath[0], 0), glm::dvec3(0), radius) - center_geo);
+		auto uvProgress = glm::distance(p1, math::LlatoGeo(glm::dvec3(basePath[0], elevationOffset), glm::dvec3(0), radius) - center_geo);
 		glm::vec2 scale(2);
 
 		mesh.uvs.push_back(glm::vec2(0, uvProgress) * scale);

@@ -7,6 +7,8 @@ using namespace sunrise;
 using namespace sunrise::math;
 
 
+constexpr double radius = math::dEarthRad;
+
 // local
 
 #include "baseApp/MeshGenConfig.h"
@@ -23,10 +25,11 @@ using namespace sunrise::math;
 
 
 #ifndef SR_PLATFORM_MACOS
-#define MG_EXECUION_POLOCY std::execution::seq,
+#define MG_EXECUION_POLOCY std::execution::par,
 #else
 #define MG_EXECUION_POLOCY
 #endif
+
 
 
 ///////// system

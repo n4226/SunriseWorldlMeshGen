@@ -27,14 +27,11 @@
 
 #include"igl/writeOBJ.h"
 
-GenerationSystem::GenerationSystem(std::vector<Box>&& chunks)
+#include "GenerationHelpers.h"
+
+GenerationSystem::GenerationSystem(const std::vector<Box>& chunks)
     : osmFetcher(),
-    chunks(chunks), 
-    creators({
-    new groundCreator(),
-    //new buildingCreator(),
-    //new RoadCreator(),
-    }),
+    chunks(chunks),
     outputDir(FileManager::engineTerrainChunkDir()),
     attrOutputDir(FileManager::engineTerrainChunkAttributesDir())
 {
@@ -42,7 +39,7 @@ GenerationSystem::GenerationSystem(std::vector<Box>&& chunks)
 
 
 // lod no longer taken in but calulated
-void GenerationSystem::generate(int __lod)
+void GenerationSystem::generate()
 {
     SR_INFO("attempting to generate {} chunks", chunks.size());
 
@@ -68,6 +65,8 @@ void GenerationSystem::generate(int __lod)
             constexpr double baseSize = 90.0 / 4096;
             auto lod = static_cast<size_t>((chunk.size.x / baseSize) - 1);
 
+            SR_TRACE("making chunk with lod {}", lod);
+
             auto stats = ChunkGenerationStatistics(chunk, lod);
 
             stats.startTimer();
@@ -92,8 +91,7 @@ void GenerationSystem::generate(int __lod)
 
                 printf("Got Osm for a chunk\n");
 
-                for (icreator* creator : creators)
-                    creator->createInto(mesh, osmData, chunk, lod,stats);
+                generateChunk(chunk, lod, mesh, stats, osmData);
 
                 // posibly temporary:
                 /*for (size_t i = 0; i < mesh.indicies.size(); i++)
@@ -158,9 +156,106 @@ void GenerationSystem::generate(int __lod)
 
     auto endTime = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration<double>(endTime - startTime);
-    printf("finished all chunks in %llf seconds \n",time);
+    SR_INFO("finished all chunks in {} seconds \n",time);
 
 }
+
+
+
+void GenerationSystem::generateChunk(Box chunk, size_t lod, Mesh& mesh, ChunkGenerationStatistics& stats, const osm::osm& osmData)
+{
+
+    icreator::ChunkData chunkData = {chunk, lod, osmData, stats};
+
+    auto creators = createCreators(chunkData);
+
+    //creator->createInto(mesh, osmData, chunk, lod, stats);
+
+    // generation of ground polygons
+
+    mesh::ShadedMultiPolygon2D groundPolygons;
+
+    for (icreator* creator : creators) {
+        creator->initInChunk(false,mesh);
+        auto pol = creator->polygonsFromOSM();
+        groundPolygons.insert(groundPolygons.end(), pol.begin(), pol.end());
+        
+        for (const osm::element& element : osmData.elements) {
+            auto pol = creator->polygonsFromElement(element);
+            groundPolygons.insert(groundPolygons.end(), pol.begin(), pol.end());
+        }
+    }
+
+
+    // ocean should be (frame - (union of all landmasses))
+    // where - is a difference of polygons
+
+    mesh::MultiPolygon2D allLandPolygons{};
+
+    for (auto& p : groundPolygons)
+        allLandPolygons.push_back(p.polygon);
+
+    auto allLandmasses = mesh::bunionAll(allLandPolygons);
+
+    auto framePoints = chunk.polygon();
+
+    auto ocean = mesh::bDifference({ {framePoints} }, allLandmasses);
+
+    //TODO: temporary has to be first thing in mesh for some reason
+    //groundCreator::createSubdividedQuadChunkMesh(mesh, chunk);
+
+
+    // projection / trianglulation of ground step
+
+    /*for (auto& pol : groundPolygons) {
+        if (pol.polygon.size() == 0) continue;
+        mesh.indicies.push_back({});
+        mesh.attributes->subMeshMats.push_back(pol.material);
+        GenerationHelpers::drawMultPolygonInChunk(pol.polygon, mesh,chunk,&stats);
+    }*/
+
+    mesh.indicies.push_back({});
+    mesh.attributes->subMeshMats.push_back(1);
+    for (auto& pol : allLandPolygons) {
+        if (pol.size() == 0) continue;
+        GenerationHelpers::drawMultPolygonInChunk(pol, mesh,chunk,&stats);
+    }
+
+    //draw ocean
+    mesh.indicies.push_back({});
+    mesh.attributes->subMeshMats.push_back(0);
+    GenerationHelpers::drawMultPolygonInChunk(ocean[0], mesh, chunk, &stats);
+
+    //todo: fix only the first drawn submesh apears in world -- for tomorrow
+
+    // generation of rest of 3d mesh
+
+    for (icreator* creator : creators) {
+        creator->initInChunk(true,mesh);
+
+        creator->meshFromOSM(mesh);
+
+        for (const osm::element& element : osmData.elements)
+            creator->meshFromElement(mesh, element);
+    }
+
+    //cleanup
+
+    for (auto creator : creators)
+        delete creator;
+
+}
+
+std::vector<icreator*> GenerationSystem::createCreators(icreator::ChunkData chunkData)
+{
+    return {
+        new groundCreator(chunkData),
+        //new buildingCreator(chunkData),
+        //new RoadCreator(chunkData),
+    };
+}
+
+
 
 void GenerationSystem::debugChunk(size_t index, int lod)
 {
@@ -182,8 +277,7 @@ void GenerationSystem::debugChunk(size_t index, int lod)
 
     printf("Got Osm for a chunk\n");
 
-    for (icreator* creator : creators)
-        creator->createInto(mesh, osmData, chunk,lod,stats);
+    generateChunk(chunk, lod, mesh, stats, osmData);
     
     stats.logWholeMesh(&mesh);
     stats.endTimer();

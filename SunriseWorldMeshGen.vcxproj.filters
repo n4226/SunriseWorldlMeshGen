@@ -66,6 +66,9 @@
     <ClInclude Include="src\baseApp\ui\MainMeshGenUIScene.h">
       <Filter>src\baseApp\ui</Filter>
     </ClInclude>
+    <ClInclude Include="src\generation\GenerationHelpers.h">
+      <Filter>src\generation</Filter>
+    </ClInclude>
     <ClInclude Include="src\generation\GenerationStatistics.h">
       <Filter>src\generation</Filter>
     </ClInclude>
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="src\baseApp\ui\MainMeshGenUIScene.cpp">
       <Filter>src\baseApp\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\generation\GenerationHelpers.cpp">
+      <Filter>src\generation</Filter>
     </ClCompile>
     <ClCompile Include="src\generation\GenerationStatistics.cpp">
       <Filter>src\generation</Filter>
