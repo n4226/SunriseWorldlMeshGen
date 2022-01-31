@@ -50,8 +50,14 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
                 throw e;
         }
     }
-    else if (onlyUseOSMCash)
-        throw std::runtime_error("not in osm cash");
+    else if (onlyUseOSMCash) {
+        SR_ERROR("Osm not in cash so loading chunk with empty osm");
+        stats.markOsmJSONReceived();
+        auto osmData = osm::osm{};
+        stats.markOSMParsedFromJSON();
+        return osmData;
+        //throw std::runtime_error("not in osm cash");
+    }
 #if !SERVER_LOCAL && USE_MARL
     ticket.wait();
     defer(ticket.done());

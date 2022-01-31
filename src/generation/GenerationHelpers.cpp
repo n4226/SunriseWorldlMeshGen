@@ -11,14 +11,12 @@
 /// <param name="mesh"></param>
 /// <param name="frame"></param>
 /// <param name="stats"></param>
-void GenerationHelpers::drawMultPolygonInChunk(
+void GenerationHelpers::drawHPolygonInChunk(
     const mesh::HPolygon2D& polygon, Mesh& mesh,
     const Box& frame, ChunkGenerationStatistics* stats, bool geoCenter)
-{
-
-
+{   //todo - consider being able to remove duplicate verticies that occur from having ocean and land have same verts as boundaries
     SR_ASSERT(polygon.size() > 0);
-    auto roofMesh = mesh::triangulate(polygon).first;
+    auto [roofMesh, cw] = mesh::triangulate(polygon);
     //auto roofMesh = mesh::triangulateEarcut(polygon);
 
     glm::dvec3 center_geo;
@@ -29,7 +27,6 @@ void GenerationHelpers::drawMultPolygonInChunk(
     }
 
     auto startVertOfset = mesh.verts.size();
-
 
     for (size_t i = 0; i < roofMesh.verts.size(); i++)
     {
@@ -54,12 +51,15 @@ void GenerationHelpers::drawMultPolygonInChunk(
 
         mesh.tangents.push_back(glm::vec3(0));
         mesh.bitangents.push_back(glm::vec3(0));
+        
+        auto metersPerTeture = 3.0;
 
-        auto uv = glm::vec2(((posLatLon - frame.start) / (frame.getEnd() - frame.start)) * math::llaDistance(frame.start, frame.getEnd()));
+        auto uv = glm::vec2(((posLatLon - frame.start) / (frame.getEnd() - frame.start)) * math::llaDistance(frame.start, frame.getEnd()) * metersPerTeture);
 
         mesh.uvs.push_back(uv);
     }
 
+    //TODO: asuming one submesh in triangulated mesh
     for (size_t i = 0; i < roofMesh.indicies[0].size(); i++)
     {
         mesh.indicies[mesh.indicies.size() - 1].push_back(roofMesh.indicies[0][i] + startVertOfset);

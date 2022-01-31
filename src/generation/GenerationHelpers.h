@@ -14,7 +14,7 @@ public:
     /// <param name="mesh"></param>
     /// <param name="frame"></param>
     /// <param name="stats"></param>
-    static void drawMultPolygonInChunk(
+    static void drawHPolygonInChunk(
         const mesh::HPolygon2D& polygon, Mesh& mesh,
         const Box& frame, ChunkGenerationStatistics* stats, bool geoCenter = true);
 };

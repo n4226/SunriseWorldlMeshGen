@@ -8,18 +8,37 @@
 #include "GenerationStatistics.h"
 
 
+struct ChunkGenStatus {
+	// used to calc percent of job done i.e number of chunks completed / total chunks
+	bool completed = false;
+	// if completed and failed = false than chunk was created
+	bool failed = false;
+	using Container = std::unordered_map<std::string, ChunkGenStatus>;
+};
+
+
 class GenerationSystem
 {
 public:
 	GenerationSystem(const std::vector<Box>& chunks);
 
-	void generate();
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns>unordered map with status of each chunk requested</returns>
+	ChunkGenStatus::Container generate();
 
 	void debugChunk(size_t index, int lod);
 
 	static std::vector<Box> genreateChunksAround(glm::dvec2 desired,int divided, glm::ivec2 formation);
 	static Box actualChunk(glm::dvec2 desired,int divided = 12);
+
+	// only modify internally
+	libguarded::plain_guarded<ChunkGenStatus::Container> chunkStats{};
 private:
+
+
+	bool running = false;
 
 	void generateChunk(Box chunk,size_t lod, Mesh& mesh, ChunkGenerationStatistics& stats,const osm::osm& osmData);
 

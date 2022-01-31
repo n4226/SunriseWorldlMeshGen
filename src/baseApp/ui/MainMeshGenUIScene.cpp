@@ -85,6 +85,53 @@ void MainMeshGenUIScene::onDrawUI()
 		
 		ImGui::Text("Will generate ?? chunks");
 
+		ImGui::Separator();
+
+		auto treeNodeFlags = ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+
+		if (currentGenSys) {
+			auto statuses = currentGenSys->chunkStats.lock();
+
+			auto completed = 0.f;
+			auto total = 0.f;
+
+			for (auto& [item, status] : *statuses) {
+				total += 1;
+				if (status.completed) completed += 1;
+			}
+
+			ImGui::ProgressBar(total == 0 ? 0 : (completed / total));
+
+			if (ImGui::TreeNodeEx("generatedTree", treeNodeFlags, "Last Generation Tasks")) {
+				for (auto& [chunk, status] : *statuses) {
+					if (!status.completed)
+						ImGui::PushStyleColor(ImGuiCol_Text, { 0.8,0.8,0.1,1 });
+					else if (status.failed)
+						ImGui::PushStyleColor(ImGuiCol_Text, { 0.8,0,0.1,1 });
+					else
+						ImGui::PushStyleColor(ImGuiCol_Text, { 0,0.8,0.1,1 });
+
+
+					ImGui::PushID(chunk.c_str());
+					if (ImGui::TreeNodeEx(chunk.c_str(), treeNodeFlags, chunk.c_str())) {
+
+
+						if (ImGui::Button("Move here")) {
+							auto first = math::Box(chunk);
+							playerLLA.x = first.getCenter().x;
+							playerLLA.y = first.getCenter().y;
+						}
+
+						ImGui::TreePop();
+					}
+					ImGui::PopID();
+
+					ImGui::PopStyleColor();
+				}
+				ImGui::TreePop();
+			}
+		}
+
 		ImGui::Spacing();
 
 		ImGui::Separator();
@@ -165,15 +212,19 @@ void MainMeshGenUIScene::runMeshGen(const std::vector<Box>& chunks)
 
 	SR_INFO("About to start mesh gen process");
 
+
+	if (currentGenSys)
+		delete currentGenSys;
+
+	currentGenSys = new GenerationSystem(std::move(chunks));
+
+	//marl::WaitGroup wait(1);
+
 	marl::schedule([=] {
-
-		GenerationSystem genSys(std::move(chunks));
-
-		genSys.generate();
+		currentGenSys->generate();
 
 		SR_INFO("Finished mesh gen process");
+		//wait.done();
 	});
-
-
 
 }

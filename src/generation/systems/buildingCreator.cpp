@@ -90,6 +90,14 @@ void buildingCreator::addBuilding(Mesh& mesh,const osm::osm& osm,const osm::elem
 		return posLatLon;
 	});
 
+	//limit footprint to chunk boundary
+	// [0][0] is ok becasue interseciton of two simple non holed polygons is garented to return same thing
+	basePath = mesh::binterseciton({{basePath}},{{chunk.chunk.polygon()}})[0][0];
+
+	if (basePath.size() == 0) {
+		//SR_DEBUGBREAK();
+		return; // the building is not in the chunk
+	}
 	auto bounds = mesh::bounds(basePath);
 
 	glm::dvec2 min = bounds.start;

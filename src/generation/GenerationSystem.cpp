@@ -38,10 +38,28 @@ GenerationSystem::GenerationSystem(const std::vector<Box>& chunks)
 }
 
 
-// lod no longer taken in but calulated
-void GenerationSystem::generate()
+/// <summary>
+/// do not run multiple in parallel from the same system
+/// </summary>
+ChunkGenStatus::Container GenerationSystem::generate()
 {
+    if (running) {
+        SR_WARN("another generate task already running so stopping this one");
+        return {};
+    }
+    running = true;
+    defer(running = false);
+
     SR_INFO("attempting to generate {} chunks", chunks.size());
+
+    {
+        auto stats = chunkStats.lock();
+        stats->clear();
+        stats->reserve(chunks.size());
+
+        for (auto& chunk : chunks)
+            (*stats)[chunk.toString()] = {};
+    }
 
     auto onlyUseOSMCash = MeshGenConfig::get().onlyUseOsmCash;
     auto startTime = std::chrono::high_resolution_clock::now();
@@ -125,11 +143,17 @@ void GenerationSystem::generate()
                 }
                 stats.endTimer();
 
-                SR_INFO("printing chunk statistics:");
+                //SR_INFO("printing chunk statistics:");
 
                 //printf(stats.printLog().c_str());
 
                 FileManager::saveStringToFile(stats.printLog(), outputDir + chunk.toString() + ".stats");
+
+                {
+                    auto progressStats = chunkStats.lock();
+
+                    (*progressStats)[chunk.toString()].completed = true;
+                }
             }
 #if USE_MARL
             catch (...) {
@@ -146,6 +170,16 @@ void GenerationSystem::generate()
             catch (const std::exception& e) {
                 // moving onto next chunk nothing needed here
                 SR_CRITICAL("UNHANDLED CHUNK creation exeption: {}", e.what());
+
+                {
+                    auto progressStats = chunkStats.lock();
+
+                    auto key = chunk.toString();
+
+                    (*progressStats)[key].completed = true;
+                    (*progressStats)[key].failed = true;
+                }
+
                 return;
             }
 
@@ -158,6 +192,10 @@ void GenerationSystem::generate()
     auto time = std::chrono::duration<double>(endTime - startTime);
     SR_INFO("finished all chunks in {} seconds \n",time);
 
+    {
+        auto progressStats = chunkStats.lock();
+        return *progressStats;
+    }
 }
 
 
@@ -187,19 +225,21 @@ void GenerationSystem::generateChunk(Box chunk, size_t lod, Mesh& mesh, ChunkGen
     }
 
 
-    // ocean should be (frame - (union of all landmasses))
-    // where - is a difference of polygons
 
     mesh::MultiPolygon2D allLandPolygons{};
 
     for (auto& p : groundPolygons)
         allLandPolygons.push_back(p.polygon);
 
-    auto allLandmasses = mesh::bunionAll(allLandPolygons);
+    allLandPolygons = mesh::bunionAll(allLandPolygons);
 
-    auto framePoints = chunk.polygon();
+    mesh::MultiPolygon2D framePoints = { { chunk.polygon() } };
 
-    auto ocean = mesh::bDifference({ {framePoints} }, allLandmasses);
+    allLandPolygons = mesh::binterseciton(framePoints, allLandPolygons);
+
+
+    // ocean should be (frame - (union of all landmasses)) where - is a difference of polygons
+    auto ocean = mesh::bDifference({ {framePoints} }, allLandPolygons);
 
     //TODO: temporary has to be first thing in mesh for some reason
     //groundCreator::createSubdividedQuadChunkMesh(mesh, chunk);
@@ -213,18 +253,22 @@ void GenerationSystem::generateChunk(Box chunk, size_t lod, Mesh& mesh, ChunkGen
         mesh.attributes->subMeshMats.push_back(pol.material);
         GenerationHelpers::drawMultPolygonInChunk(pol.polygon, mesh,chunk,&stats);
     }*/
+    //draw ocean
+    mesh.indicies.push_back({});
+    mesh.attributes->subMeshMats.push_back(0);
+    for (auto& pol : ocean) {
+        if (pol.size() == 0) continue;
+        GenerationHelpers::drawHPolygonInChunk(pol, mesh, chunk, &stats);
+    }
+
 
     mesh.indicies.push_back({});
     mesh.attributes->subMeshMats.push_back(1);
     for (auto& pol : allLandPolygons) {
         if (pol.size() == 0) continue;
-        GenerationHelpers::drawMultPolygonInChunk(pol, mesh,chunk,&stats);
+        GenerationHelpers::drawHPolygonInChunk(pol, mesh,chunk,&stats);
     }
 
-    //draw ocean
-    mesh.indicies.push_back({});
-    mesh.attributes->subMeshMats.push_back(0);
-    GenerationHelpers::drawMultPolygonInChunk(ocean[0], mesh, chunk, &stats);
 
     //todo: fix only the first drawn submesh apears in world -- for tomorrow
 
@@ -250,7 +294,7 @@ std::vector<icreator*> GenerationSystem::createCreators(icreator::ChunkData chun
 {
     return {
         new groundCreator(chunkData),
-        //new buildingCreator(chunkData),
+        new buildingCreator(chunkData),
         //new RoadCreator(chunkData),
     };
 }
