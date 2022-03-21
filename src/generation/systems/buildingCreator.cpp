@@ -61,7 +61,7 @@ void buildingCreator::meshFromElement(Mesh& mesh, const osm::element& element)
 {
 	if (element.type == osm::type::way && element.tags.count("building") > 0) {
 		if (GenerationLodInformer::drawBuilding(chunk.chunk,chunk.lod,element))
-			addBuilding(mesh, chunk.osm, element, chunk.chunk,chunk.lod,chunk.stats);
+			addBuilding(mesh, *chunk.osm, element, chunk.chunk,chunk.lod,chunk.stats);
 	}
 }
 

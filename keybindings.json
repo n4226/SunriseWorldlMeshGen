@@ -1,0 +1,5 @@
+{
+    "key": "ctr+l",
+    "command": "workbench.acions.tasks.runTask",
+    "args": "copyShaders"
+}

@@ -42,7 +42,7 @@ private:
 
 	void generateChunk(Box chunk,size_t lod, Mesh& mesh, ChunkGenerationStatistics& stats,const osm::osm& osmData);
 
-	static std::vector<icreator*> createCreators(icreator::ChunkData chunkData);
+	static std::vector<icreator*> createCreators(const icreator::ChunkData& chunkData);
 
 	OsmFetcher osmFetcher;
 

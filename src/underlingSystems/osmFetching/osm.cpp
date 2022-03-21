@@ -186,7 +186,7 @@ namespace osm {
 	}
 
 
-	bool isAny(element& element, std::vector<std::array<std::string, 2>>&& wantedKeyValues) {
+	bool isAny(const element& element, std::vector<std::array<std::string, 2>>&& wantedKeyValues) {
 
 		for (size_t i = 0; i < wantedKeyValues.size(); i++)
 		{

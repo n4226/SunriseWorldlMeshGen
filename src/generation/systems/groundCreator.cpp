@@ -281,6 +281,7 @@ math::mesh::ShadedMultiPolygon2D groundCreator::polygonsFromOSM()
     shadedPolygons.resize(landPolygons.size());
 
     std::transform(landPolygons.begin(), landPolygons.end(), shadedPolygons.begin(), [](mesh::Polygon2D a) {
+		SR_CORE_TRACE("about to meshify poly with orientation: {}", math::mesh::clockwiseOriented(a));
          mesh::ShadedHPolygon2d pol = { {a}, 1};
          return pol;
     });
@@ -290,7 +291,33 @@ math::mesh::ShadedMultiPolygon2D groundCreator::polygonsFromOSM()
 
 math::mesh::ShadedMultiPolygon2D groundCreator::polygonsFromElement(const osm::element& elm)
 {
-    return math::mesh::ShadedMultiPolygon2D();
+
+    if (elm.type == osm::type::way && elm.tags.count("natural") > 0 && elm.tags.at("natural") == "scrub") {
+        const glm::dvec3 center_geo = math::LlatoGeo(glm::dvec3(chunk.chunk.getCenter(), 0), {}, radius);
+
+        auto nodes = chunk.osm->nodesIn(elm);
+
+        std::vector<glm::dvec2> basePath(nodes.size() - 1);
+
+        std::transform(nodes.begin(), std::prev(nodes.end()), basePath.begin(), [&](osm::element* element) {
+            auto posLatLon = glm::dvec2(*element->lat, *element->lon);
+            return posLatLon;
+        });
+
+        if (math::mesh::clockwiseOriented(basePath)) {
+            std::reverse(basePath.begin(), basePath.end());
+        }
+
+        SR_CORE_TRACE("about to return poly with closedState: {}", basePath[0] == basePath[basePath.size() - 1]);
+        SR_CORE_TRACE("about to return poly with orientation: {}", math::mesh::clockwiseOriented(basePath));
+        mesh::ShadedHPolygon2d pol = { {basePath}, StaticMaterialTable::entries.at("grass3") };
+        
+        //todo: start exporting these polygons again - but was getting problem with self intersection
+        //return { pol };
+
+    }
+
+    return {};
 }
 
 //TODO: right now this assumes it is the first creator to act on the mesh

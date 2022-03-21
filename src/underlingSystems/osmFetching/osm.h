@@ -53,7 +53,7 @@ namespace osm {
         std::unordered_map<uint64_t, element*> relation_elementMap;
     };
 
-    bool isAny(element& element, std::vector<std::array<std::string, 2>>&& wantedKeyValues);
+    bool isAny(const element& element, std::vector<std::array<std::string, 2>>&& wantedKeyValues);
 }
 
 

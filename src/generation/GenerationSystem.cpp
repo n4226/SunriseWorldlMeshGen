@@ -28,6 +28,7 @@
 #include"igl/writeOBJ.h"
 
 #include "GenerationHelpers.h"
+#include "systems/AirportCreator.h"
 
 GenerationSystem::GenerationSystem(const std::vector<Box>& chunks)
     : osmFetcher(),
@@ -203,7 +204,7 @@ ChunkGenStatus::Container GenerationSystem::generate()
 void GenerationSystem::generateChunk(Box chunk, size_t lod, Mesh& mesh, ChunkGenerationStatistics& stats, const osm::osm& osmData)
 {
 
-    icreator::ChunkData chunkData = {chunk, lod, osmData, stats};
+    icreator::ChunkData chunkData = {chunk, lod, &osmData, stats};
 
     auto creators = createCreators(chunkData);
 
@@ -213,23 +214,39 @@ void GenerationSystem::generateChunk(Box chunk, size_t lod, Mesh& mesh, ChunkGen
 
     mesh::ShadedMultiPolygon2D groundPolygons;
 
+    mesh::ShadedMultiPolygon2D otherPolygons;
+
     for (icreator* creator : creators) {
         creator->initInChunk(false,mesh);
         auto pol = creator->polygonsFromOSM();
-        groundPolygons.insert(groundPolygons.end(), pol.begin(), pol.end());
+        //if (pol)
+
+        for (auto p : pol)
+            if (p.material == StaticMaterialTable::entries.at("grass1"))
+                groundPolygons.push_back(p);
+            else
+                otherPolygons.push_back(p);
         
         for (const osm::element& element : osmData.elements) {
             auto pol = creator->polygonsFromElement(element);
-            groundPolygons.insert(groundPolygons.end(), pol.begin(), pol.end());
+            for (auto p : pol)
+                if (p.material == StaticMaterialTable::entries.at("grass1"))
+                    groundPolygons.push_back(p);
+                else
+                    otherPolygons.push_back(p);
         }
     }
 
-
+    //all sub polygons have to ahve the same orientation - counter clockwise now
 
     mesh::MultiPolygon2D allLandPolygons{};
+    mesh::MultiPolygon2D unShadedOtherPlygons{};
 
     for (auto& p : groundPolygons)
         allLandPolygons.push_back(p.polygon);
+
+    for (auto& p : otherPolygons)
+        unShadedOtherPlygons.push_back(p.polygon);
 
     allLandPolygons = mesh::bunionAll(allLandPolygons);
 
@@ -254,19 +271,37 @@ void GenerationSystem::generateChunk(Box chunk, size_t lod, Mesh& mesh, ChunkGen
         GenerationHelpers::drawMultPolygonInChunk(pol.polygon, mesh,chunk,&stats);
     }*/
     //draw ocean
+
     mesh.indicies.push_back({});
     mesh.attributes->subMeshMats.push_back(0);
     for (auto& pol : ocean) {
         if (pol.size() == 0) continue;
+        //stoped drawing ocean
         GenerationHelpers::drawHPolygonInChunk(pol, mesh, chunk, &stats);
     }
 
 
-    mesh.indicies.push_back({});
-    mesh.attributes->subMeshMats.push_back(1);
-    for (auto& pol : allLandPolygons) {
-        if (pol.size() == 0) continue;
-        GenerationHelpers::drawHPolygonInChunk(pol, mesh,chunk,&stats);
+
+
+    auto landPolygonsToDraw = mesh::bDifference(allLandPolygons, unShadedOtherPlygons);
+
+	mesh.indicies.push_back({});
+	mesh.attributes->subMeshMats.push_back(1);
+	for (auto& pol : landPolygonsToDraw) {
+		if (pol.size() == 0) continue;
+		GenerationHelpers::drawHPolygonInChunk(pol, mesh, chunk, &stats);
+	}
+
+    for (auto& pol : otherPolygons) {
+        if (pol.polygon.size() == 0) continue;
+
+        //limit poly to size of chunk (if not already done in creator
+        //TODO: se if this will ever be bad - will the result never not be just a single holed polygon
+        pol.polygon = mesh::binterseciton(framePoints, {pol.polygon})[0];
+
+        mesh.indicies.push_back({});
+        mesh.attributes->subMeshMats.push_back(pol.material);
+        GenerationHelpers::drawHPolygonInChunk(pol.polygon, mesh,chunk,&stats);
     }
 
 
@@ -290,11 +325,12 @@ void GenerationSystem::generateChunk(Box chunk, size_t lod, Mesh& mesh, ChunkGen
 
 }
 
-std::vector<icreator*> GenerationSystem::createCreators(icreator::ChunkData chunkData)
+std::vector<icreator*> GenerationSystem::createCreators(const icreator::ChunkData& chunkData)
 {
     return {
         new groundCreator(chunkData),
         new buildingCreator(chunkData),
+        new AirportCreator(chunkData),
         //new RoadCreator(chunkData),
     };
 }

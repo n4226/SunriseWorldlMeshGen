@@ -39,7 +39,7 @@ void RoadCreator::meshFromElement(Mesh& mesh, const osm::element& elm)
 	if (chunk.lod > 0) return;
 	if (elm.type == osm::type::way && elm.tags.count("highway") > 0) {
 					
-		addRoad(mesh, chunk.osm, elm, chunk.chunk, chunk.lod);
+		addRoad(mesh, *chunk.osm, elm, chunk.chunk, chunk.lod);
 		
 	}
 }

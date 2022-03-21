@@ -8,6 +8,8 @@
 
 #include "ui/MainMeshGenUIScene.h"
 
+#include "../testingScenes/DemoScene1.h"
+
 using namespace sunrise;
 
 
@@ -33,7 +35,7 @@ public:
 SunriseWorldGenApp::SunriseWorldGenApp()
 	//: Application(nullptr)
 	: Application(new MainMeshGenUIScene(this))
-	//: Application(new WorldScene(this))
+	//: Application(new DemoScene1(this))
 {
 }
 

@@ -32,6 +32,11 @@ void MainMeshGenUIScene::load()
 	SR_INFO("loading shape files");
 	shapeFileSystem = new ShapeFileSystem();
 	SR_INFO("finished loading shape files");
+
+	//set location to Newark Airport
+	glm::dvec3 ewr(40.689352, -74.174450,30);
+	playerLLA = ewr;
+	defaultCenter = ewr;
 }
 
 void MainMeshGenUIScene::onDrawUI()
@@ -60,6 +65,8 @@ void MainMeshGenUIScene::onDrawUI()
 		static int dividedCount = 11;
 
 		ImGui::InputFloat2("Center",center.data());
+
+		// point of scrub = 40.7063459, -74.0566669
 
 		static std::array<int, 2> size{ 1,1 };
 

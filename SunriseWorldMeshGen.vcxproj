@@ -153,6 +153,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\generation\systems\AirportCreator.h" />
+    <ClInclude Include="src\testingScenes\DemoScene1.h" />
     <ClInclude Include="src\baseApp\MeshGenConfig.h" />
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h" />
     <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h" />
@@ -166,6 +168,7 @@
     <ClInclude Include="src\generation\systems\buildingCreator.h" />
     <ClInclude Include="src\generation\systems\groundCreator.h" />
     <ClInclude Include="src\mgpch.h" />
+    <ClInclude Include="src\testingScenes\systems\SimpleCameraMovement.h" />
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h" />
     <ClInclude Include="src\underlingSystems\elevation\ElevationFetcher.h" />
     <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h" />
@@ -173,6 +176,8 @@
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\generation\systems\AirportCreator.cpp" />
+    <ClCompile Include="src\testingScenes\DemoScene1.cpp" />
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp" />
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp" />
     <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp" />
@@ -189,6 +194,7 @@
     <ClCompile Include="src\mgpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\testingScenes\systems\SimpleCameraMovement.cpp" />
     <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp" />
     <ClCompile Include="src\underlingSystems\elevation\ElevationFetcher.cpp" />
     <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp" />

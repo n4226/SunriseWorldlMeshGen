@@ -27,7 +27,8 @@ public:
 	struct ChunkData {
 		Box chunk;
 		int lod;
-		const osm::osm& osm;
+		const osm::osm* osm;
+		//const osm::osm& osm;
 		ChunkGenerationStatistics& stats;
 	};
 
@@ -53,6 +54,14 @@ public:
 	virtual void meshFromOSM		(Mesh& mesh) {};
 
 protected:
+
+	/// <summary>
+	/// returns an open (last point not equal to first point in array) counter clockwise oriented polygon
+	/// </summary>
+	/// <param name="way"></param>
+	/// <returns></returns>
+	math::mesh::Polygon2D polygonFromWay(const osm::element& way);
+
 
 	ChunkData chunk;
 };
