@@ -39,13 +39,14 @@ sunrise::math::mesh::ShadedMultiPolygon2D AirportCreator::polygonsFromOSM()
 			auto poly = polygonFromWay(elm);
 			if (!poly.size() == 0)
 				disruptions.push_back({ poly });
-			SR_CORE_INFO("making poly with size: {}", poly.size());
+			//SR_CORE_INFO("making poly with size: {}", poly.size());
 		}
 
 	}
 	//disruptions = mesh::bunionAll(disruptions);
-	airpotPoly.polygon = mesh::bDifference({ airpotPoly.polygon }, disruptions)[0];
-
+	if (airpotPoly.polygon.size() > 0) {
+		airpotPoly.polygon = mesh::bDifference({ airpotPoly.polygon }, disruptions)[0];
+	}
 
 	return { airpotPoly };
 }

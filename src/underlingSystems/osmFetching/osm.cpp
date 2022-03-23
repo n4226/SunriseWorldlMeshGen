@@ -154,12 +154,15 @@ namespace osm {
 			{
 			case type::node:
 				node_elementMap[e.id] = &e;
-
+				break;
 			case type::way:
 				way_elementMap[e.id] = &e;
+				break;
 
 			case type::relation:
 				relation_elementMap[e.id] = &e;
+				break;
+
 			default:
 				break;
 			}
@@ -176,8 +179,18 @@ namespace osm {
 		std::transform(e.nodes.begin(), e.nodes.end(), results.begin(), [&](int64_t id) {
 			//SR_ASSERT(node_elementMap.find(id) != node_elementMap.end());
 #if SR_ENABLE_PRECONDITION_CHECKS
-			if (node_elementMap.find(id) == node_elementMap.end())
+			if (node_elementMap.find(id) == node_elementMap.end()) {
+				SR_WARN("node not found balling out of element");
 				throw std::runtime_error("node not found");
+				/*if (std::find_if(elements.begin(), elements.end(), [id](auto& elm) {
+					return elm.id == id;
+				}) == elements.end()) {
+					throw std::runtime_error("node not found");
+				}
+				else {
+					throw std::runtime_error("what happened?");
+				}*/
+			}
 #endif
 			auto result = node_elementMap.find(id)->second;
 			return result;

@@ -1,0 +1,90 @@
+
+// building server for the first time:
+
+https://wiki.openstreetmap.org/wiki/Overpass_API/Installation - info site
+
+
+1. switch to WSL - i am using v1 but should work in v2
+
+wsl pwd is capital u;
+
+$EXEC_DIR: The root directory in which executable files should be installed (/bin/ suffix removed). (~100 MB). For example, the public server has this on /opt/osm-3s/v0.7.54/
+$DB_DIR: a directory to store the database
+$REPLICATE_DIR: a directory to store minutely (or otherwise) diffs (only necessary if you decide to configure minutely updates below)
+
+
+$EXEC_DIR: E:\OSMServer\server\osm-3s_v0.7.56.9\
+$EXEC_DIR: /mnt/e/OSMServer/server/
+$DB_DIR: E:\OSMServer\data
+$DB_DIR: /mnt/e/OSMServer/data/
+$REPLICATE_DIR: E:\OSMServer\replicates
+
+
+got error installing libc bin if issues prisest can try buttom scot stevens answer:
+     https://askubuntu.com/questions/1160366/apt-not-working-installed-libc-bin-package-post-installation-script-subprocess
+
+
+
+wget http://dev.overpass-api.de/releases/osm-3s_v[latest_version].tar.gz
+latest_version = 0.7.56.9 osm-3s_v0.7.56.9.tar.gz from 2021-03-09 17:07	783K
+wget http://dev.overpass-api.de/releases/osm-3s_v0.7.56.9.tar.gz
+
+./configure CXXFLAGS="-O2" --prefix=$EXEC_DIR
+./configure CXXFLAGS="-O2" --prefix=/mnt/e/OSMServer/server/
+
+
+// populating the DB
+
+./download_clone.sh --db-dir=database_dir --source=http://dev.overpass-api.de/api_drolbr/ --meta=no
+./download_clone.sh --db-dir=/mnt/e/OSMServer/data/ --source=http://dev.overpass-api.de/api_drolbr/ --meta=no
+
+// runtime instructions
+
+
+//static usage:
+
+$EXEC_DIR/bin/osm3s_query --db-dir=$DB_DIR
+/mnt/e/OSMServer/server/bin/osm3s_query --db-dir=/mnt/e/OSMServer/data/
+
+-- demo querry = 
+<query type="node"><bbox-query n="51.0" s="50.9" w="6.9" e="7.0"/><has-kv k="amenity" v="pub"/></query><print/>
+
+// starting demon which is required for auto tasks like diff updates and web api
+
+nohup $EXEC_DIR/bin/dispatcher --osm-base --db-dir=$DB_DIR &
+nohup /mnt/e/OSMServer/server/bin/dispatcher --osm-base --db-dir=/mnt/e/OSMServer/data/ &
+
+to stop the nohup - use kill and find pid from when it was launched
+
+can use "ps -ef |grep nohup" to help find pid
+
+// web api:
+
+
+
+see apachy file on this computer at this location: \\wsl$\Ubuntu-20.04\etc\apache2\sites-available\000-default.conf
+
+appache commands:
+use top restart command
+restart: sudo /etc/init.d/apache2 restart
+restart: sudo systemctl reload apache2
+how to fix: You don't have permission to access this resource. Apache/2.4.41 - use proper endpoint not route server
+
+how to fix demmon not started error:
+this could help: https://stackoverflow.com/questions/24525795/overpass-api-dispatcher-fails-with-address-already-in-use-98
+
+
+
+ITS WORKING!!!!!
+
+normal operating:
+
+start demon - dont use sudo
+than if necessary restart appache 
+when teting in browser it appears to always show 403 forbideen when just requesting route but if you use proper api endpoint seems to work fine
+
+Shutdown:
+The proper way to stop the dispatcher is via the command line parameter --terminate. Don't just kill the dispatcher process!
+
+use this command:
+nohup /mnt/e/OSMServer/server/bin/dispatcher --osm-base --db-dir=/mnt/e/OSMServer/data/ --terminate &

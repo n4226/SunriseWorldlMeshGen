@@ -41,6 +41,11 @@ bool GenerationLodInformer::drawBuilding(Box chunk, int lod, const osm::element&
 		if (prob > buildingProbLOD2) return false;
 
 		break;
+
+	case 3:
+		if (prob > buildingProbLOD3) return false;
+
+		break;
 	default:
 		break;
 	}

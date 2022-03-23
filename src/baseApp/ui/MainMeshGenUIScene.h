@@ -17,6 +17,14 @@ public:
 	virtual void load() override;
 
 	virtual void onDrawUI() override;
+
+	void meshGenChunkProgressUI(int minDivided, int maxDivided);
+
+	void drawTreeNodeLevel(const std::vector<std::unordered_map<std::string, ChunkGenStatus>>& layeredChunks, int level, ImGuiTreeNodeFlags treeNodeFlags,
+		Box* filterInside = nullptr);
+
+	void setShowingChunks(std::array<float, 2>& center, int mindividedCount, int maxDividedCount, int currentDividedCount, std::array<int, 2>& size);
+
 	virtual void onDrawMainMenu() override;
 
 	virtual void unload() override;

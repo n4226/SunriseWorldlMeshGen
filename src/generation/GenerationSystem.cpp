@@ -30,6 +30,8 @@
 #include "GenerationHelpers.h"
 #include "systems/AirportCreator.h"
 
+#define HANDLE_EXEPZTIONS 1
+
 GenerationSystem::GenerationSystem(const std::vector<Box>& chunks)
     : osmFetcher(),
     chunks(chunks),
@@ -81,7 +83,9 @@ ChunkGenStatus::Container GenerationSystem::generate()
         std::for_each(MG_EXECUION_POLOCY chunks.begin(), chunks.end(), [this,onlyUseOSMCash](Box& chunk) {
 #endif
 
+            //size of div 12 chunk
             constexpr double baseSize = 90.0 / 4096;
+            //lod zero is the highest? which is given to div 12?
             auto lod = static_cast<size_t>((chunk.size.x / baseSize) - 1);
 
             SR_TRACE("making chunk with lod {}", lod);
@@ -92,7 +96,9 @@ ChunkGenStatus::Container GenerationSystem::generate()
 
             auto file = outputDir + chunk.toString() + ".bmesh";
             auto attrFile = attrOutputDir + chunk.toString() + ".bmattr";
+#if HANDLE_EXEPZTIONS
             try {
+#endif
 
                 if (std::filesystem::exists(file) && MeshGenConfig::get().skipExisting) {
                     printf("skipping an already saved chunk chunk\n");
@@ -155,19 +161,23 @@ ChunkGenStatus::Container GenerationSystem::generate()
 
                     (*progressStats)[chunk.toString()].completed = true;
                 }
+#if HANDLE_EXEPZTIONS
             }
+#endif
 #if USE_MARL
+#if HANDLE_EXEPZTIONS
             catch (...) {
                 finishedChunk.done();
                 return;
             }
-
+#endif
             finishedChunk.done();
         });
     }
 
     finishedChunk.wait();
 #else
+#if HANDLE_EXEPZTIONS
             catch (const std::exception& e) {
                 // moving onto next chunk nothing needed here
                 SR_CRITICAL("UNHANDLED CHUNK creation exeption: {}", e.what());
@@ -183,7 +193,7 @@ ChunkGenStatus::Container GenerationSystem::generate()
 
                 return;
             }
-
+#endif
             // moving onto next chunk nothing needed here
     });
 #endif
@@ -409,6 +419,33 @@ std::vector<Box> GenerationSystem::genreateChunksAround(glm::dvec2 desired, int 
     
     return chunks;
 
+}
+
+std::vector<sunrise::math::Box> GenerationSystem::genreateChunksAround(glm::dvec2 desired, int startingDepth, int maxDepth, glm::ivec2 formation)
+{
+	auto chunk = actualChunk(desired, startingDepth);
+
+    auto newDesired = chunk.start + chunk.size / 2.0;
+
+	std::vector<Box> chunks = genreateChunksAround(newDesired,startingDepth,formation);
+	std::vector<Box> lastLevelChunks = chunks;
+	std::vector<Box> nextlastLevelChunks = {};
+    auto depth = startingDepth;
+    SR_CORE_ASSERT(startingDepth <= maxDepth);
+    while (depth < maxDepth)
+    {
+		for (auto c : lastLevelChunks) {
+            auto childs = c.children();
+            chunks.insert(chunks.end(),childs.begin(), childs.end());
+            nextlastLevelChunks.insert(nextlastLevelChunks.end(),childs.begin(), childs.end());
+		}
+        lastLevelChunks = nextlastLevelChunks;
+        nextlastLevelChunks.clear();
+        depth += 1;
+    }
+
+
+    return chunks;
 }
 
 Box GenerationSystem::actualChunk(glm::dvec2 desired, int divided)

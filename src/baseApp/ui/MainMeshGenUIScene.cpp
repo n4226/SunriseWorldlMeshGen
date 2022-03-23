@@ -51,18 +51,31 @@ void MainMeshGenUIScene::onDrawUI()
 		ImGui::Begin("Generation Tasks");
 
 		if (ImGui::Button("Open Config File")) {
-			ShellExecuteA(NULL, "open", FileManager::engineConfigDir().c_str(), NULL, NULL, SW_SHOWDEFAULT);
+			ShellExecuteA(NULL, "open", FileManager::appConfigDir().c_str(), NULL, NULL, SW_SHOWDEFAULT);
+		}
+
+		static auto meshGenConfig = MeshGenConfig::get();
+		
+		if (ImGui::Checkbox("Skip Existing Chunks", &meshGenConfig.skipExisting)) {
+			MeshGenConfig::write(meshGenConfig);
 		}
 
 		ImGui::Separator();
 
 		ImGui::Text("Generation:");
 
+		ImGui::Text("Chose a base chunk than a size and a start depth.");
+		ImGui::Text("This creates a grid of chunks all the same size.\n");
+		ImGui::Text("Then, chose a max depth this will generate child chunks each a 1 / 4 the size of their parent until the max depth is reached.");
+
+		ImGui::Spacing();
+
 		//auto t = glm::value_ptr(glm::vec2(defaultCenter.x, defaultCenter.y));
 		static std::array<float, 2> center{defaultCenter.x,defaultCenter.y};
 
 		
 		static int dividedCount = 11;
+		static int maxDividedCount = 12;
 
 		ImGui::InputFloat2("Center",center.data());
 
@@ -70,7 +83,15 @@ void MainMeshGenUIScene::onDrawUI()
 
 		static std::array<int, 2> size{ 1,1 };
 
-		ImGui::DragInt2("Generation dwSize",size.data(),1,0,100);
+		ImGui::DragInt2("Generation Size",size.data(),1,0,100);
+
+		if (ImGui::InputInt("Start Depth", &dividedCount) && dividedCount > maxDividedCount) {
+			maxDividedCount = dividedCount;
+		}
+
+		if (ImGui::InputInt("Max Depth", &maxDividedCount) && maxDividedCount < dividedCount) {
+			dividedCount = maxDividedCount;
+		}
 
 		if (ImGui::Button("Reset to Default")) {
 			std::array<float,2> newcenter{defaultCenter.x,defaultCenter.y};
@@ -86,57 +107,28 @@ void MainMeshGenUIScene::onDrawUI()
 
 		if (ImGui::Button("RunGeneration")) {
 			runMeshGen(GenerationSystem::genreateChunksAround
-			(glm::make_vec2(center.data()), dividedCount, glm::make_vec2(size.data())));
+			(glm::make_vec2(center.data()), dividedCount, maxDividedCount, glm::make_vec2(size.data())));
 		}
 		ImGui::SameLine();
 		
-		ImGui::Text("Will generate ?? chunks");
+		if (ImGui::Button("Re Run ")) {
+			if (currentGenSys) {
+				auto statuses = currentGenSys->chunkStats.lock();
+				std::vector<Box> chunks{};
+
+				for (auto& [chunk, status] : *statuses)
+					chunks.push_back(chunk);
+
+				runMeshGen(chunks);
+			}
+		}
 
 		ImGui::Separator();
 
-		auto treeNodeFlags = ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
 
 		if (currentGenSys) {
-			auto statuses = currentGenSys->chunkStats.lock();
+			meshGenChunkProgressUI(dividedCount, maxDividedCount);
 
-			auto completed = 0.f;
-			auto total = 0.f;
-
-			for (auto& [item, status] : *statuses) {
-				total += 1;
-				if (status.completed) completed += 1;
-			}
-
-			ImGui::ProgressBar(total == 0 ? 0 : (completed / total));
-
-			if (ImGui::TreeNodeEx("generatedTree", treeNodeFlags, "Last Generation Tasks")) {
-				for (auto& [chunk, status] : *statuses) {
-					if (!status.completed)
-						ImGui::PushStyleColor(ImGuiCol_Text, { 0.8,0.8,0.1,1 });
-					else if (status.failed)
-						ImGui::PushStyleColor(ImGuiCol_Text, { 0.8,0,0.1,1 });
-					else
-						ImGui::PushStyleColor(ImGuiCol_Text, { 0,0.8,0.1,1 });
-
-
-					ImGui::PushID(chunk.c_str());
-					if (ImGui::TreeNodeEx(chunk.c_str(), treeNodeFlags, chunk.c_str())) {
-
-
-						if (ImGui::Button("Move here")) {
-							auto first = math::Box(chunk);
-							playerLLA.x = first.getCenter().x;
-							playerLLA.y = first.getCenter().y;
-						}
-
-						ImGui::TreePop();
-					}
-					ImGui::PopID();
-
-					ImGui::PopStyleColor();
-				}
-				ImGui::TreePop();
-			}
 		}
 
 		ImGui::Spacing();
@@ -158,16 +150,50 @@ void MainMeshGenUIScene::onDrawUI()
 			}
 		}
 
+		static int displayingDepth = dividedCount;
+		static int currentDisplayDepth = 0;
 
-		if (ImGui::Button("add first generated")) {
+		static bool displayingGenerating = true;
 
+
+
+		if (ImGui::Checkbox("Draw Generated", &displayingGenerating)) {
+			if (!displayingGenerating) {
+				terrainMask->clear();
+				currentDisplayDepth = 0;
+				reloadTerrainInMask();
+			}
+			else {
+
+			}
+		}
+
+		ImGui::SameLine();
+		ImGui::Checkbox("Draw chunks not on disk",&doNotSparslyPopulateMask);
+
+		if (displayingGenerating) {
+
+			ImGui::SliderInt("Displaying Depth", &displayingDepth, dividedCount, maxDividedCount);
+
+			if (displayingDepth != currentDisplayDepth) {
+				currentDisplayDepth = displayingDepth;
+
+				setShowingChunks(center, dividedCount, maxDividedCount, currentDisplayDepth, size);
+				reloadTerrainInMask();
+			}
+		}
+
+		/*if (ImGui::Button("add first generated")) {
+			auto newChunks = GenerationSystem::genreateChunksAround
+			(glm::make_vec2(center.data()), dividedCount, glm::make_vec2(size.data()));
+			(*terrainMask).push_back(newChunks[0]);
 		}
 
 		if (ImGui::Button("add all generated")) {
 			auto newChunks = GenerationSystem::genreateChunksAround
 			(glm::make_vec2(center.data()), dividedCount, glm::make_vec2(size.data()));
 			(*terrainMask).insert(terrainMask->end(), newChunks.begin(), newChunks.end());
-		}
+		}*/
 
 		ImGui::Spacing();
 
@@ -196,6 +222,121 @@ void MainMeshGenUIScene::onDrawUI()
 
 	}
 
+}
+
+void MainMeshGenUIScene::meshGenChunkProgressUI(int minDivided, int maxDivided)
+{
+	auto treeNodeFlags = ImGuiTreeNodeFlags_FramePadding | ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+	auto statuses = currentGenSys->chunkStats.lock();
+
+	auto completed = 0;
+	auto total = 0;
+	auto failed = 0;
+
+	std::vector<std::unordered_map<std::string,ChunkGenStatus>> layeredChunks{};
+
+	layeredChunks.resize(maxDivided - minDivided + 1);
+
+	for (auto& [item, status] : *statuses) {
+		total += 1;
+		if (status.completed) completed += 1;
+		if (status.failed) failed += 1;
+		auto chunk = math::Box(item);
+		auto chunkDivided = log(90 / chunk.size.x) / log(2);
+		auto chunkDividedInt = static_cast<int>(round(chunkDivided));
+		auto index = chunkDividedInt - minDivided;
+		SR_ASSERT(index <= minDivided);
+		layeredChunks[index].emplace(std::make_pair(chunk.toString(),status));
+	}
+
+	ImGui::ProgressBar(total == 0 ? 0 : ((float)completed / (float)total));
+	ImGui::Text("%d of %d processed, %d errors", completed, total, failed);
+
+	if (ImGui::TreeNodeEx("generatedTree", treeNodeFlags, "Last Generation Tasks")) {
+		auto level = 0;
+		drawTreeNodeLevel(layeredChunks, level, treeNodeFlags);
+
+		ImGui::TreePop();
+	}
+}
+
+void MainMeshGenUIScene::drawTreeNodeLevel(const std::vector<std::unordered_map<std::string, ChunkGenStatus>>& layeredChunks,
+	int level, ImGuiTreeNodeFlags treeNodeFlags,Box* filterInside)
+{
+	if (layeredChunks.size() <= level) { return; };
+	for (auto& [chunk, status] : layeredChunks[level]) {
+
+		auto first = math::Box(chunk);
+		if (filterInside) {
+			//must be inside given box
+			/*auto childs = filterInside->children();
+			std::array<Box, 4>::iterator pos = std::find_if(childs.begin(), childs.end(), [first](auto& i) {
+				return i.overlaps(first);
+			});
+			std::array<Box, 4>::iterator end = childs.end();
+			if (pos == end) {
+				continue;
+			}*/
+			//todo: fix acuracy
+			if (!filterInside->overlaps(first)) {
+				continue;
+			}
+		}
+
+		if (!status.completed)
+			ImGui::PushStyleColor(ImGuiCol_Text, { 0.8,0.8,0.1,1 });
+		else if (status.failed)
+			ImGui::PushStyleColor(ImGuiCol_Text, { 0.8,0,0.1,1 });
+		else
+			ImGui::PushStyleColor(ImGuiCol_Text, { 0,0.8,0.1,1 });
+
+
+		ImGui::PushID(chunk.c_str());
+		if (ImGui::TreeNodeEx(chunk.c_str(), treeNodeFlags, chunk.c_str())) {
+
+
+			if (ImGui::Button("Move here")) {
+				playerLLA.x = first.getCenter().x;
+				playerLLA.y = first.getCenter().y;
+			}
+
+			if (ImGui::Button("Regenerate"))
+				runMeshGen({ first });
+			ImGui::Button("Regenerate including all levels of children (not functional yet)");
+
+
+			if (ImGui::Button("Copy"))
+				ImGui::SetClipboardText(chunk.c_str());
+
+			//draw children
+			if (layeredChunks.size() > (level + 1)) {
+				drawTreeNodeLevel(layeredChunks, level + 1, treeNodeFlags, &first);
+			}
+
+			ImGui::TreePop();
+		}
+		ImGui::PopID();
+
+		ImGui::PopStyleColor();
+	}
+}
+
+void MainMeshGenUIScene::setShowingChunks(std::array<float, 2>& center, int mindividedCount, int maxDividedCount, int currentDividedCount, std::array<int, 2>& size)
+{
+	auto glmCenter = glm::make_vec2(center.data());
+	auto newChunks = GenerationSystem::genreateChunksAround
+	(glmCenter, mindividedCount,maxDividedCount, glm::make_vec2(size.data()));
+
+	std::vector<Box> filteredChunks{};
+	filteredChunks.resize(newChunks.size());
+	const auto correctSize = GenerationSystem::actualChunk(glmCenter, currentDividedCount).size.x;
+	auto newEnd = std::copy_if(newChunks.begin(), newChunks.end(), filteredChunks.begin(), [correctSize](auto& elm) {
+		return elm.size.x == correctSize;
+	});
+	filteredChunks.erase(newEnd, filteredChunks.end());
+
+	terrainMask->clear();
+	(*terrainMask).insert(terrainMask->end(), filteredChunks.begin(), filteredChunks.end());
 }
 
 void MainMeshGenUIScene::onDrawMainMenu()

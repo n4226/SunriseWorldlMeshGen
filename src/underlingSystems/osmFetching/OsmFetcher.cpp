@@ -103,7 +103,7 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
 
     stats.markOSMParsedFromJSON();
 
-    if (strcmp(server.c_str(), "http://127.0.0.1") != 0) {
+    if (strcmp(server.c_str(), "http://127.0.0.1") != 0 && strcmp(server.c_str(), "http://localhost") != 0) {
         printf("sleeping with json data\n");
         Sleep(8000);
     }
@@ -119,8 +119,9 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
 std::string OsmFetcher::getQuery(Box frame)
 {
     // full osm data
+    //timeout used to be 25
     const char* str = R"(
-        <osm-script output="json" output-config="" timeout="25">
+        <osm-script output="json" output-config="" timeout="200">
         <union into="_">
         <bbox-query s="%f" w="%f" n="%f" e="%f"/>
         <query into="_" type="way">

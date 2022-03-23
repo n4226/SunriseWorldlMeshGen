@@ -31,6 +31,8 @@ public:
 	void debugChunk(size_t index, int lod);
 
 	static std::vector<Box> genreateChunksAround(glm::dvec2 desired,int divided, glm::ivec2 formation);
+	static std::vector<Box> genreateChunksAround(glm::dvec2 desired,int startingDepth, int maxDepth, glm::ivec2 formation);
+
 	static Box actualChunk(glm::dvec2 desired,int divided = 12);
 
 	// only modify internally
