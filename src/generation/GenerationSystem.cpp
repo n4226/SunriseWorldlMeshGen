@@ -180,7 +180,8 @@ ChunkGenStatus::Container GenerationSystem::generate()
 #if HANDLE_EXEPZTIONS
             catch (const std::exception& e) {
                 // moving onto next chunk nothing needed here
-                SR_CRITICAL("UNHANDLED CHUNK creation exeption: {}", e.what());
+                if (strcmp(e.what(),"already made") != 0)
+                    SR_CRITICAL("UNHANDLED CHUNK creation exeption: {}", e.what());
 
                 {
                     auto progressStats = chunkStats.lock();
@@ -188,7 +189,8 @@ ChunkGenStatus::Container GenerationSystem::generate()
                     auto key = chunk.toString();
 
                     (*progressStats)[key].completed = true;
-                    (*progressStats)[key].failed = true;
+                    if (strcmp(e.what(), "already made") != 0)
+                        (*progressStats)[key].failed = true;
                 }
 
                 return;

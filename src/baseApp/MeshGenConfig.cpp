@@ -15,6 +15,11 @@ MeshGenConfig::ConfigValues MeshGenConfig::get()
 {
 	static ConfigValues v = getorReset();
 
+	if (invalidated) {
+		v = getorReset();
+		invalidated = false;
+	}
+
 	return v;
 }
 
@@ -72,6 +77,14 @@ void MeshGenConfig::write(const ConfigValues& values)
 	}
 
 	FileManager::saveStringToFile(valstr,path());
+	invalidateStored();
+}
+
+bool MeshGenConfig::invalidated = false;
+
+void MeshGenConfig::invalidateStored()
+{
+	invalidated = true;
 }
 
 MeshGenConfig::ConfigValues MeshGenConfig::defaults()

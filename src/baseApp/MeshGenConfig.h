@@ -18,6 +18,7 @@ public:
 
 	static ConfigValues get();
 	static void write(const ConfigValues& values);
+	static void invalidateStored();
 
 
 	static std::string path() {return FileManager::appConfigDir() + "meshGen.cfg"; }
@@ -27,7 +28,7 @@ protected:
 
 	static ConfigValues defaults();
 
-
+	static bool invalidated;
 
 	MeshGenConfig();
 

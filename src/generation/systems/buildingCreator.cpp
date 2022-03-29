@@ -90,6 +90,7 @@ void buildingCreator::addBuilding(Mesh& mesh,const osm::osm& osm,const osm::elem
 		return posLatLon;
 	});
 
+
 	//limit footprint to chunk boundary
 	// [0][0] is ok becasue interseciton of two simple non holed polygons is garented to return same thing right?
 	basePath = mesh::binterseciton({{basePath}},{{chunk.chunk.polygon()}})[0][0];

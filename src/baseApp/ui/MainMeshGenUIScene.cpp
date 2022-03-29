@@ -54,7 +54,7 @@ void MainMeshGenUIScene::onDrawUI()
 			ShellExecuteA(NULL, "open", FileManager::appConfigDir().c_str(), NULL, NULL, SW_SHOWDEFAULT);
 		}
 
-		static auto meshGenConfig = MeshGenConfig::get();
+		auto meshGenConfig = MeshGenConfig::get();
 		
 		if (ImGui::Checkbox("Skip Existing Chunks", &meshGenConfig.skipExisting)) {
 			MeshGenConfig::write(meshGenConfig);
