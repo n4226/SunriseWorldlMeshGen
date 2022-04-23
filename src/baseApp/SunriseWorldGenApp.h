@@ -19,6 +19,7 @@ protected:
 	ApplicationConfig configure() override {
 		ApplicationConfig config{};
 
+		/* mesh gen settings */
 		config.enableMarl = true;
 		config.marlThreadCountOffset = 2;
 		config.vulkan = true;
@@ -28,6 +29,11 @@ protected:
 		config.useFileSys = true;
 
 		config.wantsHighThreadPriority = false;
+
+
+		/*fsts settings*/
+		config.wantsHighThreadPriority = true;
+
 
 		return config;
 	}

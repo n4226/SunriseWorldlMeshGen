@@ -80,7 +80,7 @@
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.3.211.0\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <MinimalRebuild>false</MinimalRebuild>
@@ -91,8 +91,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;geos.lib;geos_c.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;geos.lib;geos_c.lib;DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.211.0\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Debug;extern\Sunrise\vendor\DirectX\Bin\Windows10_2022\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Debug-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
@@ -104,7 +104,7 @@
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.3.211.0\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -118,8 +118,8 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;geos.lib;geos_c.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;geos.lib;geos_c.lib;DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.211.0\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Release;extern\Sunrise\vendor\DirectX\Bin\Windows10_2022\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
@@ -131,7 +131,7 @@
       <PrecompiledHeaderFile>mgpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>SR_PLATFORM_WINDOWS;SR_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.154.1\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.3.211.0\Include;src;extern\shapelib;extern\Sunrise\src;extern\Sunrise\src\Sunrise;extern\Sunrise\vendor;extern\Sunrise\vendor\spdlog\include;extern\Sunrise\vendor\glm-master;extern\Sunrise\vendor\marl-main\marl-main\include;extern\Sunrise\vendor\stb;extern\Sunrise\vendor\mango-master\mango-master\include;extern\Sunrise\vendor\libigl\include;extern\Sunrise\vendor\HTTPRequest\include;extern\Sunrise\vendor\httplib;extern\Sunrise\vendor\rapidjson\include;extern\Sunrise\vendor\libguarded\src;extern\Sunrise\vendor\nlohmann\include;extern\Sunrise\vendor\earcut-hpp\include\mapbox;extern\Sunrise\vendor\bin\glfw\windows\glfw-3.3.2.bin.WIN64\glfw-3.3.2.bin.WIN64\lib-vc2019;extern\Sunrise\vendor\date\include;extern\Sunrise\vendor\entt\single_include;extern\Sunrise\vendor\asio-1.18.1\include;extern\Sunrise\vendor\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -145,16 +145,14 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;geos.lib;geos_c.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.2.154.1\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;geos.lib;geos_c.lib;DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.211.0\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Release;extern\Sunrise\vendor\DirectX\Bin\Windows10_2022\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\generation\systems\AirportCreator.h" />
-    <ClInclude Include="src\testingScenes\DemoScene1.h" />
     <ClInclude Include="src\baseApp\MeshGenConfig.h" />
     <ClInclude Include="src\baseApp\SunriseWorldGenApp.h" />
     <ClInclude Include="src\baseApp\configure tasks\ConfigureTasksScript.h" />
@@ -164,11 +162,14 @@
     <ClInclude Include="src\generation\GenerationSystem.h" />
     <ClInclude Include="src\generation\creator.h" />
     <ClInclude Include="src\generation\managment\GenerationLodInformer.h" />
+    <ClInclude Include="src\generation\systems\AirportCreator.h" />
     <ClInclude Include="src\generation\systems\RoadCreator.h" />
     <ClInclude Include="src\generation\systems\buildingCreator.h" />
     <ClInclude Include="src\generation\systems\groundCreator.h" />
     <ClInclude Include="src\mgpch.h" />
+    <ClInclude Include="src\testingScenes\DemoScene1.h" />
     <ClInclude Include="src\testingScenes\systems\SimpleCameraMovement.h" />
+    <ClInclude Include="src\test\TestMGPUScene.h" />
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h" />
     <ClInclude Include="src\underlingSystems\elevation\ElevationFetcher.h" />
     <ClInclude Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.h" />
@@ -176,8 +177,6 @@
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\generation\systems\AirportCreator.cpp" />
-    <ClCompile Include="src\testingScenes\DemoScene1.cpp" />
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp" />
     <ClCompile Include="src\baseApp\SunriseWorldGenApp.cpp" />
     <ClCompile Include="src\baseApp\configure tasks\ConfigureTasksScript.cpp" />
@@ -187,6 +186,7 @@
     <ClCompile Include="src\generation\GenerationSystem.cpp" />
     <ClCompile Include="src\generation\creator.cpp" />
     <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp" />
+    <ClCompile Include="src\generation\systems\AirportCreator.cpp" />
     <ClCompile Include="src\generation\systems\RoadCreator.cpp" />
     <ClCompile Include="src\generation\systems\buildingCreator.cpp" />
     <ClCompile Include="src\generation\systems\groundCreator.cpp" />
@@ -194,7 +194,9 @@
     <ClCompile Include="src\mgpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\testingScenes\DemoScene1.cpp" />
     <ClCompile Include="src\testingScenes\systems\SimpleCameraMovement.cpp" />
+    <ClCompile Include="src\test\TestMGPUScene.cpp" />
     <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp" />
     <ClCompile Include="src\underlingSystems\elevation\ElevationFetcher.cpp" />
     <ClCompile Include="src\underlingSystems\osmFetching\OsmAttributeFetcher.cpp" />
@@ -204,9 +206,9 @@
   <ItemGroup>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\GBuffer.frag">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../bin/Debug-windows-x86_64/SunriseWorldMeshGen/shaders/GBuffer.frag.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../bin/Release-windows-x86_64/SunriseWorldMeshGen/shaders/GBuffer.frag.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">../bin/Dist-windows-x86_64/SunriseWorldMeshGen/shaders/GBuffer.frag.spv</Outputs>
@@ -215,9 +217,9 @@
     </CustomBuild>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\GBuffer.vert">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../bin/Debug-windows-x86_64/SunriseWorldMeshGen/shaders/GBuffer.vert.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../bin/Release-windows-x86_64/SunriseWorldMeshGen/shaders/GBuffer.vert.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">../bin/Dist-windows-x86_64/SunriseWorldMeshGen/shaders/GBuffer.vert.spv</Outputs>
@@ -226,9 +228,9 @@
     </CustomBuild>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\gpuGenCommands.comp">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../bin/Debug-windows-x86_64/SunriseWorldMeshGen/shaders/gpuGenCommands.comp.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../bin/Release-windows-x86_64/SunriseWorldMeshGen/shaders/gpuGenCommands.comp.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">../bin/Dist-windows-x86_64/SunriseWorldMeshGen/shaders/gpuGenCommands.comp.spv</Outputs>
@@ -237,9 +239,9 @@
     </CustomBuild>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\terrain.frag">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../bin/Debug-windows-x86_64/SunriseWorldMeshGen/shaders/terrain.frag.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../bin/Release-windows-x86_64/SunriseWorldMeshGen/shaders/terrain.frag.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">../bin/Dist-windows-x86_64/SunriseWorldMeshGen/shaders/terrain.frag.spv</Outputs>
@@ -248,9 +250,9 @@
     </CustomBuild>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\terrain.vert">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../bin/Debug-windows-x86_64/SunriseWorldMeshGen/shaders/terrain.vert.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../bin/Release-windows-x86_64/SunriseWorldMeshGen/shaders/terrain.vert.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">../bin/Dist-windows-x86_64/SunriseWorldMeshGen/shaders/terrain.vert.spv</Outputs>
@@ -259,9 +261,9 @@
     </CustomBuild>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\triangle.frag">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../bin/Debug-windows-x86_64/SunriseWorldMeshGen/shaders/triangle.frag.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../bin/Release-windows-x86_64/SunriseWorldMeshGen/shaders/triangle.frag.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">../bin/Dist-windows-x86_64/SunriseWorldMeshGen/shaders/triangle.frag.spv</Outputs>
@@ -270,9 +272,9 @@
     </CustomBuild>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\triangle.vert">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Debug-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Release-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %(Identity) -o $(SolutionDir)/bin/Dist-windows-x86_64/$(ProjectName)/shaders/%(Filename)%(Extension).spv -g</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">../bin/Debug-windows-x86_64/SunriseWorldMeshGen/shaders/triangle.vert.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">../bin/Release-windows-x86_64/SunriseWorldMeshGen/shaders/triangle.vert.spv</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">../bin/Dist-windows-x86_64/SunriseWorldMeshGen/shaders/triangle.vert.spv</Outputs>

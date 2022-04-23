@@ -10,6 +10,8 @@
 
 #include "../testingScenes/DemoScene1.h"
 
+#include "../test/TestMGPUScene.h"
+
 using namespace sunrise;
 
 
@@ -33,8 +35,10 @@ public:
 
 
 SunriseWorldGenApp::SunriseWorldGenApp()
-	//: Application(nullptr)
-	: Application(new MainMeshGenUIScene(this))
+	//: Application(new MainMeshGenUIScene(this))
+	: Application(new WorldScene(this))
+
+	//: Application(new TestMGPUScene(this))
 	//: Application(new DemoScene1(this))
 {
 }

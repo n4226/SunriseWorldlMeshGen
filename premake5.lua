@@ -60,11 +60,11 @@ project "SunriseWorldMeshGen"
 		
 		"%{sunriseLocation}/src/**.vert",
 		"%{sunriseLocation}/src/**.frag",
-		"%{sunriseLocation}/src/**.comp"
+		"%{sunriseLocation}/src/**.comp",
 	}
 
 	includedirs {
-		"C:/VulkanSDK/1.2.154.1/Include",
+		"C:/VulkanSDK/1.3.211.0/Include",
 
 		"%{wks.location}/src",
 		"%{wks.location}/extern/shapelib/",
@@ -94,7 +94,7 @@ project "SunriseWorldMeshGen"
 	}	
 	
 	libdirs {
-		"C:/VulkanSDK/1.2.154.1/Lib",
+		"C:/VulkanSDK/1.3.211.0/Lib",
 		"%{sunriseLocation}/vendor/marl-main/marl-main/Debug",
 		"%{wks.location}/extern/shapelib/build/dll/Debug",
 	}
@@ -117,8 +117,16 @@ project "SunriseWorldMeshGen"
 
 	}
 
+	-- filter "files:**.cpp"
+	-- 	flags {"NoPCH"}
+
+
 	filter "system:windows"
 		systemversion "latest"
+
+		links {
+			"DirectXTK"
+		}
 
 		defines {
 			"SR_PLATFORM_WINDOWS"
@@ -151,7 +159,8 @@ project "SunriseWorldMeshGen"
 		symbols "on"
 
 		libdirs {
-			"%{sunriseLocation}/vendor/geos/bin/Debug"
+			"%{sunriseLocation}/vendor/geos/bin/Debug",
+			"%{sunriseLocation}/vendor/DirectX/Bin/Windows10_2022/x64/Debug"
 		}
 
 	filter "configurations:Release"
@@ -160,7 +169,8 @@ project "SunriseWorldMeshGen"
 		optimize "on"
 
 		libdirs {
-			"%{sunriseLocation}/vendor/geos/bin/Release"
+			"%{sunriseLocation}/vendor/geos/bin/Release",
+			"%{sunriseLocation}/vendor/DirectX/Bin/Windows10_2022/x64/Release"
 		}
 
 	filter "configurations:Dist"
@@ -169,13 +179,14 @@ project "SunriseWorldMeshGen"
 		optimize "on"
 		
 		libdirs {
-			"%{sunriseLocation}/vendor/geos/bin/Release"
+			"%{sunriseLocation}/vendor/geos/bin/Release",
+			"%{sunriseLocation}/vendor/DirectX/Bin/Windows10_2022/x64/Release"
 		}
 
 	-- GLSL Shader Compile Pipeline
 
 	filter {'files:**.vert or files:**.frag or files:**.comp', 'system:windows' }
-		glslCompilerLoc = "C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe"
+		glslCompilerLoc = "C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe"
 	   -- A message to display while this build step is running (optional)
 	   buildmessage 'Compiling %{file.relpath} TO SPIR-V - windows'
 		
@@ -184,7 +195,7 @@ project "SunriseWorldMeshGen"
 	   -- One or more commands to run (required)
 	   buildcommands {
 		  -- (glslCompilerLoc .. (" -V %{file.relpath} -o %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/shaders/%{file.name}.spv -g"))
-		  ("C:/VulkanSDK/1.2.154.1/Bin/glslangValidator.exe -V %{file.relpath} -o %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/shaders/%{file.name}.spv -g")
+		  ("C:/VulkanSDK/1.3.211.0/Bin/glslangValidator.exe -V %{file.relpath} -o %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/shaders/%{file.name}.spv -g")
 	   }
 
 	   -- One or more outputs resulting from the build (required)
@@ -192,6 +203,23 @@ project "SunriseWorldMeshGen"
 
 	   -- One or more additional dependencies for this build command (optional)
 	   --buildinputs { 'path/to/file1.ext', 'path/to/file2.ext' }
-
+	
+	
 
 include "extern/Sunrise"
+
+
+,
+    -- {
+    --   "mode": "Windowed",
+    --   "monitor": "\\\\.\\DISPLAY1\\Monitor0",
+    --   "monitorLocalPostion": {
+    --     "x": 0.5,
+    --     "y": 0.5
+    --   },
+    --   "group": 0,
+    --   "size": {
+    --     "x": 1920,
+    --     "y": 1080
+    --   }
+    -- }

@@ -43,6 +43,12 @@
     <Filter Include="src\generation\systems">
       <UniqueIdentifier>{8F8679F6-7B80-A248-64ED-3859508608B5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\testingScenes">
+      <UniqueIdentifier>{DB4C8BF5-4763-898B-90DA-14ADFC2F5A13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\testingScenes\systems">
+      <UniqueIdentifier>{02E6ADFF-6EA8-E189-B758-7016235ABA67}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\underlingSystems">
       <UniqueIdentifier>{5C4D5443-48DC-DD0C-F1FA-F107DD68EEB2}</UniqueIdentifier>
     </Filter>
@@ -81,6 +87,9 @@
     <ClInclude Include="src\generation\managment\GenerationLodInformer.h">
       <Filter>src\generation\managment</Filter>
     </ClInclude>
+    <ClInclude Include="src\generation\systems\AirportCreator.h">
+      <Filter>src\generation\systems</Filter>
+    </ClInclude>
     <ClInclude Include="src\generation\systems\RoadCreator.h">
       <Filter>src\generation\systems</Filter>
     </ClInclude>
@@ -92,6 +101,12 @@
     </ClInclude>
     <ClInclude Include="src\mgpch.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\testingScenes\DemoScene1.h">
+      <Filter>src\testingScenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\testingScenes\systems\SimpleCameraMovement.h">
+      <Filter>src\testingScenes\systems</Filter>
     </ClInclude>
     <ClInclude Include="src\underlingSystems\ShapeFileSystem.h">
       <Filter>src\underlingSystems</Filter>
@@ -108,9 +123,7 @@
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h">
       <Filter>src\underlingSystems\osmFetching</Filter>
     </ClInclude>
-    <ClInclude Include="src\testingScenes\DemoScene1.h" />
-    <ClInclude Include="src\testingScenes\systems\SimpleCameraMovement.h" />
-    <ClInclude Include="src\generation\systems\AirportCreator.h" />
+    <ClInclude Include="src\test\TestMGPUScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp">
@@ -140,6 +153,9 @@
     <ClCompile Include="src\generation\managment\GenerationLodInformer.cpp">
       <Filter>src\generation\managment</Filter>
     </ClCompile>
+    <ClCompile Include="src\generation\systems\AirportCreator.cpp">
+      <Filter>src\generation\systems</Filter>
+    </ClCompile>
     <ClCompile Include="src\generation\systems\RoadCreator.cpp">
       <Filter>src\generation\systems</Filter>
     </ClCompile>
@@ -154,6 +170,12 @@
     </ClCompile>
     <ClCompile Include="src\mgpch.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testingScenes\DemoScene1.cpp">
+      <Filter>src\testingScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\testingScenes\systems\SimpleCameraMovement.cpp">
+      <Filter>src\testingScenes\systems</Filter>
     </ClCompile>
     <ClCompile Include="src\underlingSystems\ShapeFileSystem.cpp">
       <Filter>src\underlingSystems</Filter>
@@ -170,9 +192,7 @@
     <ClCompile Include="src\underlingSystems\osmFetching\osm.cpp">
       <Filter>src\underlingSystems\osmFetching</Filter>
     </ClCompile>
-    <ClCompile Include="src\testingScenes\DemoScene1.cpp" />
-    <ClCompile Include="src\testingScenes\systems\SimpleCameraMovement.cpp" />
-    <ClCompile Include="src\generation\systems\AirportCreator.cpp" />
+    <ClCompile Include="src\test\TestMGPUScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\GBuffer.frag">
