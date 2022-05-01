@@ -35,7 +35,7 @@ void DemoScene1::load()
 	
 	for (int i = 0; i < mesh2.uvs.size(); i++)
 	{
-		mesh2.uvs[i] *= 50;
+		//mesh2.uvs[i] *= 50;
 	}
 
 	auto& floorTransform = registry.get<Transform>(floor);
@@ -113,7 +113,7 @@ void DemoScene1::update()
 
 
 	for (auto ren : app.renderers) {
-		//testCubeMesh.debugDrawNormals(ren, testCubeTrans);
+		testCubeMesh.debugDrawNormals(ren, testCubeTrans);
 		//floorMesh.debugDrawNormals(ren, floorTrans);
 	}
 		//ren->debugDraw->drawLine({ -10,-10,-10 }, { 10,10,10 });

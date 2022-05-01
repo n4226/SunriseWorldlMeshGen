@@ -21,8 +21,9 @@ public:
 
 private:
 
-	Entity cube;
+	Entity sunCube;
 	Entity testEnt;
+	Entity floor;
 
 };
 
