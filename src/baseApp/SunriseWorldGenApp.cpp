@@ -35,10 +35,10 @@ public:
 
 
 SunriseWorldGenApp::SunriseWorldGenApp()
-	//: Application(new MainMeshGenUIScene(this))
+	: Application(new MainMeshGenUIScene(this))
 	//: Application(new WorldScene(this))
 
-	: Application(new DemoScene1(this))
+	//: Application(new DemoScene1(this))
 	//: Application(new TestMGPUScene(this))
 {
 }

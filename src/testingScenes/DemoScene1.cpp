@@ -2,7 +2,7 @@
 #include "DemoScene1.h"
 #include "Sunrise/math/mesh/MeshPrimatives.h"
 #include "systems/SimpleCameraMovement.h"
-
+#include "Sunrise/graphics/vulkan/renderer/Renderer.h"
 
 void DemoScene1::load()
 {
@@ -23,16 +23,16 @@ void DemoScene1::load()
 	testEnt = registry.create();
 	registry.emplace<Transform>(testEnt, testEntTranse);
 	registry.emplace<Mesh>(testEnt, MeshPrimatives::cube());
-	registry.emplace<MeshRenderer>(testEnt, MeshRenderer(9));
+	registry.emplace<MeshRenderer>(testEnt, MeshRenderer(10));
 
 
 	floor = registry.create();
 	registry.emplace<Transform>(floor);
 	registry.emplace<Mesh>(floor, MeshPrimatives::square());
-	registry.emplace<MeshRenderer>(floor, MeshRenderer(1));
+	registry.emplace<MeshRenderer>(floor, MeshRenderer(10));
 
 	auto& mesh2 = registry.get<Mesh>(floor);
-	
+		
 	for (int i = 0; i < mesh2.uvs.size(); i++)
 	{
 		mesh2.uvs[i] *= 50;
@@ -72,6 +72,12 @@ void DemoScene1::load()
 	registry.emplace<Mesh>(fence, MeshPrimatives::cube());
 	registry.emplace<MeshRenderer>(fence, MeshRenderer(3));*/
 
+	/*auto floor2 = registry.create();
+	registry.emplace<Transform>(floor2, floorTransform);
+	registry.emplace<Mesh>(floor2, mesh2);
+	registry.emplace<MeshRenderer>(floor2, MeshRenderer(10));
+	auto& floor2Trans = registry.get<Transform>(floor2);
+	floor2Trans.position.z = 10;*/
 
 }
 
@@ -114,7 +120,14 @@ void DemoScene1::update()
 
 	for (auto ren : app.renderers) {
 		//testCubeMesh.debugDrawNormals(ren, testCubeTrans);
-		//floorMesh.debugDrawNormals(ren, floorTrans);
+		floorMesh.debugDrawNormals(ren, floorTrans);
+
+		//draw axis indicator
+		auto base = glm::vec3(0, 0, 5);
+		ren->debugDraw->drawLine(base, base + glm::vec3(1, 0, 0), glm::vec4(1, 0, 0, 1));
+		ren->debugDraw->drawLine(base, base + glm::vec3(0, 1, 0), glm::vec4(0, 1, 0, 1));
+		ren->debugDraw->drawLine(base, base + glm::vec3(0, 0, 1), glm::vec4(0, 0, 1, 1));
+
 	}
 		//ren->debugDraw->drawLine({ -10,-10,-10 }, { 10,10,10 });
 
