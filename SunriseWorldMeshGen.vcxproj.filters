@@ -43,6 +43,9 @@
     <Filter Include="src\generation\systems">
       <UniqueIdentifier>{8F8679F6-7B80-A248-64ED-3859508608B5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\test">
+      <UniqueIdentifier>{DC8737CF-C854-92DA-F16D-8082DD99C768}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\testingScenes">
       <UniqueIdentifier>{DB4C8BF5-4763-898B-90DA-14ADFC2F5A13}</UniqueIdentifier>
     </Filter>
@@ -102,6 +105,9 @@
     <ClInclude Include="src\mgpch.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\test\TestMGPUScene.h">
+      <Filter>src\test</Filter>
+    </ClInclude>
     <ClInclude Include="src\testingScenes\DemoScene1.h">
       <Filter>src\testingScenes</Filter>
     </ClInclude>
@@ -123,7 +129,6 @@
     <ClInclude Include="src\underlingSystems\osmFetching\osm.h">
       <Filter>src\underlingSystems\osmFetching</Filter>
     </ClInclude>
-    <ClInclude Include="src\test\TestMGPUScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\baseApp\MeshGenConfig.cpp">
@@ -171,6 +176,9 @@
     <ClCompile Include="src\mgpch.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\test\TestMGPUScene.cpp">
+      <Filter>src\test</Filter>
+    </ClCompile>
     <ClCompile Include="src\testingScenes\DemoScene1.cpp">
       <Filter>src\testingScenes</Filter>
     </ClCompile>
@@ -192,13 +200,18 @@
     <ClCompile Include="src\underlingSystems\osmFetching\osm.cpp">
       <Filter>src\underlingSystems\osmFetching</Filter>
     </ClCompile>
-    <ClCompile Include="src\test\TestMGPUScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\GBuffer.frag">
       <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
     </CustomBuild>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\GBuffer.vert">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\debugLine.frag">
+      <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
+    </CustomBuild>
+    <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\debugLine.vert">
       <Filter>extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders</Filter>
     </CustomBuild>
     <CustomBuild Include="extern\Sunrise\src\Sunrise\Sunrise\graphics\shaders\gpuGenCommands.comp">

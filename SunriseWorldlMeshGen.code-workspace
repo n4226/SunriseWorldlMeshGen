@@ -13,7 +13,10 @@
 					"cmd": "cd \"${workspaceFolder}\\extern\\Sunrise\\src\\Sunrise\\Sunrise\\graphics\\shaders\" ; .\\compileShaders.bat"
 				}
 			]
-		}	
+		},
+		"files.associations": {
+			"base.h": "c"
+		}
 	},
 	"tasks": {
 		"version": "2.0.0",

@@ -11,6 +11,7 @@
 #include "../testingScenes/DemoScene1.h"
 
 #include "../test/TestMGPUScene.h"
+#include "Sunrise/world/terrain/OnboardWorldBGScene.h"
 
 using namespace sunrise;
 
@@ -35,9 +36,10 @@ public:
 
 
 SunriseWorldGenApp::SunriseWorldGenApp()
-	: Application(new MainMeshGenUIScene(this))
-	//: Application(new WorldScene(this))
+//: Application(new MainMeshGenUIScene(this))
+: Application(new WorldScene(this))
 
+	//: Application(new OnboardWorldBGScene(this))
 	//: Application(new DemoScene1(this))
 	//: Application(new TestMGPUScene(this))
 {

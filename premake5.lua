@@ -209,7 +209,7 @@ project "SunriseWorldMeshGen"
 include "extern/Sunrise"
 
 
-,
+    -- ,
     -- {
     --   "mode": "Windowed",
     --   "monitor": "\\\\.\\DISPLAY1\\Monitor0",
