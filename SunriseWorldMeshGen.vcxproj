@@ -119,7 +119,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;geos.lib;geos_c.lib;DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.211.0\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Release;extern\Sunrise\vendor\DirectX\Bin\Windows10_2022\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.211.0\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Release;extern\Sunrise\vendor\DirectX\Bin\Windows10_2022\x64\Release;extern\Sunrise\vendor\marl-main\marl-main\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Release-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>
@@ -146,7 +146,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>vulkan-1.lib;shp.lib;marl.lib;geos.lib;geos_c.lib;DirectXTK.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.211.0\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Release;extern\Sunrise\vendor\DirectX\Bin\Windows10_2022\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.211.0\Lib;extern\Sunrise\vendor\marl-main\marl-main\Debug;extern\shapelib\build\dll\Debug;extern\Sunrise\vendor\geos\bin\Release;extern\Sunrise\vendor\DirectX\Bin\Windows10_2022\x64\Release;extern\Sunrise\vendor\marl-main\marl-main\build\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>IF EXIST $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll\ (xcopy /Q /E /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul) ELSE (xcopy /Q /Y /I $(SolutionDir)\extern\shapelib\build\dll\Debug\shp.dll $(SolutionDir)\bin\Dist-windows-x86_64\$(ProjectName)\ &gt; nul)</Command>

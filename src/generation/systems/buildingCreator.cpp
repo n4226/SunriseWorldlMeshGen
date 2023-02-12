@@ -49,11 +49,33 @@
 //	stats.logVerts(mesh.verts.size() - startVerts, ChunkGenerationStatistics::VertUse::building);
 //}
 
+//use these to subtract from last submesh to get right materials
+constexpr size_t buidingMatCount = 3;
+constexpr size_t roofMatCount = 2;
+
+//in order so building 1 (mat 2) is at the begining
+constexpr glm::vec2 otherSize = { 10,8 };
+constexpr std::array<glm::vec2, 5> uvMultiplyerPerBuildingMat = { glm::vec2(1),otherSize, otherSize, glm::vec2(10,10), glm::vec2(8,8)};
+
 void buildingCreator::initInChunk(bool forMesh, Mesh& mesh)
 {
 	if (forMesh) {
+		//buliding mats
 		mesh.indicies.push_back({});
 		mesh.attributes->subMeshMats.push_back(2);
+
+		mesh.indicies.push_back({});
+		mesh.attributes->subMeshMats.push_back(11);
+
+		mesh.indicies.push_back({});
+		mesh.attributes->subMeshMats.push_back(12);
+
+		//roof mats
+		mesh.indicies.push_back({});
+		mesh.attributes->subMeshMats.push_back(20);
+
+		mesh.indicies.push_back({});
+		mesh.attributes->subMeshMats.push_back(21);
 	}
 }
 
@@ -65,8 +87,15 @@ void buildingCreator::meshFromElement(Mesh& mesh, const osm::element& element)
 	}
 }
 
-void buildingCreator::addBuilding(Mesh& mesh,const osm::osm& osm,const osm::element& building, const Box& frame, int lod, ChunkGenerationStatistics& stats)
+void buildingCreator::addBuilding(Mesh& mesh, const osm::osm& osm, const osm::element& building, const Box& frame, int lod, ChunkGenerationStatistics& stats)
 {
+	//pick materials
+	//pick a random side and roof mat from [0,max) using the constexprs above
+
+	//both of these are backindicies from the end of the submeshes (i.e index = size() - mat)
+	size_t sideMat = ((building.id % buidingMatCount) + roofMatCount) + 1;
+	size_t roofMat = (building.id % roofMatCount) + 1;
+
 
 	constexpr double radius = math::dEarthRad;
 	const glm::dvec3 center_geo = math::LlatoGeo(glm::dvec3(frame.getCenter(), 0), {}, radius);
@@ -88,12 +117,18 @@ void buildingCreator::addBuilding(Mesh& mesh,const osm::osm& osm,const osm::elem
 		posLatLon.y = glm::min(posLatLon.y, frame.getEnd().y);*/
 
 		return posLatLon;
-	});
+		});
 
 
 	//limit footprint to chunk boundary
 	// [0][0] is ok becasue interseciton of two simple non holed polygons is garented to return same thing right?
-	basePath = mesh::binterseciton({{basePath}},{{chunk.chunk.polygon()}})[0][0];
+	auto intersaction = mesh::binterseciton({ {basePath} }, { {chunk.chunk.polygon()} });
+	if (intersaction.size() > 0 && intersaction[0].size() > 0) {
+		basePath = intersaction[0][0];
+	}
+	else {
+		basePath.clear(); //will exit early in next step
+	}
 
 	if (basePath.size() == 0) {
 		//SR_DEBUGBREAK();
@@ -157,12 +192,13 @@ void buildingCreator::addBuilding(Mesh& mesh,const osm::osm& osm,const osm::elem
 		mesh.bitangents.push_back(glm::vec3(0));
 
 		auto uv = glm::vec2(((posLatLon - min) / (max - min)) * math::llaDistance(min, max));
+		uv *= uvMultiplyerPerBuildingMat[uvMultiplyerPerBuildingMat.size() - roofMat];
 		mesh.uvs.push_back(uv);
 	}
 
 	for (size_t i = 0; i < roofMesh.indicies[0].size(); i++)
 	{
-		mesh.indicies[mesh.indicies.size() - 1].push_back(roofMesh.indicies[0][i] + startVertOfset);
+		mesh.indicies[mesh.indicies.size() - roofMat].push_back(roofMesh.indicies[0][i] + startVertOfset);
 	}
 
 
@@ -210,9 +246,9 @@ void buildingCreator::addBuilding(Mesh& mesh,const osm::osm& osm,const osm::elem
 		// scalled uvs
 
 		mesh.uvs.push_back(glm::vec2(0, 0));
-		mesh.uvs.push_back(glm::vec2(glm::distance(pos2, pos1), 0));
-		mesh.uvs.push_back(glm::vec2(0, height));
-		mesh.uvs.push_back(glm::vec2(glm::distance(pos2, pos1), height));
+		mesh.uvs.push_back(glm::vec2(glm::distance(pos2, pos1), 0) * uvMultiplyerPerBuildingMat[uvMultiplyerPerBuildingMat.size() - sideMat]);
+		mesh.uvs.push_back(glm::vec2(0, height) * uvMultiplyerPerBuildingMat[uvMultiplyerPerBuildingMat.size() - sideMat]);
+		mesh.uvs.push_back(glm::vec2(glm::distance(pos2, pos1), height) * uvMultiplyerPerBuildingMat[uvMultiplyerPerBuildingMat.size() - sideMat]);
 
 
 		//mesh.uvs.push_back(glm::vec2(0,0));
@@ -224,21 +260,21 @@ void buildingCreator::addBuilding(Mesh& mesh,const osm::osm& osm,const osm::elem
 
 		if (!isCLockWise) {
 			// wall side 1
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 0);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 1);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 2);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 1);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 3);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 2);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 0);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 1);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 2);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 1);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 3);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 2);
 		}
 		else {
 			// wall side 2
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 2);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 1);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 0);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 2);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 3);
-			mesh.indicies[mesh.indicies.size() - 1].push_back(localOff + 1);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 2);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 1);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 0);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 2);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 3);
+			mesh.indicies[mesh.indicies.size() - sideMat].push_back(localOff + 1);
 		}
 	}
 

@@ -114,6 +114,8 @@ project "SunriseWorldMeshGen"
 		
 		-- shapelib dll copy
 		("{COPY} %{wks.location}/extern/shapelib/build/dll/Debug/shp.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
+		-- ("{COPY} %{wks.location}/extern/shapelib/build/dll/Release/shp.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
+		-- ("{COPY} %{wks.location}/extern/shapelib/build/dll/Dist/shp.dll %{wks.location}/bin/" .. outputdir .. "/%{prj.name}/"),
 
 	}
 
@@ -170,7 +172,8 @@ project "SunriseWorldMeshGen"
 
 		libdirs {
 			"%{sunriseLocation}/vendor/geos/bin/Release",
-			"%{sunriseLocation}/vendor/DirectX/Bin/Windows10_2022/x64/Release"
+			"%{sunriseLocation}/vendor/DirectX/Bin/Windows10_2022/x64/Release",
+			"%{sunriseLocation}/vendor/marl-main/marl-main/build/Release"
 		}
 
 	filter "configurations:Dist"
@@ -180,7 +183,8 @@ project "SunriseWorldMeshGen"
 		
 		libdirs {
 			"%{sunriseLocation}/vendor/geos/bin/Release",
-			"%{sunriseLocation}/vendor/DirectX/Bin/Windows10_2022/x64/Release"
+			"%{sunriseLocation}/vendor/DirectX/Bin/Windows10_2022/x64/Release",
+			"%{sunriseLocation}/vendor/marl-main/marl-main/build/Release"
 		}
 
 	-- GLSL Shader Compile Pipeline

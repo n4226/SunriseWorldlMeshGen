@@ -35,6 +35,7 @@ private:
 
 	bool showGenerationWindow = true;
 
+
 	glm::dvec2 defaultCenter = glm::dvec2(40.75699, -73.92144);
 
 	//ChunkGenStatus::Container lastRunGenStatus

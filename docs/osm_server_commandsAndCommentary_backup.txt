@@ -1,4 +1,6 @@
 
+//NOTE from the future: the drive now appears a g in windows/wsl so e must be swaped with g
+
 // building server for the first time:
 
 https://wiki.openstreetmap.org/wiki/Overpass_API/Installation - info site
@@ -53,6 +55,7 @@ $EXEC_DIR/bin/osm3s_query --db-dir=$DB_DIR
 
 nohup $EXEC_DIR/bin/dispatcher --osm-base --db-dir=$DB_DIR &
 nohup /mnt/e/OSMServer/server/bin/dispatcher --osm-base --db-dir=/mnt/e/OSMServer/data/ &
+nohup /mnt/g/OSMServerFiles/osmServerAndData/executable/bin/dispatcher --osm-base --db-dir=/mnt/g/OSMServerFiles/osmServerAndData/database/ &
 
 to stop the nohup - use kill and find pid from when it was launched
 
@@ -88,3 +91,11 @@ The proper way to stop the dispatcher is via the command line parameter --termin
 
 use this command:
 nohup /mnt/e/OSMServer/server/bin/dispatcher --osm-base --db-dir=/mnt/e/OSMServer/data/ --terminate &
+nohup /mnt/g/OSMServerFiles/osmServerAndData/executable/bin/dispatcher --osm-base --db-dir=/mnt/g/OSMServerFiles/osmServerAndData/database/ --terminate &
+
+
+NOTES:
+
+if you get somethign like the ofllowing in the nohup.out when starting the demon: 
+     File_Error Address already in use 98 /mnt/g/OSMServerFiles/osmServerAndData/database//osm3s_v0.7.55_osm_base Unix_Socket::4
+you just need to remove the locked file mentioned. it is a zero sized fiel used for locking

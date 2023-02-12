@@ -30,6 +30,7 @@
 #include "GenerationHelpers.h"
 #include "systems/AirportCreator.h"
 
+//TUrn off for debugging
 #define HANDLE_EXEPZTIONS 1
 
 GenerationSystem::GenerationSystem(const std::vector<Box>& chunks)
@@ -102,7 +103,8 @@ ChunkGenStatus::Container GenerationSystem::generate()
 
                 if (std::filesystem::exists(file) && MeshGenConfig::get().skipExisting) {
                     printf("skipping an already saved chunk chunk\n");
-                    throw std::runtime_error("already made");
+                    //throw std::runtime_error("already made");
+                    return; //chunk already made
                 }
 
                 BinaryMeshAttrributes binaryAttributes{};
@@ -309,11 +311,19 @@ void GenerationSystem::generateChunk(Box chunk, size_t lod, Mesh& mesh, ChunkGen
 
         //limit poly to size of chunk (if not already done in creator
         //TODO: se if this will ever be bad - will the result never not be just a single holed polygon
-        pol.polygon = mesh::binterseciton(framePoints, {pol.polygon})[0];
 
-        mesh.indicies.push_back({});
-        mesh.attributes->subMeshMats.push_back(pol.material);
-        GenerationHelpers::drawHPolygonInChunk(pol.polygon, mesh,chunk,&stats);
+        auto inter = mesh::binterseciton(framePoints, { pol.polygon });
+        if (inter.size() > 0) {
+            pol.polygon = inter[0];
+            mesh.indicies.push_back({});
+            mesh.attributes->subMeshMats.push_back(pol.material);
+            GenerationHelpers::drawHPolygonInChunk(pol.polygon, mesh,chunk,&stats);
+        }
+        else {
+            //i guess asume it doens;t intersect? i dont know why this happens --see chunk doc notes to see the chunk that causes this
+            //just do nothing here then
+        }
+
     }
 
 

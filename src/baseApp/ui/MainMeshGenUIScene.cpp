@@ -34,9 +34,11 @@ void MainMeshGenUIScene::load()
 	SR_INFO("finished loading shape files");
 
 	//set location to Newark Airport
-	glm::dvec3 ewr(40.689352, -74.174450,30);
-	playerLLA = ewr;
-	defaultCenter = ewr;
+	//glm::dvec3 ewr(40.689352, -74.174450,30);
+	//playerLLA = ewr;
+	//defaultCenter = ewr;
+
+	//set nothign for default neyork loc
 }
 
 void MainMeshGenUIScene::onDrawUI()

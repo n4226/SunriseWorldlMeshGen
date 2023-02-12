@@ -69,9 +69,9 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
 
     httplib::Client cli(server.c_str());//();
 
-    cli.set_write_timeout(40, 0);
-    cli.set_read_timeout(40, 0);
-    cli.set_connection_timeout(40, 0);
+    cli.set_write_timeout(100, 0);
+    cli.set_read_timeout(100, 0);
+    cli.set_connection_timeout(100, 0);
     cli.set_keep_alive(true);
 
     auto str = getQuery(frame);
@@ -85,7 +85,7 @@ osm::osm OsmFetcher::fetchChunk(Box frame, bool onlyUseOSMCash, ChunkGenerationS
     if (response == nullptr || response.error() == httplib::Error::Read)
         throw std::runtime_error("read error");
     if (response->body.empty())
-        throw std::runtime_error("osmEmpty");
+        throw std::runtime_error("osmEmpty _ osm server is probably not running");
 
     {
         std::ofstream out;
